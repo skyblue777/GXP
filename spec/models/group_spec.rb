@@ -1,0 +1,2 @@
+describe Group do
+end

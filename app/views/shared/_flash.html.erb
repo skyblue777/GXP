@@ -1,0 +1,7 @@
+<% if flash.any? %>
+  <div class="flash">
+    <% flash.reject { |k, _| k.in? [:timedout] }.each do |k, v| %>
+      <div class="alert alert-<%= k %>"><center><%= v.slice(1,1).capitalize + v.slice(2..-1) == "Contest has already received a project submission from you\"" ? v.slice(1,1).capitalize + v.slice(2..-1) : v == "Password confirmation and Password does not match" ? "Password and Confirm Password do not match" : v %></center></div>
+    <% end %>
+  </div>
+<% end %>

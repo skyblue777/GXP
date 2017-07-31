@@ -1,0 +1,30 @@
+<div class="steps-container">
+  <div class="steps step<%= step %>">
+    <div id="step1" class="col-md-4" style="text-align:center">
+      <div class="bubble filled"></div>
+      <div class="connector right"></div>
+      <span><%= link_to 'Basics', if_persisted_path(@project, :edit_project_path), class: "btn btn-warning" %></span>
+    </div>
+    <div id="step2" class="col-md-4"  style="text-align:center">
+      <div class="bubble"></div>
+      <%about_path = if_persisted_path(@project, :step2_project_path)%>
+      <% if about_path == "#" %>
+        <span><%= link_to 'About You', about_path, class: "btn", style: "color:grey" %></span>
+      <%else%>
+        <span><%= link_to 'About You', about_path, class: "btn btn-warning" %></span>
+      <%end%>
+      <div class="connector left"></div>
+      <div class="connector right"></div>
+    </div>
+    <div id="step3" class="col-md-4"  style="text-align:center">
+      <div class="bubble"></div>
+      <% preview_path = if_persisted_path(@project, :project_path) %>
+      <% if preview_path != "#" %>
+        <span><%= link_to 'Preview', preview_path, class: "btn btn-warning" %></span>
+      <%else%>
+        <span><%= link_to 'Preview', "#", class: "btn", style:"color:grey" %></span>
+      <%end%>
+      <div class="connector left"></div>
+    </div>
+  </div>
+</div>

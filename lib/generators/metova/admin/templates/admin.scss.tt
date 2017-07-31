@@ -1,0 +1,9 @@
+//
+//= require_self
+//
+
+@import "font-awesome",
+        "bootstrap-sprockets",
+        "bootstrap",
+        "bootstrap/variables",
+        "bootstrap/mixins";

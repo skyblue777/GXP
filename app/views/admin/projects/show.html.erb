@@ -1,0 +1,5 @@
+<h1 class="page-header">Project: <%= @project %></h1>
+<%= render 'admin/shared/attribute', name: 'Name', value: @project.name %>
+<%= render 'admin/shared/attribute', name: 'Vote count', value: @project.votes_count %>
+<%= render 'admin/shared/attribute', name: 'Users', value: @project.users.pluck(:email).to_sentence %>
+<%= render 'admin/shared/attribute', name: 'Voted By Users', value: @project.votes.map(&:user).map(&:name).join(', ') %>

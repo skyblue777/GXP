@@ -1,0 +1,15 @@
+<tr>
+  <td><%= project.id %></td>
+  <td><%= project.name %></td>
+  <td><%= project.user %></td>
+  <td><%= project.group.nil? ? false : true %></td>
+  <td><%= project.contest %></td>
+  <td><%= project.categories.pluck(:name).map(&:inspect).join(', ') %></td>
+  <td><%= project.created_at.strftime('%m/%d/%Y') %></td>
+  <td class="text-right">
+    <%#= link_to 'Edit', edit_admin_project_path(project) %>
+    <%= link_to 'Show', admin_project_path(project), methods: :get %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Delete', admin_project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete the project "' + project.name.to_s + '" created by "' + project.user.to_s + '"?' } %>
+  </td>
+</tr>

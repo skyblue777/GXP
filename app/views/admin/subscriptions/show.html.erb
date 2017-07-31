@@ -1,0 +1,77 @@
+<div class="col-sm-8">
+  <h1 class="page-header">Subscription: <%= @subscription.name %></h1>
+</div>
+<div class="col-sm-4">
+  <% if @subscription.active? %>
+    <%= link_to 'Disable', disable_admin_subscription_path(@subscription), class: "pull-right btn btn-danger"%>
+  <% else %>
+    <%= link_to 'Enable', enable_admin_subscription_path(@subscription), class: "pull-right btn btn-info"%>
+  <% end %>
+</div>
+
+<div class="col-sm-6">
+  <% details = "Start Date: #{@subscription.created_at.strftime('%m/%d/%Y')}<br>Amount: #{number_to_currency(@subscription.amount/100.to_f)}<br>Active: #{@subscription.active}<br>Customer: #{@subscription.user.name unless @subscription.user.blank?}" %>
+  <%= render 'admin/shared/attribute', name: 'Details', value: details.html_safe %>
+</div>
+<div class="col-sm-6">
+  <% card = "Brand: #{@subscription.card_brand}<br>Last 4: #{@subscription.card_last_4}<br>Exp Month: #{@subscription.card_exp_month}<br>Exp Year: #{@subscription.card_exp_year}" %>
+  <%= render 'admin/shared/attribute', name: 'Card', value: card.html_safe %>
+</div>
+
+<div class="col-sm-12">
+  <h2>Payments</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Card</th>
+        <th>Expiration</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subscription.payments.each do |p| %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= number_to_currency(p.amount/100.to_f) %></td>
+          <td><%= "#{p.card_brand} - #{p.card_last_4}" %></td>
+          <td><%= "#{p.card_exp_month} - #{p.card_exp_year}" %></td>
+          <td><%= p.created_at.strftime('%m/%d/%Y') %></td>
+          <td>
+            <% unless p.refunds.any? %>
+              <%= link_to "Refund", refund_admin_payment_path(p), class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @subscription.refunds.any? %>
+  <div class="col-sm-12">
+    <h2>Refunds</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscription.refunds.each do |r| %>
+          <tr>
+            <td><%= r.id %></td>
+            <td><%= r.payment_id %></td>
+            <td><%= number_to_currency(r.amount/100.to_f) %></td>
+            <td><%= r.created_at.strftime('%m/%d/%Y') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

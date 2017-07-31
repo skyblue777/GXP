@@ -1,0 +1,2 @@
+describe Refund do
+end

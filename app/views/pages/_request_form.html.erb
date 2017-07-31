@@ -1,0 +1,162 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	function wordCount( val ){
+	    var wom = val.match(/\S+/g);
+	    return {
+	        charactersNoSpaces : val.replace(/\s+/g, '').length,
+	        characters         : val.length,
+	        words              : wom ? wom.length : 0,
+	        lines              : val.split(/\r*\n/).length
+	    };
+	}
+	var textarea = document.getElementById("sending_text");
+	var result   = document.getElementById("lbl_maxlimit");
+
+	textarea.addEventListener("input", function(){
+	  var v = wordCount(this.value);
+	  $("#lbl_maxlimit").text(1600 - v.characters);
+	}, false);
+});
+</script>
+
+<div class="container user-form">
+  <div class="row">
+  <div class="col-md-2"></div>
+		<div class="col-md-8">
+			<%= form_for @request,  url: send_request_post_path, method: :post do |f| %>		
+				<label>Message:*(<em>Maxlimit:<i id="lbl_maxlimit">1600</i></em>)</label>
+				<%= f.text_area :content, id: 'sending_text', class: 'wysiwyg form-control', style: "position:relative; left:-11px;", maxlength:1600 %>
+				<label>Phone Numbers:</label>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code1", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code1" id="code_id1" readonly="true" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile1" id="mobile_id1" class="form-control" maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code2", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code2" id="code_id2" readonly="true" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile2" id="mobile_id2" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code3", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code3" id="code_id3" readonly="true" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile3" id="mobile_id3" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code4", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code4" readonly="true" id="code_id4" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile4" id="mobile_id4" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code5", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code5" readonly="true"  id="code_id5" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile5" id="mobile_id5" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>	
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code6", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code6" readonly="true" id="code_id6" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile6" id="mobile_id6" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code7", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code7" readonly="true" id="code_id7" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile7" id="mobile_id7" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+						<div class="col-md-5">
+							<%= country_select("request_country_code8", "country", include_blank: "Select a Country", class: "form-control") %>
+							</div>
+							<div class="col-md-2">
+							<input type="text" name="code8" readonly="true" id="code_id8" class="form-control" style="margin-left:20px;" placeholder="code">
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="mobile8" id="mobile_id8" class="form-control"  maxlength="15" placeholder="phone no.">
+						</div>
+					</div>
+				  <div class="row">
+				  	<div class="col-md-5"></div>
+						<div class="col-md-2">
+							<input type="submit" value="Send" class= 'btn btn-warning' id="request_submit" style="width:140px;">
+						</div>
+						<div class="col-md-5"></div>
+					</div>					
+
+			<%end%>
+		</div>
+		<div class="col-md-2"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#request_submit").click(function(evt){
+			mob_code1 = $("#code_id1").val();
+			mob_code2 = $("#code_id2").val();
+			mob_code3 = $("#code_id3").val();
+			mob_code4 = $("#code_id4").val();
+			mob_code5 = $("#code_id5").val();
+			mob_code6 = $("#code_id6").val();
+			mob_code7 = $("#code_id7").val();
+			mob_code8 = $("#code_id8").val();
+
+			mob1 = $("#mobile_id1").val();
+			mob2 = $("#mobile_id2").val();
+			mob3 = $("#mobile_id3").val();
+			mob4 = $("#mobile_id4").val();
+			mob5 = $("#mobile_id5").val();
+			mob6 = $("#mobile_id6").val();
+			mob7 = $("#mobile_id7").val();
+			mob8 = $("#mobile_id8").val();
+			if($("#sending_text").val() == ""){
+				alert("Please enter some message!");
+				evt.preventDefault();
+			}
+			if((mob1 == "" || mob_code1 == "") && (mob2 == "" || mob_code2 == "") && (mob3 == "" || mob_code3 == "") && (mob4 == "" || mob_code4 == "") && (mob5 == "" || mob_code5 == "") && (mob6 == "" || mob_code6 == "") && (mob7 == "" || mob_code7 == "") && (mob8 == "" || mob_code5 == "")){
+				alert("Please enter at least one phone no!");
+				evt.preventDefault();
+			}
+		});
+	});
+</script>

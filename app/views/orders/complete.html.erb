@@ -1,0 +1,47 @@
+<div class="join-section">
+  <div class="container">
+    <h1>Complete Order</h1>
+  </div>
+</div>
+<div class="book-background-light">
+  <div class="container user-form">
+    <%if current_user.nil?%>
+      <div class="row">
+        <div class="col-md-12">
+          <div><b style="color:red">NOTE:</b> Please register yourself to vote on a project.</div> 
+          <div><%= link_to "Register Yourself", new_user_registration_path, method: :get, class: "btn btn-info" %></div>
+        </div>
+      </div>
+    <%end%>
+    <div class="row">
+      <div class="col-md-12">
+        <h2><%= I18n.t('order.your_order') %>:</h2>
+        <h4><%= I18n.t('order.order_items') %>:</h4>
+        <% @total_price = 0 %>
+        <% @order.order_products.each do |order_product| %>
+          <%= render partial: 'order_products', locals: { op: order_product }%>
+        <% end %>
+        <hr>
+      </div>
+      <div class="col-md-6">
+        <% if @order.shipping_address %>
+          <h4><%= I18n.t('order.address') %>:</h4>
+          <%= render partial: 'address', locals: { address: @order.shipping_address } %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <h4>Email:</h4>
+        <div class="list-group">
+          <div class="list-group-item">
+            <p class= "list-group-item-text"><%= @order.email %></p>
+          </div>
+        </div>
+
+        <h4><%= I18n.t('order.totals') %>:</h4>
+        <%= render partial: 'totals', locals: { order: @order } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

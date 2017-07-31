@@ -1,0 +1,70 @@
+<div class="project-details">
+  <div class="container">
+  	<h1>Sent Request Dashboard</h1>
+  </div>
+</div>
+<div class="container">
+<br>
+  <div class="row">
+		<div class="col-md-12">
+			<table class="table" border="1">
+				<tr>
+					<th>Phone No.</th>
+					<th>Message</th>
+					<th>Sent Date</th>
+					<th>Subscription<br>($2.99)</th>
+					<th>Purchase Date</th>
+					<th>Lifetime Membership<br>(Book Purchase)</th>
+					<th>Purchase Date</th>
+					<th>Voting Status</th>
+				</tr>
+				<% @requests_info.each do |rinf| %>
+					<tr>	
+						<td><%= rinf.phone_no %></td>
+						<td><%= rinf.message %></td>
+						<td><%= rinf.created_at.to_date %></td>
+						<td style="font-size:20px; text-align:center">
+							<% if !sub_purchase(rinf.phone_no).blank? %>
+								<b style="color:green">✓</b>
+							<%else%>
+								<b style="color:red">×</b>
+							<%end%>
+						</td>
+						<td>							
+							<% if !sub_purchase(rinf.phone_no).blank? %>
+								<%= sub_purchase(rinf.phone_no).updated_at.to_date %>
+							<%else%>
+								<div style="font-size:20px;	text-align:center"><b style="color:red">×</b></div>
+							<%end%>
+						</td>
+						<td style="font-size:20px; text-align:center">
+							<% address = Address.where("mobile = ?", rinf.phone_no).last 
+								order = Order.find_by(shipping_address_id: address.id) unless address.blank? %>
+								<% if order && order.complete? %>
+									<b style="color:green">✓</b>
+								<%else%>
+									<b style="color:red">×</b>
+								<%end%>
+						</td>
+						<td>
+							<%if order && order.complete? %>
+								<%= order.created_at.to_date %>
+							<%else%>
+								<b style="font-size:20px; color:red; text-align:center">×</b>
+							<%end%>
+						</td>
+						<td style="font-size:20px; text-align:center">
+							<% vote_status =  voting_status(rinf.phone_no) %>
+							<%if vote_status[0] == true %>
+								<b style="color:green">✓</b>
+							<%end%>
+							<%if vote_status[1] == true && vote_status[0] != true %>
+								<b style="color:red">×</b>
+							<%end%>
+						</td>
+					</tr>
+				<%end%>				
+			</table>
+		</div>
+	</div>	
+</div>

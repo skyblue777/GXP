@@ -1,0 +1,230 @@
+<style type="text/css">
+/*  .mandetory{
+    color:red; font-size:30px; margin-left:-20px; margin-top:-20px;
+  }
+  #mob_mandetory{
+    font-size:30px; margin-left: -113px; color:red;
+  }
+
+  #email_error, #blank_email_error{
+    background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+  }*/
+
+  fieldset {
+    border: none;
+    position: relative;
+    font-family: arial, sans-serif;
+  }
+  input:focus {
+    outline: none;
+  }
+  input + label {
+    display: block;
+    cursor: text;
+    color: #777;
+    transition: .15s ease-out all;
+    position: absolute;
+    top: 0.79em;
+    left: 1em;
+  }
+  input:focus + label,
+  label.stay {
+    top: -0.3em;
+    left: 1em;
+    font-size: .7em;
+    transition: .15s ease-out all;
+  }
+</style>
+
+<style type="text/css">
+  /*#sponsor_notes{ font-size: 26px; }*/
+    .mandetory{
+    color:red; font-size:30px; margin-left:-20px;
+  }    
+  #spon_phone_error, #spon_name_error, #spon_email_error{
+    background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+  }
+  .control-label, .spon_name_error, .spon_phone_error, .spon_email_error{
+    display: none;
+  }
+</style>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$(function() {
+  $("#sponsor_start_date").attr('placeholder', "Desired Start of Sponsorship");
+  $("#sponsor_start_date").datepicker({
+    changeMonth: true, 
+    changeYear: true,
+    minDate: 'today',
+    dateFormat: 'yy-mm-dd',
+  });
+});
+</script>
+
+<style type="text/css">
+  #sponsor_start_date{
+  position: initial;
+  /*font-size: 13px;  */
+  z-index: 2;
+  float: left;
+  height: 50px;
+  /*width: 100%;*/
+  margin-bottom: 0
+  }  
+</style>
+
+
+<div class="contact-us">
+  <div class="container">
+    <h1>ADVERTISING</h1>
+  </div>
+</div>
+<br><br>
+<div class="container">
+<div class="col-lg-12">
+  <div class="col-lg-6 div_advertise">
+   <span>Thank you </span>for your consideration in moving a greater cause forward. Because of your ability to sponsor projects, you allow the world to take one collective step toward a sustainable future for generations to come. You are part of the millions that sacrifice their self-interest for the greater good of the Earth.<br>
+    If there is a project that grabs your attention, that you truly believe in, and that you want to see come to fruition, we make it possible for you to sponsor that project. As a sponsor, you’ll enjoy the benefit of moving one bright idea toward reality, as well as:
+   <div class="col-lg-12 advertise-icons-metter"><div class="col-lg-3"><%= image_tag "adv-img3.png", style: "" %></div> 
+    <div class="col-lg-9 "><h4 style="font-weight: 500 !important; color:black;">Joining a community where you can <b> find unlimited talent and network </b>with future entrepreneurs and innovators</h4></div> </div>
+    <div class="col-lg-12  advertise-icons-metter"><div class="col-lg-3"><%= image_tag "adv-img2.png", style: "" %></div> 
+    <div class="col-lg-9 "><h4 style="font-weight: 500 !important; color:black; "><b> Your brand will be recognized </b>via banners, promotional materials, and notoriety displayed by Green X</h4></div> </div>
+    
+    <div class="col-lg-12  advertise-icons-metter"><div class="col-lg-3"><%= image_tag "adv-img1.png", style: "" %></div> 
+    <div class="col-lg-9 "><h4 style="font-weight: 500 !important; color:black; ">By sponsoring Green X, you do your part of<b> pushing corporate social responsibility forward. </b>You make the community a better place by fostering new ideas. </h4></div> </div>
+    </div>
+    <div class="col-lg-6">
+      <video id="video" controls="" poster="https://s3.amazonaws.com/greenx-web-heroku/promo-preview.jpg" style="width: 90%"><source src="https://s3.amazonaws.com/greenx-web-heroku/green-x-promo.mp4" type="video/mp4" /> <source src="https://s3.amazonaws.com/greenx-web-heroku/green-x-promo.webm" type="video/webm" />Your browser does not support the video tag.</video>     
+    </div>
+
+  <!-- <div class="col-lg-4 right-pannel-adver">
+    <div class="right-adver"><%#= image_tag "right-img.png" %></div>
+    <div class="right-adver"><%#= image_tag "right-img.png" %></div>
+    <div class="right-adver"><%#= image_tag "right-img.png" %></div>
+  </div> -->
+     
+   
+    </div>
+</div>
+
+<div class="advertisment-application1">
+<div class="container">
+  <h1>ADVERTISING APPLICATION</h1>
+</div>
+</div>
+
+<div class="container">
+  <div class="col-lg-12">
+    <!-- <div class="col-lg-8"> -->
+     <p style="margin-left:20px;">When you’re ready, please fill out the form below and we’ll be in touch with the next steps.</p> 
+        <%= simple_form_for @sponsor do |f| %>        
+        <div class="col-sm-6 col-md-6">
+            <span class="spon_name_error" id="spon_name_error" >Name Field can't be blank</span>
+            <%= f.input :name, autofocus: false, label: false %>
+            <span class="spon_phone_error" id="spon_phone_error" >Phone No. field can't be blank</span>
+            <%= f.input :phone, label: false, maxlength: 20 %>
+            <span class="spon_email_error" id="spon_email_error" >Email field can't be blank</span>
+            <%= f.input :email, label: false %>
+            <%= f.input :address_1, label: false %>
+            <%= f.input :address_2, label: false %>
+            <%= f.input :country, include_blank: "Select a Country" %>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <%= f.input :state, label: false %>
+            <%= f.input :city, label: false %>
+            <%= f.input :zip, label: false %>
+            <%= f.input :duration, label: false %>
+            <LABEL style="color:black;">DESIRED START OF ADVERTISING</LABEL>
+            <%= f.input :start_date %>
+            <%= f.input :region, label: false %>
+            <%= f.input :notes, label: false %>
+          <div class="actions">
+            <%= f.submit 'Submit', class: 'btn btn-warning', id: "btn_sponcership" %>
+          </div>            
+        </div>
+        <% end %>
+        <hr/>              
+        <h4><p>Thank you again for your selfless dedication to a better world.</p></h4>
+    <!-- </div> -->
+  </div>
+</div>
+<br>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('#sponsor_phone').keypress(function(event) {
+    var $this = $(this);
+    if ((event.which != 46 || $this.val().indexOf('.') != -1) &&
+       ((event.which < 48 || event.which > 57) &&
+       (event.which != 0 && event.which != 8))) {
+           event.preventDefault();
+    }
+    var text = $(this).val();
+    if ((event.which == 46) && (text.indexOf('.') == -1)) {
+        setTimeout(function() {
+            if ($this.val().substring($this.val().indexOf('.')).length > 0) {
+                $this.val($this.val().substring(0, $this.val().indexOf('.') + 0));
+            }
+        }, 1);
+    }    
+  });    
+    $("#btn_sponcership").click(function(evt){
+      var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      if(!emailReg.test($("#sponsor_email").val()) && $("#sponsor_email").val() != ""){
+        alert("Invalid email Id.");
+        evt.preventDefault();
+      }
+      if($("#sponsor_name").val() == ""){
+        $("#spon_name_error").removeClass("spon_name_error");
+        evt.preventDefault();
+      }else{
+        $("#spon_name_error").addClass("spon_name_error");
+      }
+      if($("#sponsor_phone").val() == ""){
+        $("#spon_phone_error").removeClass("spon_phone_error");
+        evt.preventDefault();
+      }else{
+        $("#spon_phone_error").addClass("spon_phone_error");
+      }
+      if($("#sponsor_email").val() == ""){
+        $("#spon_email_error").removeClass("spon_email_error");
+        evt.preventDefault();
+      }else{
+        $("#spon_email_error").addClass("spon_email_error");
+      }  
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $("#btn_sign_in").click(function(){
+      $("#user_email").val("");
+      $("#user_password").val("");
+    // });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("input[type=email], input[type=tel], input[type=password],input[type=text], input[type=date]").each(function(e) {
+      $(this).wrap('<fieldset></fieldset>');
+      var tag = $(this).attr("placeholder");
+      //var tag= $(this).data("tag");
+      $(this).attr("placeholder", "");
+      $(this).after('<label for="name">' + tag + '</label>');
+    });
+
+    $("input[type=email], input[type=tel], input[type=password],input[type=text], input[type=date]").on('blur', function() {
+      if (!$(this).val() == "") {
+        $(this).next().addClass('stay');
+      } else {
+        $(this).next().removeClass('stay');
+      }
+    });
+  });
+</script>

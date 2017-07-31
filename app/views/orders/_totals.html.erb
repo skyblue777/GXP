@@ -1,0 +1,18 @@
+<div class="list-group">
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('order.subtotal') %>:</h5>
+    <p class= "list-group-item-text"><%= number_to_currency @total_price %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('order.shipping') %>:</h5>
+    <p class= "list-group-item-text"><%= number_to_currency shipping_charges(@order.shipping_address.country, @order.order_products) %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('order.tax') %>:</h5>
+    <p class= "list-group-item-text"><%= number_to_currency Order::TAX_RATE %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('order.total') %>:</h5>
+    <p class= "list-group-item-text"><%= number_to_currency @total_price + Order::TAX_RATE + shipping_charges(@order.shipping_address.country, @order.order_products) %></p>
+  </div>
+</div>

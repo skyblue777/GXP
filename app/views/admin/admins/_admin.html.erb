@@ -1,0 +1,15 @@
+<tr class="admin-row admin<%= admin.id %>">
+  <td><%= admin.id %></td>
+  <td><%= admin.name %></td>
+  <td><%= admin.email %></td>
+  <td><%= admin.role.titleize %></td>
+  <td class="text-right">
+    <% if policy(admin).edit? %>
+      <%= link_to 'Edit', edit_admin_registration_path(admin), class: 'edit_admin' %>
+    <% end %>
+    &nbsp; / &nbsp;
+    <% if policy(admin).destroy? %>
+      <%= link_to 'Delete',  admin_registration_path(admin),  method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </td>
+</tr>

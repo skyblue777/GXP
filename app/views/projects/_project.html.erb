@@ -1,0 +1,31 @@
+<div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8" id="project<%= project.id %>" style="margin-bottom:10px;margin-top:10px;overflow:hidden;" title="<%= project.name.titlecase %>">
+  <div class="team-member" style="height:400px;">
+    <div class="team-thumb">
+      <div class="ps-rel">
+      <%#= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+      <%= link_to project, class: 'project-image-container ' do %>
+        <%= attachment_image_tag project.images.first, :image, :fill, 260, 260, class: 'project-img img-responsive ps-rel', fallback: "http://lorempixel.com/260/260/nature/#{rand(1..10)}" %>
+      <% end %>            
+      </div>
+    </div>
+    <div class="row" style="height:70px;">
+      <div class="col-sm-12">
+        <h3 style="text-align:center;"><%= project.name.titlecase.gsub(/^(.{18,}?).*$/m,'\1..') %></h3>
+      </div>
+    </div>
+    <div class="row" style="font-size:14px;">
+      <div class="col-sm-12" style="text-align:center;">
+        <span class="label label-success">
+          <%= fa_icon 'heart' %>
+          <%= project.votes_count %>
+        </span>
+        &nbsp;&nbsp;&nbsp;
+        <%= link_to 'More', project_path(project) %>
+        <% if policy(project).edit? %>
+         |
+        <%= link_to 'Edit', edit_project_path(project) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

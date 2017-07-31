@@ -1,0 +1,62 @@
+
+  <div class="row navbar"> 
+    <%#= render 'shared/errors' %>
+    <div class="col-sm-2 logo"> 
+      <%= link_to root_path, method: :get do %>
+        <%= image_tag 'logo.png', alt: "image", class: "img-responsive logo-man" %>
+      <%end%>        
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#matblog-navbar-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+    </div>
+    <div class="col-sm-8 menu">
+      <ul>
+        <li><%= link_to 'ABOUT', about_path, method: :get, class: active_route(about_path) %></li>
+        <li><%= link_to 'PROJECTS & WINNERS', projects_path, method: :get, class: active_route(projects_path) %></li>
+        <!-- <li><%#= link_to 'Buy the book', products_path, class: active_route(products_path) %></li> -->
+        <li><%= link_to 'SPONSOR A PRIZE', advertising_path, class: active_route(advertising_path) %></li>          
+        <li><%= link_to 'ADVERTISING', new_sponsor_path, method: :get, class: active_route(new_sponsor_path) %></li>
+        <li><%= link_to 'JOIN', join_path, method: :get, class: active_route(join_path) %></li>
+      </ul>
+    </div>
+    <div class="col-sm-2 cart-sign">
+      <ul class="clearfix">
+        <% order_items = current_order.order_products if !current_order.nil? %>
+        <% if !order_items.nil? && order_items.count > 0  %>
+          <li class="shopping-cart-full" data-toggle="tooltip" data-placement="bottom" title="There are <%= order_items.count %> items in the cart. Click to see details.">
+            <%= link_to (fa_icon 'cart-plus 2x', style: "font-size:25px; text-align:right; color: green;", method: :get), '/cart', id: "cart_item_id" %>
+          </li>
+        <% else %>
+          <li class="shopping-cart-empty" data-toggle="tooltip" data-placement="bottom" title="Cart is empty.">
+            <%= link_to (fa_icon 'shopping-cart 2x', style: "font-size:25px; text-align:right; color: green;", method: :get), '/cart', id: "cart_item_id" %>
+          </li>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to user_path(current_user), method: :get, class: 'profile-link' do %><%= image_tag 'profile.png' %> MY PROFILE<% end %>
+          </li>
+          <li>
+            <%= link_to('SIGN OUT', destroy_user_session_path, class: 'sign-in-button btn btn-warning', style: "color:white;font-family: 'Roboto', sans-serif;", :method => :delete) %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to('SIGN IN', new_user_session_path, method: :get, class: 'sign-in-button btn btn-warning', style: "color:white;font-family: 'Roboto', sans-serif;")  %>
+          </li>
+        <% end %>
+      </ul>          
+    </div>
+    
+    <%= render 'shared/flash' %>
+  </div>
+
+  <style type="text/css">
+  .sign-in-button:hover, .sign-in-button:focus {
+    background-color: #eb9316 !important;
+  }
+  </style>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(function() { 
+          $(".flash").fadeOut("slow");
+    }, 10000);      
+  });
+  </script>

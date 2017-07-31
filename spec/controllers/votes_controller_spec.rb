@@ -1,0 +1,3 @@
+describe VotesController do
+
+end

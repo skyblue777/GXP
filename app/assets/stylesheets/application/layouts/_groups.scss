@@ -1,0 +1,41 @@
+// Place all the styles related to the groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.invited-users {
+  ul {
+    li {
+      height: 26px;
+      line-height: 26px;
+
+      &:before {
+        height: 18px;
+        width: 18px;
+        margin-right: 8px;
+        font-family: FontAwesome;
+      }
+
+      &.not-sent-yet:before {
+        content: '\f234';
+      }
+
+      &.pending:before {
+        content: '\f0e0';
+        color: $brand-warning;
+      }
+
+      &.accepted:before {
+        content: '\f05d';
+        font-size: 16px;
+        color: $brand-primary;
+      }
+
+      .fa-trash-o {
+        margin-left: 4px;
+        &:hover {
+          @extend .fa-trash;
+        }
+      }
+    }
+  }
+}

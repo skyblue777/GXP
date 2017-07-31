@@ -1,0 +1,16 @@
+Thank you for your order!
+
+Your transaction ID is: <%= @order.name %>
+
+Order Summary
+<% @order.order_products.each do |op| %>
+  <%= op.name %>
+  <%#= link_to ' - download now!', complete_order_url(@order.name, token: @order.token) if op.product.book_download.present? %>
+<% end %>
+
+<!-- Codes -->
+OTP
+<%= @otp %>
+<%# @order.redemption_codes.each do |code| %>
+  <%#= code.code %>
+<%# end %>

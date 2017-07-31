@@ -1,0 +1,14 @@
+DEFAULTS: &DEFAULTS
+  encrypted_password: <%= Admin.new.send(:password_digest, 'metova123') %>
+
+admin:
+  name: Metova
+  email: admin@metova.com
+  role: 0
+  <<: *DEFAULTS
+
+super_admin:
+  name: Wayne Christian
+  email: wayne.christian@phalinx.com
+  role: 1
+  <<: *DEFAULTS

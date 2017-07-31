@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hardback:
+  name: Hardback Book
+  description: For those who like to hold a book in their hands this is for you!
+  price: 500
+  image_id: '2'
+
+audiobook:
+  name: Audiobook
+  description: Listen to this in your car or walking.
+  price: 600
+  image_id: '2'
+
+ebook:
+  name: E-book
+  description: Learn how to go green wherever you have a Kindle.
+  price: 700
+  image_id: '2'

@@ -1,0 +1,3 @@
+describe GroupsController do
+
+end

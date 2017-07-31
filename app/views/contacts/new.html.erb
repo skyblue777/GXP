@@ -1,0 +1,58 @@
+<style type="text/css">
+  .control-label{
+    display: none;
+  }
+  abbr{
+    display: none;
+  }
+  #contact_content{
+    /*font-size: 26px;*/
+  }
+
+</style>
+
+<div class="contact-us">
+  <div class="container">
+    <h1>Contact Us</h1>
+  </div>
+</div>
+
+<div class="contact">
+  <div class="container">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 offset-lg-1">
+      <div class="contact-title">We are here to answer any questions you may have about Green X Prize. Reach out to us and we'll resjpons as soon as we can.</div>
+      <div class="form-area">
+        <%= simple_form_for @contact do |f| %>
+          <span class="cont_name_error" id="cont_name_error">Name can't be blank</span>
+          <%= f.input :name, label: "Name", autofocus: true, placeholder: "*Name" %>
+          <span class="cont_email_error" id="cont_email_error">Email can't be blank</span>          
+          <%= f.input :email, as: :email, label: "Email", placeholder: "*Email" %>
+          <span class="cont_phone_error" id="cont_phone_error">Phone Number can't be blank</span> 
+          <%= f.input :phone, as: :tel, label: "Phone Number", placeholder: "*Phone Number", maxlength: 20 %>
+          <span class="cont_content_error" id="cont_content_error">Comment can't be blank</span>          
+          <%= f.input :content, as: :text, label: "Comment", input_html: {rows: 5} %>
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="actions col-md-2">
+              <%= f.submit 'Submit', class: 'btn btn-warning btn-block btn-large', id: "btn_contact_submit" %>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_contact_submit").click(function(evt){
+      var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      if(!emailReg.test($("#contact_email").val())){
+        alert("Invalid Email address");
+        evt.preventDefault();
+      }
+    });
+  });
+</script>

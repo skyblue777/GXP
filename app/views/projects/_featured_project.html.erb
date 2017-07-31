@@ -1,0 +1,16 @@
+<div id="featured-project" class="row">
+  <div class="row">
+    <div class="featured-project-image">
+      <%= image_tag "http://lorempixel.com/1000/400/nature/10" %>
+    </div>
+    <div class="featured-project-info">
+      <span class="featured-project-title"><%= project %></span>
+      <small>by <%= project.users[0].name %></small>
+      <p class="featured-project-preview">
+        <%= project.body.html_safe %>
+      </p>
+      <%= link_to 'Vote Now', project_path(project), class: 'btn btn-inverted vote-btn' %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

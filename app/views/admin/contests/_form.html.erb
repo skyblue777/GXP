@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#contest_starts_at").datepicker({
+	  	changeMonth: true, 
+	  	changeYear: true,
+	  	minDate: 'today',
+	  	dateFormat: 'yy-mm-dd',
+	  });
+	  $("#contest_ends_at").datepicker({
+	  	changeMonth: true, 
+	  	changeYear: true,
+	  	minDate: 'today',
+	  	dateFormat: 'yy-mm-dd',
+	  });
+
+		$("#btn_admin_contest").click(function(evt){
+			if(($("#contest_ends_at").val() == $("#contest_starts_at").val()) &&($("#contest_ends_at").val() != "" && $("#contest_starts_at").val() != "")){
+				alert("Start Date and End Date can't be same.");
+				evt.preventDefault();
+			}
+		});	  	  
+	});
+</script>
+
+<%= simple_form_for [:admin, @contest] do |f| %>
+  <%= f.input :main, wrapper: :vertical_boolean %>
+  <%= f.input :name %>
+  <%= f.input :slug, input_html: { data: { path: contest_url(':slug') } } %>
+  <%= f.input :starts_at %>
+  <%= f.input :ends_at %>
+  <%= f.input :location %>
+  <%= f.input :terms_of_service, input_html: { class: :wysiwyg } %>
+  <%= f.submit 'Save', class: 'btn btn-primary', id: "btn_admin_contest" %>
+  <%= link_to "Cancel", :back, {:class => "btn btn-default"} %>
+<% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8WP3o0hCauFoiI4SMgr1BevY2w8qp7Uc&libraries=places&callback=initAutocomplete" async defer></script>
+<script type="text/javascript">
+	
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('contest_location')),
+        {types: ['geocode']});
+  }
+
+  $("#contest_location").focus(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  });	
+
+</script>

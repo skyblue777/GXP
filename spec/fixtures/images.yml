@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+carpooling:
+  image_id: '2'
+  project: carpooling
+
+recycling:
+  image_id: '2'
+  project: recycling
+
+beehives:
+  image_id: '2'
+  project: beehives
+
+wind_power:
+  image_id: '2'
+  project: wind_power
+
+save_the_whales:
+  image_id: '2'
+  project: save_the_whales

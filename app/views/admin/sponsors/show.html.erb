@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1 class="page-header">Sponsor: <%= @sponsor.name %></h1>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to 'Edit', edit_admin_sponsor_path(@sponsor) %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= render 'admin/shared/attribute', name: 'Name', value: @sponsor.name %>
+  </div>
+  <div class="col-sm-6">
+    <% address = "#{@sponsor.name}<br>#{@sponsor.address_1} #{@sponsor.address_2}<br>#{@sponsor.city}, #{@sponsor.state} #{@sponsor.zip}<br>#{@sponsor.country}" %>
+    <%= render 'admin/shared/attribute', name: 'Address', value: address.html_safe %>
+  </div>
+  <div class="col-sm-6">
+    <% contact = "Phone: #{@sponsor.phone}<br>Email: #{@sponsor.email}" %>
+    <%= render 'admin/shared/attribute', name: 'Contact', value: contact.html_safe %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <% info = "Start Date: #{@sponsor&.start_date&.strftime('%m/%d/%Y')}<br>Duration: #{@sponsor.duration}<br>Region: #{@sponsor.region}" %>
+    <%= render 'admin/shared/attribute', name: 'Sponsorship Information', value: info.html_safe %>
+  </div>
+  <div class="col-sm-6">
+    <%= render 'admin/shared/attribute', name: 'Notes', value: @sponsor.notes %>
+  </div>
+  <div class="col-sm-12">
+    <%= render 'admin/shared/attribute', name: 'Admin Notes', value: @sponsor.admin_notes %>
+  </div>
+</div>

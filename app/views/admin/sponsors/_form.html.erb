@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#sponsor_start_date").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      minDate: 'today',
+      dateFormat: 'yy-mm-dd',
+      });
+    });
+</script>
+
+<%= simple_form_for [:admin, @sponsor] do |f| %>
+  <%= f.input :name, autofocus: true, label: false %>
+  <%= f.input :phone, label: false %>
+  <%= f.input :email, label: false %>
+  <%= f.input :address_1, label: false %>
+  <%= f.input :address_2, label: false %>
+  <%= f.input :city, label: false %>
+  <%= f.input :state, label: false %>
+  <%= f.input :country %>
+  <%= f.input :zip, label: false %>
+  <%= f.input :duration, label: false %>
+  <%= f.input :start_date %>
+  <%= f.input :region, label: false %>
+  <%= f.input :notes, label: false %>
+  <%= f.input :admin_notes, label: false %>
+  <div class="text-center">
+    <%= f.submit 'Save', class: 'btn inverse-btn-inverted' %>
+  </div>
+<% end %>

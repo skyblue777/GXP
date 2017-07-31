@@ -1,0 +1,254 @@
+<!-- Modal -->
+<script type="text/javascript">
+  $(document).ready(function(){  
+    $(".close").click(function(){
+       $('#video').each(function (){   
+          this.currentTime = 0;
+          this.pause();
+        });
+    });
+  });
+</script>
+
+<div class="banner">
+  <div class="container-fluid no-padding">
+    <div class="row">
+      <div class="col-lg-12 no-padding">
+        <div class="col-lg-6">
+          <div class="item left-banner modal-body"> 
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-11">
+                <video id="video" controls="" poster="https://s3.amazonaws.com/greenx-web-heroku/promo-preview.jpg" style="width: 95%;"><source src="https://s3.amazonaws.com/greenx-web-heroku/green-x-promo.mp4" type="video/mp4" /> <source src="https://s3.amazonaws.com/greenx-web-heroku/green-x-promo.webm" type="video/webm" />Your browser does not support the video tag.</video>              
+              </div>              
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 right-banner">
+          <p> Green X Prize is a brand new global online community where socially conscious entrepreneurs can propose their communities and generate profits for public, private, and corporate investors. </p>
+          <a href="#" class="find-out-btn">Find Out How</a> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- slider start -->
+<div class="team-section container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="section-title ps-rel">
+        <h2>$10,000 WINNERS</h2>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> 
+          <%= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <ul class="inline-list social-round">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <h3>Jane Doe</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet </span>
+        <button type="button" class="btn btn-warning">Jane’s Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"><%= image_tag "2.png", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <ul class="inline-list social-round">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <h3>Jane Doe</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet </span>
+        <button type="button" class="btn btn-warning">Jane’s Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> <%= image_tag "3.png", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <ul class="inline-list social-round">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <h3>Jane Doe</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet </span>
+        <button type="button" class="btn btn-warning">Jane’s Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> <%= image_tag "4.png", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <ul class="inline-list social-round">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <h3>Jane Doe</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet </span>
+        <button type="button" class="btn btn-warning">Jane’s Project</button>
+      </div>
+    </div>
+  </div>
+  <!-- /.row --> 
+</div>
+<!-- slider end --> 
+<div class="how-works">
+  <div class="container-fluid  ">
+    <div class="row">
+      <div class="col-lg-12 no-padding">
+        <div class="container">
+     <h1>How <%= image_tag "logo.png" %>Works</h1>
+     </div>
+     <div class="identy">
+     <div class="container">
+    <h2><span>Identify The Problem </span><br>You know the world needs a sustainable overhaul.</h2>
+     </div>
+     
+     </div>
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="help-works">
+    <div class="container">
+      <div class="col-lg-4">
+       <h1>CREATE A SOLUTION <br> <span>You can design an idea, movement, or theory toward a more sustainable world.</span></h1>
+      </div>
+      <div class="col-lg-4 baby-img"><h2>You Know You Can Help</h2></div>
+        <div class="col-lg-4">
+          <h1>GET INSPIRED<br> <span>GET INSPIRED  Join the movement and see what else is being invented, wait until you’re ready to pitch.</span></h1>
+        </div>
+      </div>
+</div>
+  
+
+<div class="movment">
+  <div class="container">
+    <h2><span>2 Ways To Join The Movement</span><br>Members Can Create, Inspire, Vote, Win!</h2>     
+    <div class="col-lg-4  "><h3>Lifetime Membership</h3> <span>Click here to buy the book and become a lifetime Green X Prize member.</span>
+      <%= link_to 'Get Your <br>Lifetime Membership'.html_safe, products_path, class: "btn btn-warning membership" %>      
+    </div>
+    <div class="col-lg-2  "> </div>
+      <div class="col-lg-4 monthly"><h3>Monthly Membership</h3> <span>Skip the book and buy a monthly membership for just $2.99 per month.</span>
+      <%= link_to "Get Your <br>Monthly Membership".html_safe, new_subscription_path, class: 'btn btn-warning membership' %>
+
+          </div>
+      </div>
+    </div>
+
+<div class="fun-sec-main">
+
+<div class="fun-section container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="section-title ps-rel">
+        <h2>Then The Real Fun Begins!</h2>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="fun-member">
+        <div class="fun-thumb">
+          <div class="ps-rel"> <%= image_tag "icon1.png", alt: "img", class: "img-responsive ps-rel" %>            
+          </div>
+        </div>
+        <h3>Pitch An Idea</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</span>
+       
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="fun-member">
+        <div class="fun-thumb">
+          <div class="ps-rel"> <%= image_tag "icon2.png", alt: "img", class: "img-responsive ps-rel" %>
+         
+            
+          </div>
+        </div>
+        <h3>Discuss Ideas</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</span>
+        
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="fun-member">
+        <div class="fun-thumb">
+          <div class="ps-rel"> <%= image_tag "icon3.png", alt: "img", class: "img-responsive ps-rel" %>
+         
+            
+          </div>
+        </div>
+        <h3>Inspire Others</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</span>
+        
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="fun-member">
+        <div class="fun-thumb">
+          <div class="ps-rel"> <%= image_tag "icon4.png", alt: "img", class: "img-responsive ps-rel" %>
+         
+            
+          </div>
+        </div>
+        <h3>Vote & Win</h3>
+        <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</span>
+       
+      </div>
+    </div>
+  </div>
+  <!-- /.row --> 
+</div>
+
+</div>
+<div class="wins-section">
+<div class="container">
+  <h1>Each Month Someone Wins <span>$10,000</span></h1>
+    <p>through a transparent community voting</p>
+
+</div>
+</div>
+
+<div class="sponcer">
+<div class="container">
+  <h1>New Ideas are Inspired, Sponsored and Funded Every Month</h1>
+   <center><%= link_to 'Apply To Be A Sponsor', new_sponsor_path, class: "sponcer-btn" %></center>
+
+</div>
+</div>
+
+<div class="join-today">
+<div class="container">
+  <h1>New Ideas are Inspired, Sponsored and Funded Every Month</h1>
+   <div class="membrshp-btn">   
+    <%= link_to 'Lifetime Membership', products_path, class: "btn btn-warning life-membership" %>
+    <%= link_to "Monthly Membership", new_subscription_path, class: 'btn btn-warning month-membership' %>
+   </div>
+
+</div>
+</div>

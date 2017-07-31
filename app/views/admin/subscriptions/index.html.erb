@@ -1,0 +1,33 @@
+<h1 class="page-header">
+  Subscriptions
+</h1>
+<table class="table table-striped table-categories">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Active</th>
+      <th>Customer</th>
+      <th>Created</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr id="subscription-<%= subscription.id %>">
+        <td><%= subscription.name %></td>
+        <td><%= number_to_currency (subscription.amount/100.to_f) %></td>
+        <td><%= subscription.active %></td>
+        <td><%= subscription.user.name unless subscription.user.blank? %></td>
+        <td><%= subscription.created_at.strftime('%m/%d/%Y') %></td>
+        <td class="text-right">
+          <%= link_to 'Edit', edit_admin_subscription_path(subscription) %>
+          &nbsp; / &nbsp;
+          <%= link_to 'View', admin_subscription_path(subscription) %>
+          &nbsp; / &nbsp;
+          <%= link_to 'Delete', admin_subscription_path(subscription), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

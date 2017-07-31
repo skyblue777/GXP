@@ -1,0 +1,16 @@
+<tr id="order-<%= order.id %>">
+  <td><%= order.name %></td>
+  <td><%= "$#{admin_orders_total(order)}" %></td>
+  <!-- #number_to_currency order.total -->
+  <td><%= order.shipped %></td>
+  <td><%= order.complete %></td>
+  <td><%= order.tracking_number %></td>
+  <td><%= order.created_at.strftime('%m/%d/%Y') %></td>
+  <td class="text-right">
+    <%= link_to 'Edit', edit_admin_order_path(order) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'View', admin_order_path(order) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Delete', admin_order_path(order), method: :delete, data: { confirm: 'Are you sure you want to delete the order "' + order.name.to_s + '"?' } %>
+  </td>
+</tr>

@@ -1,0 +1,232 @@
+<div class="col-sm-8">
+  <h1 class="page-header">Order: <%= @order.name %></h1>
+</div>
+<div class="col-sm-4">
+  <%= link_to 'Edit', edit_admin_order_path(@order), class: "pull-right btn btn-info" %>
+</div>
+
+<div class="col-sm-12">
+  <h2>User Information</h2>
+</div>
+<div class="col-sm-6">
+  <%= render 'admin/shared/attribute', name: 'Email', value: @order.email.html_safe %>
+</div>
+<div class="col-sm-6">
+  <% if @order.shipping_address %>
+    <% address = "#{@order.shipping_address.name}<br>#{@order.shipping_address.street}<br>#{@order.shipping_address.city}, #{@order.shipping_address.state} #{@order.shipping_address.zip}<br>#{@order.shipping_address.country}" %>
+    <%= render 'admin/shared/attribute', name: 'Address', value: address.html_safe %>
+  <% end %>
+</div>
+
+<div class="col-sm-6">
+  <%= render 'admin/shared/attribute', name: 'Shipped', value: @order.shipped %>
+</div>
+<div class="col-sm-6">
+  <%= render 'admin/shared/attribute', name: 'Complete', value: @order.complete %>
+</div>
+
+<div class="col-sm-12">
+  <h2>Order Products</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% sum  = 0 %>
+      <% @order.order_products.each do |op| %>
+        <tr>
+          <td><%= op_product(op.product_price_id).name unless op_product(op.product_price_id).blank? %></td>
+          <td><%= ProductPrice.find_by(id: op.product_price_id).book_type %></td>
+          <td><%= ProductPrice.find_by(id: op.product_price_id).price %></td>
+          <td><%= op.quantity %></td>
+          <td><%= ProductPrice.find_by(id: op.product_price_id).price * op.quantity%></td>
+        </tr>
+        <% sum = sum + ProductPrice.find_by(id: op.product_price_id).price * op.quantity %>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total</td>
+        <td><%= sum %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-sm-12">
+  <h2>Payments</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Card</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.payments.each do |p| %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= number_to_currency(p.amount/100.to_f) %></td>
+          <td><%= "#{p.card_brand} - #{p.card_last_4}" %></td>
+          <td><%= p.created_at.strftime('%m/%d/%Y') %></td>
+          <td>
+            <% unless p.refunds.any? %>
+              <%= link_to "Refund", refund_admin_payment_path(p), class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @order.refunds.any? %>
+  <div class="col-sm-12">
+    <h2>Refunds</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Payment ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.refunds.each do |r| %>
+          <tr>
+            <td><%= r.id %></td>
+            <td><%= r.payment_id %></td>
+            <td><%= number_to_currency(r.amount/100.to_f) %></td>
+            <td><%= r.created_at.strftime('%m/%d/%Y') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<!-- <div class="col-sm-12">
+  <h2>Shipment</h2>
+  <button type="button" id="btn_shiping">Ship Product</button>
+  <br><br>
+  <div class="modal_shiping" id="modal_shiping">
+    <div class="panel panel-default">
+      <div class="panel-heading">Shiping Details</div>
+      <div class="panel-body">
+        <%#= form_for  @order, url: order_shiping_path, method: :post do %>
+          <h1>Form Address</h1>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              Name:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_name" class="form-control" placeholder="*Name">
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              Email:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_email" class="form-control" placeholder="*Email">
+            </div>            
+          </div>          
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              Street:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_street" class="form-control" placeholder="*Street">
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              City:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_city" class="form-control" placeholder="*City">
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              State:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_state" class="form-control" placeholder="*State">
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              Zip:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_zip" class="form-control" placeholder="*Zip">
+            </div>            
+          </div>
+          <div class="row">
+            <div class="col-md-1" style="text-align:right">
+              Country:
+            </div>
+            <div class="col-md-8">
+              <%#= country_select("from_country", "country", include_blank: "Select a Country") %>
+            </div>            
+          </div>
+          <div class="row" style="">
+            <div class="col-md-1">
+              Mobile No:
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control" name="from_country_code" id="from_country_code" label="false" placeholder="*code" readonly="true">
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="from_mobile_no" class="form-control", id="from_mobile_no" placeholder="*Mobile Number" maxlength="15">
+            </div>
+          </div>                                                          
+          <%#= submit_tag "Send", class: "btn btn-info" %>
+        <%#end%>        
+      </div>
+    </div>
+  </div>  
+</div> -->
+
+<!-- <div class="col-sm-12">
+  <h2>Shipment Status</h2>
+  <ul>
+
+  </ul>
+</div> -->
+
+
+<div class="col-sm-12">
+  <h2>Generated Codes</h2>
+  <ul>
+    <% @order.redemption_codes.each do |code| %>
+      <li><%= code.code %></li>
+    <% end %>
+  </ul>
+</div>
+
+<!-- <style type="text/css">
+  
+</style>
+
+<script type="text/javascript">
+  $("#modal_shiping").hide();
+  $(document).ready(function(){
+    $("#btn_shiping").click(function(){
+      $("#modal_shiping").toggle();
+    });
+  });
+</script> -->

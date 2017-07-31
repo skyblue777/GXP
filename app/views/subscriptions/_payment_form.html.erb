@@ -1,0 +1,95 @@
+<h2 class="white">Sign up for a subscription plan for <%= number_to_currency(@plan.amount/100.to_f) %> now!</h2>
+
+<div class="well">
+<!--   <ul class="nav nav-pills" id="id_card_details">
+    <li class="active"><a  data-toggle="pill" href="#sectionA" class="pilltext">Pay with PayPal Account</a></li>
+    <li><a data-toggle="pill" href="#sectionB" class="pilltext">Pay With Card</a></li>
+  </ul> -->
+
+  <div class="" style="padding: 0px;">
+    <div id="sectionA" class="tab-pane fade in active">
+      <%= form_tag({controller: "subscriptions", action: "process_card", method: "post"}, class: "nifty_form", id: "nonce-form") do %>    
+      <input type="hidden" name="amount" value="<%= @plan.amount/100.to_f %>">
+      <%= hidden_field_tag "plan", @plan.id, id: "card-nonce" %>
+      <input type="hidden" name="with_paypal" value=true>
+      <%if current_user.nil?%>
+        <div>Country</div>
+        <span class="sub_country_error_pa" id="sub_country_error_pa"></span>
+        <%= country_select("sub_cnrty_code_pa", "country", include_blank: "Select a Country") %>
+        <div>Mobile No.</div>
+        <span class="mobile_blnk_error_pa" id="mobile_blnk_error_pa" ></span>
+        <span class="mobile_no_error_pa" id="mobile_no_error_pa" ></span>
+        <div class="row" style="position:relative; left:15px;">
+          <div class="col-md-2">
+            <input type="text" class="form-control" name="sub_country_code_pa" id="sub_country_code_pa" label="false" placeholder="*code" readonly="true">
+          </div>
+          <div class="col-md-9">
+            <input type="text" name="sub_mobile_no_pa" style="width:106%" class="form-control", id="sub_mob_no_id_pa" placeholder="*Phone Number" maxlength="15">
+          </div>
+        </div>
+        <div>Email</div>
+        <span class="email_blank_error_pa" id="email_blank_error_pa"></span>
+        <span class="sub_email_error_pa" id="sub_email_error_pa"></span>
+        <input type="text" name="email_pa" placeholder="*Email" class="form-control" id="sub_email_id_pa">
+      <%end%> 
+      <div style="text-align:center;">
+        <%= submit_tag "Make Payment", class: "btn btn-warning", id: "btn_sub_submit_pa", style:"width:200px;" %>
+        </div>
+      <%end%>  
+    </div>
+<!--     <div id="sectionB" class="tab-pane fade">
+      <%#= form_tag({controller: "subscriptions", action: "process_card", method: "post"}, class: "nifty_form", id: "nonce-form") do %>
+        <input type="hidden" name="amount" value="<%#= @plan.amount/100.to_f %>">
+        <%#= hidden_field_tag "plan", @plan.id, id: "card-nonce" %>
+        <input type="hidden" name="with_card" value=true>
+        <%#if current_user.nil?%>
+          <div class="row">
+          <div class="col-sm-6"><label style="color:grey; font-size:10px;"><input type="radio" id="visa_card" name="card_type" value="visa">Visa&nbsp;&nbsp;<image src="/visa_card.png" style="width:80px; height:10px;"></label><label style="color:grey; font-size:10px;"><input type="radio" id="master_card" name="card_type" value="mastercard">MasterCard&nbsp;&nbsp;<image src="/master_card.png" style="width:80px; height:30px;"></label></div>            
+          <div class="col-sm-6"><label style="color:grey; font-size:10px;"><input type="radio" id="discover_card" name="card_type" value="discover">Discover&nbsp;&nbsp;<image src="/discover.png" style="width:80px; height:30px;"></label><label style="color:grey; font-size:10px;"><input type="radio" id="amex_card" name="card_type" value="amex">AmEx&nbsp;&nbsp;<image src="/amex.png" style="width:80px; height:30px;"></label></div>
+          </div>
+
+
+          <div>Country</div>
+          <span class="sub_country_error" id="sub_country_error"></span>
+          <%#= country_select("sub_cnrty_code", "country", include_blank: "Select a Country") %>
+          <div>Mobile No.</div>
+          <span class="mobile_blnk_error" id="mobile_blnk_error" ></span>
+          <span class="mobile_no_error" id="mobile_no_error" ></span>
+          <div class="row">
+            <div class="col-md-2">
+              <input type="text" class="form-control" name="sub_country_code" id="sub_country_code" label="false" placeholder="*code" readonly="true">
+            </div> <div class="col-md-2"></div> 
+            <div class="col-md-10">
+              <input type="text" name="sub_mobile_no" class="form-control", id="sub_mob_no_id" placeholder="*Phone Number" maxlength="15">
+            </div>
+          </div>
+          <div>Email</div>
+          <span class="email_blank_error" id="email_blank_error"></span>
+          <span class="sub_email_error" id="sub_email_error"></span>
+          <input type="text" name="email" placeholder="*Email" class="form-control" id="sub_email_id">
+        <%#end%> 
+        <div>Card Number(Ex.<b>4111111111111111</b>)</div>
+        <span class="card_blank_error" id="card_blank_error"></span>
+        <input type="text" name="card_no" class="form-control" placeholder="*••••••••••••••••", id="card_no_id" maxlength="20">
+        <div>CVV(Ex.<b>121</b>)</div>
+        <span class="cvv_blank_error" id="cvv_blank_error"></span>
+        <input type="text" name="card_cvv" class="form-control" placeholder="*CVV" id="card_cvv_id" maxlength="3">
+        <div>Expiration Date(Ex.<b>1219</b>)</div>
+        <span class="exp_blank_error" id="exp_blank_error"></span>
+        <input type="text" class="form-control" name="card_expiration_date" id="card_expiration_date_id" placeholder="*MMYY" maxlength="4">         
+        <%#= submit_tag "Submit", class: "btn btn-lg btn-block btn-danger", id: "btn_sub_submit" %>
+      <%# end %>
+    </div>  -->   
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_sub_submit").click(function(evt){
+      if($("#visa_card").is(':checked') == false && $("#master_card").is(':checked') == false && $("#discover_card").is(':checked') == false && $("#amex_card").is(':checked') == false){
+        alert("Please select at least one card");
+        evt.preventDefault();
+      }
+    });
+  });
+</script>

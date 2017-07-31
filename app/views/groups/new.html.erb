@@ -1,0 +1,7 @@
+<div class="container">
+  <div id="new-group" class="generic-form has-image">
+    <h1>Start Your Project</h1>
+    <%= render 'projects/steps', step: 2 %>
+    <%= render 'form', group: @group, redirect_path: project_path(@project) %>
+  </div>
+</div>

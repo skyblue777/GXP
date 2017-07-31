@@ -1,0 +1,19 @@
+.has-image {
+  .silhouette {
+    float: left;
+
+    img {
+      height: 150px;
+      width: 150px;
+      margin-left: $padding;
+      @extend .img-circle;
+    }
+  }
+
+  .uploader {
+    overflow: hidden;
+    small {
+      color: #fff;
+    }
+  }
+}

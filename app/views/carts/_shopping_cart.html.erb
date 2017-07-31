@@ -1,0 +1,21 @@
+<% if @order_products.size == 0 %>
+  <center><h1><%= I18n.t('cart.no_items') %></h1></center>
+  <center><h2><%= I18n.t('cart.add_items') %></h2></center>
+  <center><p><%= link_to 'Back to Store', products_path, class: 'btn btn-warning' %></p></center>
+<% else %>
+  <% @order_products.order(:id).each do |order_product| %>
+    <%= render 'carts/cart_row', product: op_product(order_product.product_price_id), order_product: order_product %>
+  <% end %>
+  <div id="order-totals">
+    <%= link_to products_path, class: "btn btn-warning", id: "continue-shopping" do %>
+      <%= fa_icon 'shopping-cart', text: I18n.t('cart.shop') %>
+    <% end %>
+    <h5 class="text-right"><%= I18n.t('cart.subtotal') %>: <span style="color: gray"><%= number_to_currency @total_price %></span></h5>
+    <h5 class="text-right"><%= I18n.t('cart.tax') %>: <span style="color: gray"><%= number_to_currency Order::TAX_RATE %></span></h5>
+    <% current_order_shiping = current_order.shipping.nil? ? 0 : current_order.shipping %>
+    <h4 class="text-right"><%= I18n.t('cart.total') %>: <span style="color: green"><%= number_to_currency @total_price + current_order_shiping + Order::TAX_RATE %></span></h4>
+      <%= link_to new_email_path, class: "btn btn-warning pull-right" do %>
+        <%= fa_icon 'credit-card', text: I18n.t('cart.checkout') %>
+      <% end %>
+  </div>
+<% end %>

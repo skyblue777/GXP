@@ -1,0 +1,152 @@
+<div class="project-details">
+  <div class="container">
+    <h1>Order Tracking</h1>
+  </div>
+</div>
+
+<style type="text/css">
+	ol.progtrckr {
+	    margin: 0;
+	    padding: 0;
+	    list-style-type none;
+	}
+
+	ol.progtrckr li {
+	    display: inline-block;
+	    text-align: center;
+	    line-height: 3.5em;
+	}
+
+	ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+	ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+	ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+	ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+	ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+	ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+	ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+	ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+	ol.progtrckr li.progtrckr-done {
+	    color: black;
+	    border-bottom: 4px solid yellowgreen;
+	}
+	ol.progtrckr li.progtrckr-todo {
+	    color: silver; 
+	    border-bottom: 4px solid silver;
+	}
+
+	ol.progtrckr li:after {
+	    content: "\00a0\00a0";
+	}
+	ol.progtrckr li:before {
+	    position: relative;
+	    bottom: -2.5em;
+	    float: left;
+	    left: 50%;
+	    line-height: 1em;
+	}
+	ol.progtrckr li.progtrckr-done:before {
+	    content: "\2713";
+	    color: white;
+	    background-color: yellowgreen;
+	    height: 2.2em;
+	    width: 2.2em;
+	    line-height: 2.2em;
+	    border: none;
+	    border-radius: 2.2em;
+	}
+	ol.progtrckr li.progtrckr-todo:before {
+	    content: "\039F";
+	    color: silver;
+	    background-color: white;
+	    font-size: 2.2em;
+	    bottom: -1.2em;
+	}
+	
+</style>
+
+<br><br>
+<div id="user-hero">
+  <div class="container">
+    <div class="vertically-centered">
+        <div class="row">
+          <div class="col-sm-5">
+          	Current Tracking Status: <b style="color:green"><%= @tracked_data[:tracking_status][:status] rescue nil %></b><br><br>
+          	Estimated Time of Arrival: <b><%= @tracked_data[:eta] rescue nil %></b>
+          </div>
+          <div class="col-sm-4">
+          	<b><%= @tracked_data[:tracking_status][:status_details] rescue nil %></b>
+          </div>   
+          <div class="col-sm-3">
+          	<div class="panel panel-default">
+						  <div class="panel-heading"><%= "SHIPMENT INFORMATION" %></div>
+						  <div class="panel-body">
+						  <b>Delivering To:</b>
+							<p><%= current_user.name+", "%><br><%= @tracked_data[:address_to][:city] rescue nil +", "+ @tracked_data[:address_to][:state] rescue nil +", "+ @tracked_data[:address_to][:zip] rescue nil +", "+ @tracked_data[:address_to][:country] rescue nil %>
+							</p><hr>
+						  <b>Carrier:</b><p><%= @tracked_data[:carrier].upcase rescue nil %></p>
+							<p>
+							</p><hr>
+						  <b>Tracking #:</b><p><%= @tracked_data[:tracking_number] rescue nil %></p>
+						  </div>
+						</div>
+          </div>                  
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-8">
+						<ol class="progtrckr" data-progtrckr-steps="5">
+						<% if !@tracked_data[:tracking_history].nil? %>
+							<% @tracked_data[:tracking_history].each do |tracdet|%>
+							 <li class="progtrckr-done"><%= tracdet[:status] %></li>
+							<%end%>
+						<%end%>
+						 <!-- <li class="progtrckr-done">Pre-Production</li>
+						 <li class="progtrckr-done">In Production</li>
+						 <li class="progtrckr-todo">Shipped</li>
+						 <li class="progtrckr-todo">Delivered</li> -->
+						</ol>          
+          </div>
+          <div class="col-sm-2">
+          </div>        
+        </div><br><br><br>
+        <div class="row">
+          <div class="col-sm-1">
+          </div>
+          <div class="col-sm-10">
+          	<div class="panel panel-default">
+						  <div class="panel-heading"><%= "Tracking Details:" %></div>
+						  <div class="panel-body">
+						  		<table class="table">
+						  		<tr>
+						  			<th>Time</th>
+						  			<th>Status</th>
+						  			<th>Status Detail</th>
+						  			<th>Location Address</th>
+						  		</tr>								  
+						  		<% if !@tracked_data[:tracking_history].nil? %>
+								  	<% @tracked_data[:tracking_history].each do |tracdet|%>
+								  		<tr>
+								  			<td><%= tracdet[:object_created] %></td>
+								  			<td><%= tracdet[:status] %></td>
+								  			<td><%= tracdet[:status_details] %></td>
+								  			<td><%= "#{tracdet[:location][:city]}, #{tracdet[:location][:state]}, #{tracdet[:location][:zip]}, #{tracdet[:location][:country]}" %></td>	  
+								  		</tr>
+								  	<%end%>
+						  	<%end%>
+						  	</table>
+						  </div>
+						</div>         
+          </div>
+          <div class="col-sm-1">
+          </div>        
+        </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div><br><br><br><br></div>2

@@ -1,0 +1,225 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+
+en:
+  date:
+    formats:
+      mddyyyy: "%D"
+  time:
+    formats:
+      admin: "%b %-d, %Y %H:%M%P"
+
+  flash:
+    group_invitations:
+      accepted: 'You have been added to this project!'
+      accepted_failure: 'Something went wrong when accepting the invitation'
+    actions:
+      create:
+        notice: "%{resource_name} was successfully created."
+        alert: "%{resource_name} could not be created."
+      update:
+        notice: "%{resource_name} was successfully updated."
+        alert: "%{resource_name} could not be updated."
+      destroy:
+        notice: "%{resource_name} was successfully deleted."
+        alert: "%{resource_name} could not be deleted."
+    errors:
+      not_authorized: 'You are not authorized to perform this action. You must have a valid subscription or lifetime membership to vote. You must have a lifetime membership to create a project.'
+
+  activerecord:
+    attributes:
+     SINGULAR_MODEL_NAME:
+        ATTRIBUTE_NAME: '' # alias to attribute
+    errors:
+      attributes:
+        redemption_code:
+          invalid: 'is not valid'
+      models:
+        project:
+          attributes:
+            contest:
+              taken: 'has already received a project submission from you'
+              too_early: 'has not started yet!'
+              too_late: 'has already ended!'
+            categories:
+              too_short:
+                one: 'must have at least one chosen'
+              too_long:
+                other: 'has too many chosen (maximum is %{count})'
+            images:
+              not_enough: 'must have at least %{count} image'
+              too_many: 'cannot have more than %{count} images'
+            videos:
+              too_large: 'is too large'
+        image:
+          attributes:
+            image:
+              too_large: 'is too large'
+        vote:
+          too_many_votes: 'You already voted in this contest'
+          cannot_vote_for_yourself: 'You cannot vote for yourself'
+        user:
+          attributes:
+            password:
+              confirmation: "Password does not match"
+              too_short: "Password is too short (minimum is %{count} characters)"
+            password_confirmation:        
+              confirmation: "Confirm Password does not match"
+              too_short: "Password is too short (minimum is %{count} characters)"
+            email: 
+              taken: "Email has already been taken"
+
+  root:
+    links:
+      sign_in: 'Sign In to Get Started'
+      start_project: 'Start your Project'
+      buy_book: 'Buy the Book to Start a Project'
+      buy_book_or_subscription: 'Buy a Subscription to Vote on Projects'
+      # buy_book_or_subscription: 'Buy a Book or Get a Subcription to Vote on Projects'
+
+  address:
+    name: 'Full Name'
+    street: 'Street'
+    city: 'City'
+    state: 'State / Province'
+    zip: 'Zip Code / Zone'
+    mobile: 'Mobile'
+    country: 'Country'
+  cart:
+    add: 'Add to Cart'
+    checkout: 'Check out Now'
+    shop: 'Continue Shopping'
+    no_items: 'There are no items in your shopping cart.'
+    add_items: 'Please go back and add some items to your cart.'
+    subtotal: 'Subtotal'
+    tax: 'Tax'
+    shipping: 'Shipping'
+    total: 'Total Price'
+    unit: 'Unit Price'
+  order:
+    address: 'Shipping Address'
+    your_order: 'Your Order'
+    order_items: 'Order Items'
+    subtotal: 'Subtotal'
+    tax: 'Tax'
+    shipping: 'Shipping'
+    totals: 'Totals'
+    total: 'Total Price'
+    quantity: 'Quantity'
+    unit: 'Unit Price'
+    payment: 'Payment Details'
+  project:
+    processing_video: "We are currently processing this project's video. It will be available shortly."
+    video:
+      formats: 'MP4'
+      file_size: '%{size} file limit'
+      choose_file: 'Choose a Video From Your Computer'
+    image:
+      formats: 'JPG, PNG'
+      file_size: '%{size} file limit'
+      choose_file: 'Choose an Image From Your Computer'
+  pundit:
+    default: 'You are not authorized to perform this action.'
+  user:
+    no_projects: 'This user has not submitted any projects!'
+    no_votes: 'This user has not voted on any projects!'
+    buttons:
+      edit_profile: 'Edit Profile'
+    titles:
+      sign_up: 'Sign Up'
+      update_profile: 'Update Your Profile'
+      manage_subscription: 'Buy Subscription'
+    messages:
+      membership_created: 'Congratulations, you have a lifetime membership!'
+
+  simple_form:
+    required:
+      text: 'required'
+      mark: '*'
+    labels:
+      address:
+        name: 'Full Name'
+        street: 'Street'
+        city: 'City'
+        state: 'State'
+        zip: 'Zip Code'
+        mobile: 'Mobile Number'
+        country: 'Country'
+      user:
+        email: ''
+        password: ''
+        image: 'Profile Photo'
+        terms_of_service: 'I agree to the terms of service'
+      project:
+        name: 'Project Title'
+        video: 'Project Video'
+        image: 'Project Image'
+        body: 'Description'
+      product:
+        name: 'Name'
+        price: 'Price'
+        description: 'Description'
+        book_download: 'Download File'
+      group:
+        invited_user_email: 'Add users by e-mail (press enter to submit)'
+      contest:
+        main: 'Main contest?'
+        slug: 'URL path'
+      sponsor:
+        name: 'Full Name or Company Name'
+        phone: 'Primary Phone Number'
+        email: 'Email Address'
+        address_1: 'Address Line 1'
+        address_2: 'Address Line 2'
+        city: 'City'
+        state: 'State'
+        country: 'Country'
+        zip: 'Zip Code'
+        duration: 'Duration of Sponsorship'
+        start_date: 'Desired Start of Sponsorship'
+        region: 'Desired Region'
+        notes: 'Additional Notes'
+        admin_notes: 'Admin Notes'
+    placeholders:
+      address:
+        name: '*Full Name'
+        street: '*Street'
+        city: '*City'
+        state: '*State / Province'
+        zip: '*Zip Code / Zone'
+        mobile: '*Phone Number'
+        country: '*Country'
+      subscriptions:
+        number: 'Card Number'
+        exp_month: 'Exp Month'
+        exp_year: 'Exp Year'
+        cvc: 'CVC'
+      user:
+        email: '*E-mail'
+        password: '*Password'
+        name: '*Name'
+        location: '*Location'
+        password_confirmation: '*Confirm password'
+        redemption_code: 'Redemption code'
+      sponsor:
+        name: '*Full Name or Company Name'
+        phone: '*Primary Phone Number'
+        email: '*Email Address'
+        address_1: 'Address Line 1'
+        address_2: 'Address Line 2'
+        city: 'City'
+        state: 'State'
+        country: 'Country'
+        zip: 'Zip Code'
+        duration: 'Duration of Sponsorship'
+        start_date: 'Desired Start of Sponsorship'
+        region: 'Desired Region'
+        notes: 'Additional Notes'
+        admin_notes: 'Admin Notes'
+    hints:
+      contest:
+        slug: 'URL will become :path'
+        main: 'There can only be 1 main contest. Marking this contest as main will remove this flag from the current main contest'
+      product:
+        book_download: 'URL where users can access e-book or audiobook'

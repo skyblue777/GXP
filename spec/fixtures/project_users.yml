@@ -1,0 +1,14 @@
+carpooling:
+  project: carpooling
+  user: logan
+  admin: true
+
+recycling:
+  project: recycling
+  user: danny
+  admin: true
+
+beehives:
+  project: beehives
+  user: danny
+  admin: true

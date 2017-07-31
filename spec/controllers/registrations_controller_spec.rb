@@ -1,0 +1,3 @@
+describe RegistrationsController do
+
+end

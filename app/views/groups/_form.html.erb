@@ -1,0 +1,80 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#group_name").attr("placeholder", "*Name");
+    $("#group_bio").attr("placeholder", "*Bio");
+    $("#group_invited_user_email").attr("placeholder","Email");
+  });
+</script>
+<%= simple_form_for group, url: polymorphic_path([@project, @group], local_assigns.slice(:redirect_path, '')) do |f| %>
+  <div class="form-group">
+    <!-- <label><%#= t 'simple_form.labels.group.image' %></label> -->
+    <div class="image-container">
+      <div class="silhouette">
+        <%= attachment_image_tag group, :image, :fill, 120, 120, fallback: 'silhouette-large.png' %>
+      </div>
+      <div class="uploader">
+        <label class="choose-file" for="group_image">Choose an image from your computer</label>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped" style="width: 0%">
+          </div>
+        </div>
+        <small>JPG, PNG, or GIF</small>
+        <small>5MB File Limit</small>
+        <%= f.attachment_field :image, class: 'hidden', direct: true %>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <span class="grp_name_error" id="grp_name_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Name field can't be blank</span>
+  <%= f.input :name %>
+  <span class="grp_bio_error" id="grp_bio_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Bio field can't be blank</span>
+  <%= f.input :bio, as: :text %>
+  <%= f.input :invited_user_email %>
+  <%= f.input :invited_user_emails, as: :hidden %>
+  <div id="invited-users" class="invited-users form-group">
+    <label>Invited users:</label>
+    <ul>
+      <% if !@group.invitations.blank? %>
+      <% @group.invitations.each do |invitation| %>
+        <li class="<%= invitation_status(invitation) %>">
+          <%=  image_tag "envolop.png", size: "20x20" %>
+          <%= invitation %>
+          <%= link_to group_invitation_path(invitation), class: 'delete-invite', method: :delete, data: { remote: true, confirm: "Are you sure you want to delete the invited user?" } do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+        </li>
+      <% end %>
+      <%else%>
+        <label style="color:red">No invited User</label>
+      <%end%>
+    </ul>
+  </div>
+  <div class="text-center">
+    <%= f.submit (local_assigns.key?(:redirect_path) ? 'Next' : 'Update'), class: 'btn btn-warning', id: "group_btn" %>
+  </div>
+<% end %>
+<input type="hidden" id="hidden_group_id" value="<%= @group.id %>">
+<style type="text/css">
+  .grp_name_error, .grp_bio_error{
+    display: none;
+  }
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+   $("#group_btn").click(function(e){
+    if ($("#group_name").val() == "" || !$("#group_name").val().replace(/\s/g, '').length){
+      $("#grp_name_error").removeClass("grp_name_error");
+      e.preventDefault();
+    }else{
+      $("#grp_name_error").addClass("grp_name_error");
+    }
+    if ($("#group_bio").val() == "" || !$("#group_bio").val().replace(/\s/g, '').length){
+      $("#grp_bio_error").removeClass("grp_bio_error");
+      e.preventDefault();
+    }else{
+      $("#grp_bio_error").addClass("grp_bio_error");
+    }
+   }); 
+  });
+</script>

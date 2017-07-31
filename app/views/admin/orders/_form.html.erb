@@ -1,0 +1,9 @@
+<%= simple_form_for [:admin, @order] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :shipped %>
+  <%= f.input :tracking_number %>
+  <%= f.input :complete %>
+  <div class="text-center">
+    <%= f.submit 'Save', class: 'btn inverse-btn-inverted' %>
+  </div>
+<% end %>

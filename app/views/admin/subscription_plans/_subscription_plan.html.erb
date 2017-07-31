@@ -1,0 +1,12 @@
+<tr id="subscription-plan-<%= subscription_plan.id %>">
+  <td><%= subscription_plan.name %></td>
+  <td><%= subscription_plan.interval %></td>
+  <td><%= number_to_currency subscription_plan.amount/100.to_f %></td>
+  <td class="text-right">
+    <%= link_to 'Edit', edit_admin_subscription_plan_path(subscription_plan) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Show', admin_subscription_plan_path(subscription_plan) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Delete', admin_subscription_plan_path(subscription_plan), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

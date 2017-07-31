@@ -1,0 +1,119 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    if(<%= books_prices(1, product).to_f %> == 0.0){
+      $("<%= '#span1'+product.id.to_s %>").css("display", "none");
+    }
+    if(<%= books_prices(2, product).to_f %> == 0.0){
+      $("<%= '#span2'+product.id.to_s %>").css("display", "none");
+    }
+    if(<%= books_prices(5, product) %> == 0.0){
+      $("<%= '#span5'+product.id.to_s %>").css("display", "none");
+    }
+    if(<%= books_prices(6, product) %> == 0.0){
+      $("<%= '#span6'+product.id.to_s %>").css("display", "none");
+    }
+  });
+</script>
+
+<div class="col-xs-12  col-sm-4 " id="product<%= product.id %>">
+  <div class="book-description">
+    <%= attachment_image_tag product, :image, :fill, 500, 500, class: 'img-thumbnail img-responsive', fallback: "http://lorempixel.com/260/260/nature/#{rand(1..10)}" %>
+    <h4><%= product.name %></h4>
+    <p class="product-description">
+      <%= product.description %>
+    </p>
+  </div>
+  <br>
+  <%= simple_form_for @order_product, :url => order_products_path do |f| %>
+    <!-- <p> -->
+      <%# if !books_prices(1, product).nil? && !books_prices(2, product).nil? %>
+      <input type="hidden" name="book_name" value="<%= product.name %>">
+       <%= f.fields_for :colored_version do |c| %>
+          <div id="span1<%= product.id %>">
+            <div class="row1">
+              <div class="col-md-3" style="padding-top: 9px;">
+                Hardcover:
+              </div>
+              <div class="col-md-3" style="padding-top: 9px;">
+                <b>$<%= books_prices(1, product) %></b>
+              </div> 
+              <div class="col-md-2" style="padding-top: 9px;">Qty:</div>
+              <div class="col-md-3"><%= c.number_field :quantity_hcol,  min: 0, max: 100, step: "1" , style: "width:70px; height: 30px;", value: 0, id: "order_product_colored_version_quantity_hcol#{product.id}" %></div>
+            </div><!-- <br><br> --></div>
+
+          <div id="span2<%= product.id %>">
+            <div class="row1">
+              <div class="col-md-3" style="padding-top: 9px;">
+                Paperback:
+              </div>
+              <div class="col-md-3" style="padding-top: 9px;">
+                <b>$<%= books_prices(2, product) %></b>
+              </div> 
+              <div class="col-md-2" style="padding-top: 9px;">Qty:</div>
+              <div class="col-md-3"><%= c.number_field :quantity_pcol,  min: 0, max: 100, step: "1" , style: "width:70px; height: 30px;", value: 0, id: "order_product_colored_version_quantity_pcol#{product.id}" %></div>
+            </div><!-- <br><br> --></div>
+        <%end%>
+       <%#end%>
+      <%# if !books_prices(5, product).nil? && !books_prices(6, product).nil? %>
+        <%= f.fields_for :aud_ebk do |e| %>
+          <div id="span5<%= product.id %>">
+            <div class="row1">
+              <div class="col-md-3" style="padding-top: 9px;">
+                Audio:
+              </div>
+              <div class="col-md-3" style="padding-top: 9px;">
+                <b>$<%= books_prices(5, product) %></b>
+              </div> 
+              <div class="col-md-2" style="padding-top: 9px;">Qty:</div>
+              <div class="col-md-3"><%= e.number_field :quantity_aud,  min: 0, max: 100, step: "1", style: "width:70px; height: 30px;", value: 0, id: "order_product_aud_ebk_quantity_aud#{product.id}" %></div>
+            </div><!-- <br><br> --></div>
+
+          <div id="span6<%= product.id %>">
+            <div class="row1">
+              <div class="col-md-3" style="padding-top: 9px;">
+                Ebook:
+              </div>
+              <div class="col-md-3" style="padding-top: 9px;">
+                <b>$<%= books_prices(6, product) %></b>
+              </div> 
+              <div class="col-md-2" style="padding-top: 9px;">Qty:</div>
+              <div class="col-md-3"><%= e.number_field :quantity_ebk,  min: 0, max: 100, step: "1" , style: "width:70px; height: 30px;", value: 0, id: "order_product_aud_ebk_quantity_ebk#{product.id}" %></div>
+            </div></div>
+        <%end%>    
+        <div style="text-align:center">
+            <%= f.hidden_field :product_id, value: product.id %>
+            <%#= f.button :submit, "Add to cart", class: "btn-warning", style: "width:200px; text-align:center;" %>  
+        </div>
+    <% end %> 
+    <div style="text-align:center">
+      <input type="submit" name="commit" value="Add to cart" class="btn btn-default btn-warning"  style="width:200px; text-align:center;" id="add_to_cart_id<%= product.id%>"><br><br>  
+    </div> 
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#add_to_cart_id<%= product.id%>").click(function(){
+      $.ajax({
+        type: "POST",
+        url: "/order_products",
+        dataType: "json",
+        data:  {book_name: "<%= product.name %>", order_product: {colored_version: {quantity_hcol: $("#order_product_colored_version_quantity_hcol<%= product.id %>").val() , quantity_pcol: $("#order_product_colored_version_quantity_pcol<%= product.id %>").val() }, aud_ebk: {quantity_aud: $("#order_product_aud_ebk_quantity_aud<%= product.id %>").val() , quantity_ebk: $("#order_product_aud_ebk_quantity_ebk<%= product.id %>").val() }, product_id: "<%= product.id %>"}},
+        success:function(result){
+          alert(result["item_list"]+ " Added in your cart. " + "\n\n" + "Total Items: " + result["item_count"]+"\t\t\t\t\t\t\t\t\t\t\t\t"+"Total Price: "+result["books_tot_price"]);
+            // $("#cart_item_id").next().removeClass("fa-shopping-cart");
+            // $("#cart_item_id").next().addClass("fa-cart-plus");
+          }        
+      });
+    });
+  });
+</script>
+
+
+
+
+<style type="text/css">
+  .row1{
+    margin-left: -15px;
+  }
+</style>

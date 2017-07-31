@@ -1,0 +1,22 @@
+.flash {
+  position: fixed;
+  z-index: 10001;
+  width: 100%;
+  text-align: center;
+  top: $navbar-height - 20px;
+}
+
+.alert {
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 15px;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+.alert-notice {
+  @extend .alert-success;
+}

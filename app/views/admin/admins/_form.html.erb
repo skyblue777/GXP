@@ -1,0 +1,16 @@
+<%= simple_form_for @admin, url: (@admin.persisted? ? admin_registration_path(@admin) : admin_registrations_path) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <% if policy(:admin).edit_roles? %>
+    <%= f.input :role, collection: policy(:admin).roles, include_blank: false %>
+  <% end %>
+  <%= link_to 'Update password', '#', id: 'update_password' %>
+  <div class="update_password">
+    <%= f.input :current_password %>
+    <%= f.input :password, html: { autocomplete: 'off' }  %>
+    <%= f.input :password_confirmation, html: { autocomplete: 'off' }  %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn btn-primary' %>
+  </div>
+<% end %>

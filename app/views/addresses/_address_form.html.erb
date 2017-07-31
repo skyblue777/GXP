@@ -1,0 +1,123 @@
+<style type="text/css">
+ .adr_name_error, .adr_zip_error, .adr_state_error, .adr_city_error, .adr_street_error{
+    display: none;
+  }
+  #adr_name_error, #adr_zip_error, #adr_state_error, #adr_city_error, #adr_street_error {
+    background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+  }    
+ </style> 
+<%if current_user.nil?%>
+<style type="text/css">
+  .mobile_no_error, .blnk_error{
+    display: none;
+  }
+</style>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#btn_next").click(function(evt){
+        var $phon_no = $("#country_code").val()+$("#address_mobile").val();
+        var phoneReg =  /^\+(?:[0-9] ?){7,15}[0-9]$/;
+        if($("#address_mobile").val() == ""){
+          $("#blnk_error").removeClass("blnk_error");
+          $("#blnk_error").text("Field can't be blank");
+          evt.preventDefault();
+        }else{
+          $("#blnk_error").addClass("blnk_error");
+        }
+        if(!phoneReg.test($phon_no) && $("#address_mobile").val() != ""){
+          $("#mobile_no_error").removeClass("mobile_no_error");
+          $("#mobile_no_error").text("Invalid mobile number.");
+          evt.preventDefault();
+        }else{
+          $("#mobile_no_error").addClass("mobile_no_error");
+        }
+      });
+    });
+  </script>
+<%end%>
+
+<%= simple_form_for @address do |f| %>
+  <span class="adr_name_error" id="adr_name_error" ></span>
+  <%= f.input :name, label: false %>
+  <span class="adr_street_error" id="adr_street_error" ></span>  
+  <%= f.input :street, label: false %>
+  <span class="adr_city_error" id="adr_city_error" ></span>
+  <%= f.input :city, label: false %>
+  <span class="adr_state_error" id="adr_state_error" ></span>
+  <%= f.input :state, label: false %>
+  <span class="adr_zip_error" id="adr_zip_error" ></span>
+  <%= f.input :zip, label: false %>
+  <%= f.input :country, include_blank: '-Select a Country-' %>
+  <%if current_user.nil?%>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <span class="mobile_no_error" id="mobile_no_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" ></span>
+      <span class="blnk_error" id="blnk_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" ></span>      
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-1">
+        <input type="text" class="form-control" name="country_code" id="country_code" label="false" readonly="true" placeholder="*code" style="width:500%;position: relative;left: 14px;" value="<%= edit_country_code(@address.country) %>" >
+      </div>
+      <% @mobile_no = @address.mobile.nil? ? "" : @address.mobile.include?(edit_country_code(@address.country)) ? @address.mobile.gsub(edit_country_code(@address.country),"") : "" %>
+      <div class="col-md-2"></div>
+      <div class="col-md-9">
+          <%= f.input :mobile, label: false, maxlength: 15 %>
+      </div>
+    </div>
+  <%end%> 
+  <div style="text-align:center">
+    <%= f.button :submit, "Next", class: "btn btn-warning", id: "btn_next", style: "width:150px;" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_next").click(function(evt){
+      if ($("#address_country").val() == ""){
+       alert("Please select country"); 
+       evt.preventDefault();
+      }
+    if ($("#address_name").val() == ""){
+      $("#adr_name_error").removeClass("adr_name_error");
+      $("#adr_name_error").text("Full Name can't be blank.");
+      evt.preventDefault();          
+    }else{
+      $("#adr_name_error").addClass("adr_name_error");
+    }
+    if ($("#address_street").val() == ""){
+      $("#adr_street_error").removeClass("adr_street_error");
+      $("#adr_street_error").text("Street can't be blank.");
+      evt.preventDefault();          
+    }else{
+      $("#adr_street_error").addClass("adr_street_error");
+    }
+    if ($("#address_city").val() == ""){
+      $("#adr_city_error").removeClass("adr_city_error");
+      $("#adr_city_error").text("City can't be blank.");
+      evt.preventDefault();          
+    }else{
+      $("#adr_city_error").addClass("adr_city_error");
+    }
+    if ($("#address_state").val() == ""){
+      $("#adr_state_error").removeClass("adr_state_error");
+      $("#adr_state_error").text("State can't be blank.");
+      evt.preventDefault();          
+    }else{
+      $("#adr_state_error").addClass("adr_state_error");
+    }
+    if ($("#address_zip").val() == ""){
+      $("#adr_zip_error").removeClass("adr_zip_error");
+      $("#adr_zip_error").text("Zip code/Zone can't be blank.");
+      evt.preventDefault();          
+    }else{
+      $("#adr_zip_error").addClass("adr_zip_error");
+    }    
+
+
+
+    });
+    $("#address_mobile").val('<%= @mobile_no %>');
+  });
+</script>

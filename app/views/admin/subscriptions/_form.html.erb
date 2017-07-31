@@ -1,0 +1,6 @@
+<%= simple_form_for [:admin, @subscription] do |f| %>
+  <%= f.input :active %>
+  <div class="text-center">
+    <%= f.submit 'Save', class: 'btn inverse-btn-inverted' %>
+  </div>
+<% end %>

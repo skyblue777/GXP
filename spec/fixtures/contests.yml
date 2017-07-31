@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tenK:
+  name: '$10k green idea sweepstakes'
+  slug: '10k'
+  main: true
+  starts_at: 2015-01-01 12:00:00
+  ends_at: 2035-01-01 12:00:00
+
+franklin:
+  name: '$9999 sweepstakes'
+  slug: 'franklin'
+  location: 'Franklin, TN'
+  starts_at: 2015-01-01 12:00:00
+  ends_at: 2035-01-01 12:00:00
+  longitude: -86.8688899
+  latitude:  35.9250637
+
+portland:
+  name: '$5000 sweepstakes'
+  slug: 'portland'
+  location: 'Portland, OR'
+  starts_at: 2015-01-01 12:00:00
+  ends_at: 2035-01-01 12:00:00
+  longitude: -122.6764816
+  latitude: 45.5230622

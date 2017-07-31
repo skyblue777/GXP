@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GreenXWeb</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'manual' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'manual' %>
+  <%= favicon_link_tag 'favicon-32.png', type: 'image/png' %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ====== Roboto Google Font ===========  -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+  <script src="//vjs.zencdn.net/4.12/video.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!-- <link href='https://fonts.googleapis.com/css?family=Rufina%7cfamily=Lato' 
+  rel='stylesheet' type='text/css'> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <%= yield :head %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= 'nav' if use_nav_layout? %> <%= controller_name %>-<%= action_name %>" style="font-family: 'Roboto Condensed', sans-serif;">
+<header id="header">
+<%= render 'layouts/nav' %>
+</header>
+  <div class="main">
+    <%= yield %>
+  </div>
+<footer> 
+  
+  <div class="footer-bottom">
+    <div class="continer">
+      <center>
+        <%= image_tag 'logo-footer.png' %>
+      </center>
+      <center>
+      <!-- footer.png -->
+        <div class="social-box">
+          <ul class="list-inline social">
+            <li><div class="social-share-button" data-title="GreenXPrize" data-img="logo.png" data-url="www.greenxprize.com" data-desc="" data-via=""><a rel="nofollow " data-site="facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i></a></div></li>
+            <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="" data-via=""><a rel="nofollow " data-site="twitter" class="fa fa-twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"></a></div></li>
+            <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="www.greenxprize.com" data-via=""><a rel="nofollow " data-site="linkedin" class="fa fa-linkedin" onclick="return SocialShareButton.share(this);" title="Share to Linkedin" href="#"></a></div></li>
+            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </center>
+      <div class="text-center copy-right-text"> <span>Copyright © <%= Date.today.year %> Go Green Media Labs, LLC. All rights reserved.</span> </div>
+    </div>
+  </div>
+</footer>
+<%= javascript_include_tag 'google_analytics', 'data-turbolinks-track' => true %>
+</body>
+
+<!-- ========= Include Custom.JS =========== -->
+<script type="text/javascript" src="custom.js"></script>
+</html>

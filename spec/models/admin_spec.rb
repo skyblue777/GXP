@@ -1,0 +1,2 @@
+describe Admin do
+end

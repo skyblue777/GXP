@@ -1,0 +1,21 @@
+require Rails.root.join('lib', 'responders', 'admin_responder')
+
+class Admin::BaseController < ApplicationController
+  before_action :authenticate_admin!
+
+  layout 'admin'
+  respond_to :html
+  self.responder = AdminResponder
+
+  include Pundit
+
+  def show
+    edit
+    render :edit
+  end
+
+  def current_user
+    current_admin
+  end
+
+end

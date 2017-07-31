@@ -1,0 +1,19 @@
+carpooling:
+  project: carpooling
+  category: recreation
+
+recycling:
+  project: recycling
+  category: recreation
+
+beehives:
+  project: beehives
+  category: recreation
+
+wind_power:
+  project: wind_power
+  category: power
+
+save_the_whales:
+  project: save_the_whales
+  category: wildlife

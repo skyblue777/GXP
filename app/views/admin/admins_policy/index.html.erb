@@ -1,0 +1,27 @@
+<h1 class="page-header">
+  Admins
+  <%= link_to 'New', new_admin_admins_policy_path, class: 'btn btn-primary' %>
+</h1>
+<table class="table table-striped table-contests">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @adminpolicies.each do |ap| %>
+      <tr>
+        <td><%= ap.id %></td>
+        <td><%= ap.admin_email %></td>
+        <td><%= ap.admin_mobile_no %></td>
+        <td><%= link_to 'Edit', edit_admin_admins_policy_path(ap) %>
+        &nbsp; / &nbsp;
+        <%= link_to 'Delete', admin_admins_policy_path(ap), method: :delete, data: { confirm: 'Are you sure you want to delete the selected Admin Policy?' } %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+

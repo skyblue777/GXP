@@ -1,0 +1,146 @@
+// Place all the styles related to the registrations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-form {
+  form {
+    float: none !important;
+    margin: auto;
+
+    input[type=text],
+    input[type=password],
+    input[type=email],
+    input[type=tel],
+    select {
+      height: 62px;
+      font-size: 26px;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    label {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1.5em;
+      margin: 10px 0 10px 10px;
+    }
+
+    .terms-of-service {
+      background-color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+  }
+
+  .password-form {
+    .help-block {
+      color: #fff;
+    }
+  }
+
+  h1 {
+    color: #fff;
+    text-align: center;
+  }
+
+  .links {
+    margin-top: $padding;
+    @include cols(12);
+    @extend .centered-col;
+    text-align: center;
+    p, a {
+      color: #fff;
+    }
+  }
+
+  .has-error {
+    .error-message {
+      background-color: #d9534f;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    label {
+      color: #fff;
+    }
+  }
+  #error_explanation {
+    background-color: rgba(100, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 5px;
+    padding: 1px 0px 10px 15px;
+
+    li {
+      color: #fff;
+    }
+  }
+}
+
+#user-hero {
+  height: 508px;
+  line-height: 508px;
+  margin-bottom: $padding * 2;
+  background: image-url('backgrounds/hero-background-dark.jpg') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+
+  .user-image {
+    img {
+      border-radius: 100%;
+    }
+  }
+  h2 {
+    color: #fff;
+    font-size: 3.5em;
+    text-transform: uppercase;
+  }
+  h3 {
+    color: #fff;
+  }
+  p {
+    color: #fff;
+    line-height: 1.8em;
+  }
+}
+
+.user-projects {
+  h1 {
+    font-size: 2.5em;
+  }
+}
+
+.my-project {
+  @include make-row();
+  position: relative;
+  background-color: #fff;
+  @include box-shadow(-3px 3px 6px rgba(0, 0, 0, .32));
+
+  .project-image {
+    float: left;
+  }
+
+  .project-info {
+    overflow: hidden;
+    padding: $padding * 2;
+
+    .project-name {
+      font-size: 18px;
+    }
+  }
+}
+
+.tr-edit-link {
+  top: 5px;
+  right: 8px;
+  font-size: 18px;
+  position: absolute;
+
+  &:hover .fa {
+    color: $brand-primary;
+  }
+}

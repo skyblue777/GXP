@@ -1,0 +1,3 @@
+describe ContestsController do
+
+end

@@ -1,0 +1,26 @@
+<div class="image-container">
+  <div class="silhouette">
+    <%= attachment_image_tag i.object, :image, :fill, 120, 120, fallback: 'silhouette-large.png' %>
+  </div>
+  <div class="uploader">
+    <label class="choose-file" for="project_images_attributes_<%= image_num %>_image">Choose an image from your computer</label>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" style="width: 0%">
+      </div>
+    </div>
+    <small>JPG, PNG, or GIF</small>
+    <small>5MB File Limit</small>
+    <%= i.file_field :image,  direct: true, presigned: true %>
+    <% if @crop_coordinates %>
+      <%= hidden_field_tag :image_crop_x, @crop_coordinates.x %>
+      <%= hidden_field_tag :image_crop_y, @crop_coordinates.y %>
+      <%= hidden_field_tag :image_crop_w, @crop_coordinates.w %>
+      <%= hidden_field_tag :image_crop_h, @crop_coordinates.h %>
+    <% end %>
+    <%#= i.input :image, as: :attachment, direct: true %>
+  </div>
+  <div class="clearfix"></div>
+  <div class="img-preview hide">
+    <img id="project-img-preview" />
+  </div>
+</div>

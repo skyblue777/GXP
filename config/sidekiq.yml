@@ -1,0 +1,10 @@
+---
+:concurrency: 5
+:queues:
+  - default
+  - refile
+  - mailers
+:process_limits:
+  refile: 1
+production:
+  :concurrency: 7

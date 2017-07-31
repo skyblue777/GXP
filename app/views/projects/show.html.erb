@@ -1,0 +1,226 @@
+<%#TODO: Refactor the CSS  %>
+<style>
+  .label-success{
+      padding: 12px 8px 12px 12px;
+      display: inline-block;
+      -moz-border-radius: 100px;
+      -webkit-border-radius: 100px;
+      border-radius: 100px;
+      -moz-box-shadow: 0px 0px 2px #888;
+      -webkit-box-shadow: 0px 0px 2px #888;
+      box-shadow: 0px 0px 2px #888;
+    }
+    .btn-round-green {
+      background:#0BB76C;
+      font-size: 15px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      width:180px;
+      color: #fff;
+
+    }
+    #project-audio-button {
+      cursor: pointer;
+    }
+</style>
+
+<div class="project-details">
+  <div class="container">
+    <h1>PROJECT DETAIL</h1>
+  </div>
+</div>
+
+
+<% if !@project.finalized? %>
+  <div class="container">
+    <div id="new-project" class="generic-form has-image">
+      <center><h1>ALMOST DONE...</h1></center>
+      <%#= render 'steps', step: 3 %>
+      <div class="text-center">
+        <%= link_to 'Looks good - submit!', finalize_project_path(@project), method: :post, class: 'btn btn-warning' %>
+      </div>      
+      <hr>
+    </div>
+  </div>
+<% end %>
+<div id="project" class="finalized-<%= @project.finalized %>">
+  <div class="container">
+
+    <div class="row">
+      <% @project.images.each do |img| %>
+        <div class="col-md-4">
+        <%= image_tag "#{img.image_url}", size: "300x250" %>
+          <%#= attachment_image_tag "#{img.image_url}", class: 'project-img', size: "300x250" %>      
+        </div>
+      <%end%>      
+    </div>
+    <div class="row">
+      <div class="col-md-4 project_video">
+        <%unless @project.video_url.nil?%>
+          <%#@project.video_url.end_with?("SampleVideo_1280x720_1mb.mp4") %>
+          <video width="320" height="240" controls>
+            <source src="<%= @project.video_url %>" >
+          </video>  
+        <%end%>
+      </div>
+      <div class="col-md-4 project_audio">
+      <br><br><br><br><br><br><br><br><br>
+       <% unless @project.audio.url.ends_with?("missing.png") %>
+         <audio controls>
+          <source src="<%= @project.audio.url %>" type="audio/mp3">
+        </audio> 
+       <%end%>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%unless @project.video_url.nil? %>
+          <b>Project Video</b>
+        <%end%>
+      </div>
+      <div class="col-md-4">
+        <%unless @project.audio.url.ends_with?("missing.png") %>
+          <b>Project Audio</b>
+        <%end%>
+      </div>       
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2><%= @project.name %></h2>
+        <h4 class="credit">by: <%= !humanized_project_creators(@project).nil? ? humanized_project_creators(@project) : "Admin" %></h4>
+        <p>Contest Name:&nbsp;<b><%= @project.contest.name %></b></p>
+        <p id="votes">
+          <span class="label label-success">
+            <%= fa_icon 'heart', style: 'color: #fff; margin-right: 5px' %>
+            <%= @project.votes_count %>
+          </span>
+        </p>
+        <% if @project.contest.ends_at.future? %>
+          <p id="countdown" data-time="<%= @project.contest.ends_at.strftime('%Y/%m/%d %H:%M:%S') %>"></p>
+        <% end %>
+        <div class="clearfix"></div>
+        <% if @project.contest.location.present? %>
+          <p class="impact"><span class="title">Impact Area:</span> <span class="location"><%= @project.contest.location %></span></p>
+        <% end %>
+        <p>
+          <b>Categories:</b>
+          <% @project.categories.each_with_index do |category, i| %>
+            <%= link_to category.name, contest_projects_path(@project.contest, category_id: category.id), style: "color:blue" %><%= ', ' unless i == @project.categories.length - 1 %>
+          <% end %>
+        </p>
+      </div>     
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="body" style="text-align:justify">
+          <b>Tagline:</b>
+          <%= @project.tagline %>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="body" style="text-align:justify">
+          <b>Description:</b>
+          <%= @project.body.html_safe %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <% if current_user && current_user.active && !@project.users.include?(current_user) %>
+            <% if current_user.voted_for?(@project) %>
+              <div class="btn btn-warning" style="width:200px;">
+                <%= fa_icon 'thumbs-o-up', style: 'color: #fff; margin-right: 5px', text: 'Voted' %>
+              </div>
+            <% elsif current_user.voted_in_contest?(@project.contest) %>
+              <%= link_to 'Vote for this project', project_votes_path(@project), method: :post, class: 'btn btn-round-green btn-warning', data: { confirm: %Q[Are you sure you want to move your vote from "#{current_user.project_voted_for_in_contest(@project.contest)}" to "#{@project.name}"?] }, style: "width:200px;" %>
+            <% else %>
+              <%= link_to 'Vote for this project', project_votes_path(@project), method: :post, class: 'btn btn-round-green btn-warning', style: "width:200px;" %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Vote for this project', project_votes_path(@project), method: :post, class: 'btn btn-round-green btn-warning', style: "width:200px;" %> 
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div id="comment-container" class="col-md-12">
+      <div id="comments">
+        <h2>Comments (<%= @project.comments.count %>)</h2>
+        <div class="row container">
+          <%= simple_form_for [@project, @comment] do |f| %>
+            <%= f.input :body, as: :text, label: false, placeholder: 'Write a comment...' %>
+            <%= f.hidden_field :commentable_id, value: @project.id %>
+            <%= f.hidden_field :commentable_type, value: 'Project' %>
+            <%= f.submit 'Post Comment', class: 'btn btn-primary', id: "btn_post_comment" %>
+          <% end %>
+          <!-- disabled: current_user.nil?, -->
+        </div>
+        <div id="comments-area" class="row">
+          <%= render @comments %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script type="text/javascript">
+  $(document).ready(function(){
+      var countDownDate = new Date("<%= @project.contest.ends_at.strftime('%Y/%m/%d %H:%M:%S') %>").getTime();
+      var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+      if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+
+    $("#btn_post_comment").click(function(evt){
+      if(!$("#comment_body").val().replace(/\s/g, '').length){
+        alert("Please enter Comment");
+        evt.preventDefault();
+      }
+    });
+    $("#btn_comment").click(function(){
+      alert("Sorry!, you can't post your idea, Please purchase lifetime membership");
+    });
+    $("#btn_vote").click(function(){
+      alert("Sorry!, you can't vote, Please purchase lifetime membership or update subscription plan");
+    });
+  });
+
+  var audio_button_toggle = false;
+  $("#project-audio-button").on('click', function(){
+    if (!audio_button_toggle){
+      document.getElementById('project-audio').play();
+      audio_button_toggle = true;
+      $("#project-audio-button").css('background-color', '#000');
+    }
+    else {
+      document.getElementById('project-audio').pause();
+      audio_button_toggle = false;
+      $("#project-audio-button").css('background-color', '#468847');
+    }
+  });
+
+</script>

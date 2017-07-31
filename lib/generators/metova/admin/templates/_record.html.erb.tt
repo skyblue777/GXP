@@ -1,0 +1,11 @@
+<tr>
+  <td><%%= <%= singular_table_name %>.id %></td>
+<% attributes.first(5).each do |attr| -%>
+  <td><%%= <%= singular_table_name %>.<%= attr.name %> %></td>
+<% end -%>
+  <td class="text-right">
+    <%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>) %>
+    &nbsp; / &nbsp;
+    <%%= link_to 'Delete', admin_<%= singular_table_name %>_path(<%= singular_table_name %>), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

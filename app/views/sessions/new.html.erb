@@ -1,0 +1,96 @@
+<style type="text/css">
+/*  .mandetory{
+    color:red; font-size:30px; margin-left:-20px; margin-top:-20px;
+  }
+  #mob_mandetory{
+    font-size:30px; margin-left: -113px; color:red;
+  }
+
+  #email_error, #blank_email_error{
+    background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+  }*/
+
+  fieldset {
+    border: none;
+    position: relative;
+    font-family: arial, sans-serif;
+  }
+  input:focus {
+    outline: none;
+  }
+  input + label {
+    display: block;
+    cursor: text;
+    color: #777;
+    transition: .15s ease-out all;
+    position: absolute;
+    top: 0.79em;
+    left: 1em;
+  }
+  input:focus + label,
+  label.stay {
+    top: -0.3em;
+    left: 1em;
+    font-size: .7em;
+    transition: .15s ease-out all;
+  }
+
+</style>
+
+<div class="contact-us">
+  <div class="container">
+    <h1>SIGN IN</h1>
+  </div>
+</div>
+<div class="book-background">
+  <div class="container user-form">
+    <div class="row">
+    <br>
+      <div class="col-md-6 col-md-offset-3">
+        <%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+          <%= f.input :email, autofocus: true, label: false %>
+          <%= f.input :password, autocomplete: 'off', label: false %>
+          <div class="actions">
+            <center><%= f.submit 'Sign in', class: 'btn btn-warning', style: "width:200px;", id: "btn_sign_in" %></center>
+          </div>
+        <% end %>
+        <div class="links">
+          <center><p><%= link_to 'Not registered yet?', new_user_registration_path %></p></center>
+          <center><p><%= link_to 'Forgot password?', new_password_path(resource) %></p></center><br>
+          <center><p><%= link_to t('root.links.buy_book_or_subscription'), new_subscription_path, class: 'btn btn-warning' %></p></center><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $("#btn_sign_in").click(function(){
+      $("#user_email").val("");
+      $("#user_password").val("");
+    // });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("input[type=text], input[type=tel], input[type=email], input[type=password]").each(function(e) {
+      $(this).wrap('<fieldset></fieldset>');
+      var tag = $(this).attr("placeholder");
+      //var tag= $(this).data("tag");
+      $(this).attr("placeholder", "");
+      $(this).after('<label for="name">' + tag + '</label>');
+    });
+
+    $("input[type=email], input[type=password]").on('blur', function() {
+      if (!$(this).val() == "") {
+        $(this).next().addClass('stay');
+      } else {
+        $(this).next().removeClass('stay');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,19 @@
+<h1 class="page-header">
+  Admins
+  <%= link_to 'New', new_admin_registration_path, class: 'btn btn-primary' if policy(:admin).create? %>
+</h1>
+<table class="table table-striped table-contests">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>E-mail</th>
+      <th>Role</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @admins %>
+  </tbody>
+</table>
+

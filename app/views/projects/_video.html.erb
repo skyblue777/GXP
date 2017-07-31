@@ -1,0 +1,12 @@
+<video id="project-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480">
+
+  <% if mp4 %>
+    <source src="<%= video_url(mp4) %>" type='video/mp4' />
+  <% end %>
+
+  <% if webm %>
+    <source src="<%= video_url(webm) %>" type='video/webm' />
+  <% end %>
+
+  <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>
+</video>

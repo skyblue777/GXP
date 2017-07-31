@@ -1,0 +1,308 @@
+<div class="project">
+  <div class="container">
+    <h1>PROJECTS & WINNERS</h1>
+  </div>
+</div>
+<div class="team-section container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="section-title ps-rel">
+        <center><h2>Welcome to Green X Prize</h2></center>
+        <center><h3 style="color:black;">Submit your Project for a Chance to Win</h3></center>
+        <% if current_user.nil? %>
+          <center><%= link_to t('root.links.sign_in'), new_user_session_path, class: 'btn btn-round-green btn-large btn-warning' %></center>
+        <% elsif current_user.is_permanent? %>
+          <center><%= link_to t('root.links.start_project'), new_contest_project_path(@contest), class: 'btn btn-round-green btn-large btn-warning' %></center>
+        <% elsif current_user.active %>
+          <center><%= link_to t('root.links.buy_book'), products_path, class: 'btn btn-round-green btn-large btn-warning' %></center>
+        <% else %>
+          <center><%= link_to t('root.links.buy_book_or_subscription'), new_subscription_path, class: 'btn btn-round-green btn-large btn-warning' %></center>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- /.row --> 
+</div>
+<hr>
+<div class="team-section container">
+  <div class="row">
+    <div class="col-md-12">
+    
+      <div class="section-title ps-rel">
+      <p>Icatiisi tionet faccate mperum facestrum int ut quunte non nosed estorehent facim fugiam sita ea dolupta dolut eliquostia nusam fugitat urionsequam vent est, omnimint harchil laborei ctiore pro omnim reic tecea que con et dollabo ruptaque et post ota volu ptam, quat quam eum re quis sequia conseriatur reptasp ici xsc iateces plitiis prepedi dolescias nissimi, ommos ex exce rna.</p>
+        <h2>FUTURE $10,000 WINNERS</h2>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> 
+          <%#= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+          <%= image_tag "blackimage.jpg", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <!-- <ul class="inline-list social-round">
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="1.png" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="" data-via=""><a rel="nofollow " data-site="facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i></a></div></li>
+              <li><div class="social-share-button" data-title="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-img="" data-url="GreenXPrize" data-desc="" data-via=""><a rel="nofollow " data-site="twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i></a></div></li>
+              <li><div class="social-share-button" data-title="GreeXPrize" data-img="" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="google_plus" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-google-plus"></i></a></div>
+              </li>
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="pinterest" onclick="return SocialShareButton.share(this);" title="Share to Pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></div></li>
+            </ul> -->
+          </div>
+        </div>
+        <h3>Unknown Participant</h3>
+        <span>A synopsis of our future winner's unknown x project.</span>
+        <button type="button" class="btn btn-warning">Unknown X's Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> 
+          <%#= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+          <%= image_tag "blackimage.jpg", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <!-- <ul class="inline-list social-round">
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="1.png" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="" data-via=""><a rel="nofollow " data-site="facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i></a></div></li>
+              <li><div class="social-share-button" data-title="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-img="" data-url="GreenXPrize" data-desc="" data-via=""><a rel="nofollow " data-site="twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i></a></div></li>
+              <li><div class="social-share-button" data-title="GreeXPrize" data-img="" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="google_plus" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-google-plus"></i></a></div>
+              </li>
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="pinterest" onclick="return SocialShareButton.share(this);" title="Share to Pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></div></li>
+            </ul> -->
+          </div>
+        </div>
+        <h3>Unknown Participant</h3>
+        <span>A synopsis of our future winner's unknown x project.</span>
+        <button type="button" class="btn btn-warning">Unknown X's Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> 
+          <%#= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+          <%= image_tag "blackimage.jpg", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <!-- <ul class="inline-list social-round">
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="1.png" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="" data-via=""><a rel="nofollow " data-site="facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i></a></div></li>
+              <li><div class="social-share-button" data-title="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-img="" data-url="GreenXPrize" data-desc="" data-via=""><a rel="nofollow " data-site="twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i></a></div></li>
+              <li><div class="social-share-button" data-title="GreeXPrize" data-img="" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="google_plus" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-google-plus"></i></a></div>
+              </li>
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="pinterest" onclick="return SocialShareButton.share(this);" title="Share to Pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></div></li>
+            </ul> -->
+          </div>
+        </div>
+        <h3>Unknown Participant</h3>
+        <span>A synopsis of our future winner's unknown x project.</span>
+        <button type="button" class="btn btn-warning">Unknown X's Project</button>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-lg-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+      <div class="team-member">
+        <div class="team-thumb">
+          <div class="ps-rel"> 
+          <%#= image_tag "1.png", alt: "img", class: "img-responsive ps-rel" %>
+          <%= image_tag "blackimage.jpg", alt: "img", class: "img-responsive ps-rel" %>
+            <div class="team-overlay"></div>
+            <!-- <ul class="inline-list social-round">
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="1.png" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="" data-via=""><a rel="nofollow " data-site="facebook" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook"></i></a></div></li>
+              <li><div class="social-share-button" data-title="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-img="" data-url="GreenXPrize" data-desc="" data-via=""><a rel="nofollow " data-site="twitter" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter"></i></a></div></li>
+              <li><div class="social-share-button" data-title="GreeXPrize" data-img="" data-url="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="google_plus" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-google-plus"></i></a></div>
+              </li>
+              <li><div class="social-share-button" data-title="GreenXPrize" data-img="" data-url="" data-desc="<%#= "www.greenxprize.com/users/"+75.to_s %>" data-via=""><a rel="nofollow " data-site="pinterest" onclick="return SocialShareButton.share(this);" title="Share to Pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></div></li>
+            </ul> -->
+          </div>
+        </div>
+        <h3>Unknown Participant</h3>
+        <span>A synopsis of our future winner's unknown x project.</span>
+        <button type="button" class="btn btn-warning">Unknown X's Project</button>
+      </div>
+    </div>
+  </div>
+  <!-- /.row --> 
+</div>
+
+
+<div class="theproject">
+  <div class="container">
+    <h1>THE PROJECTS</h1>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <%if !current_user.nil? %>
+    <%if current_user.is_permanent? %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= link_to "Send Request",send_request_path, method: :get, class: 'btn btn-round-green btn-large btn-warning' %>
+          <%= link_to "Request Status Dashboard",request_dashboard_path, method: :get, class: 'btn btn-round-green btn-large btn-warning' %>
+        </div>
+      </div>  
+      <hr>
+    <%else%>
+      <div class="row">
+        <div class="col-md-12">
+          <div style="text-align:right">
+            <label>Current Subscription Status: <%= current_user&.subscriptions&.first&.renewal_status? ? "<b style='color:green'>Active</b>".html_safe : "<b style='color:red'>Expired</b>".html_safe %>
+            <% if ( !current_user&.subscriptions&.first&.renewal_status? unless current_user&.subscriptions&.first&.blank? ) %>
+              <%= link_to "Renew Subsription", renew_subscriptions_path, method: :get, class: "btn btn-warning", data: {confirm: "Are you sure, you wan't to renew $2.99 Plan?"} %></label>
+            <%end%>        
+          </div>      
+        </div>
+      </div>  
+      <hr>    
+    <%end%>
+  <%end%>
+  </div>
+<div class="container">
+  <%if !current_user.nil?%>
+    <div class="team-section container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Top 3 Projects</h1>
+          <hr>        
+          <% @last_proj = Project.order("projects.votes_count DESC").limit(3) %>
+          <%= render(@last_proj) || 'No Projects For This Contest' %>         
+        </div>
+    </div>
+  <%end%>
+</div>
+<hr><h1>Projects</h1><hr>
+
+<div class="project-pro">
+  <div class="container">
+    <h1>Advertising Application </h1> 
+    <div class="container">
+      <div class="row">
+        <div class="span12">  
+          <div class="form-group">
+          <div class="row">
+          <div class="col-lg-4"></div>
+            <div class="col-lg-4"><%= select_tag 'contest', contest_filter_options(@contests, @contest), id: 'contest-filter', class: 'contest-filter filter' %></div><div class="col-lg-4"></div></div>
+            <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-md-4"><%= select_tag 'contest', category_filter_options(@categories), id: 'category-filter', class: 'category-filter filter' %></div><div class="col-lg-4"></div></div>
+            <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+              <div id="search-container" class="form-group">
+                <div class="input-group">
+                  <div id="search-icon">
+                    <table>
+                      <tr>
+                        <td><input type="text" name="query" id="query" class="filter form-control", style="    border-top-left-radius: 22px;border-bottom-left-radius: 22px; width: 308px;" /></td>
+                        <td><input type="button" value="Search" class="btn btn-warning" style="height: 42px;"></td>
+                      </tr>
+                    </table>
+                    <!-- <i class="fa fa-search"></i> -->
+                  </div>
+                </div>
+              </div></div>
+              <div class="col-lg-4"></div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="team-section container" id="projects">
+  <div class="row">
+    <div class="col-md-12">
+      <%if !@projects.blank? %>
+        <%= render(@projects) || "No Projects Found" %>
+      <%else%>
+        <div class="row">
+          <div class="col-sm-5"></div>
+          <div class="col-sm-7" style="color:red;">
+            No Projects Found
+          </div>
+        </div>
+      <%end%>        
+    </div>
+  </div>
+</div>
+<!-- <div id='projects'>
+
+</div> -->
+
+
+<div class="col-md-12">
+  <%= paginate @projects %>
+</div>
+<br>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#project_contest_id').selectize();
+    $('.contest-filter').selectize({
+      onChange: function(value) {
+        return window.location.href = value;
+      }
+    });
+    $('.category-filter').selectize({
+      onChange: function(value) {
+        var href, idToReload;
+        idToReload = '#projects';
+        href = window.location.pathname + "?category_id=" + value;
+        return $(idToReload).load(href + " " + idToReload + " > *");
+      }
+    });
+
+    hitEnter = function(e) {
+      return e.which === 13;
+    };
+    searchProjects = function(e) {
+      var href, idToReload, query;
+      idToReload = '#projects';
+      query = $('#query').val();
+      href = window.location.pathname + "?query=" + query;
+      $(idToReload).load(href + " " + idToReload + " > *");
+      return false;
+    };
+    $('#search-icon').on('click', function(e) {
+      return searchProjects(e);
+    });
+    $('#query').on('keydown', function(e) {
+      if (!hitEnter(e)) {
+        return;
+      }
+      return searchProjects(e);
+    });
+    $('.just-me').on('click', function() {
+      $('.chooser').addClass('hide');
+      return $('#just-me').removeClass('hide');
+    });
+    $('.group-or-organization').on('click', function() {
+      $('.chooser').addClass('hide');
+      return $('#group-or-organization').removeClass('hide');
+    });
+    $('.load-more-btn').on('click', function(e) {
+      e.preventDefault();
+      return $('#projects').infinitescroll('retrieve');
+    });
+    $('#projects').infinitescroll({
+      navSelector: '.pagination',
+      nextSelector: '.pagination .next a',
+      itemSelector: '.project-block',
+      loading: {
+        start: function(options) {
+          $('.load-more-btn').prop('disabled', 'disabled');
+          $('.load-more-btn').html('Loading...');
+          return $(this).data('infinitescroll').beginAjax(options);
+        },
+        finished: function() {
+          $('.load-more-btn').removeProp('disabled');
+          return $('.load-more-btn').html('Load More');
+        },
+        finishedMsg: '',
+        msgText: ''
+      },
+      errorCallback: function() {
+        $('.load-more-btn').prop('disabled', 'disabled');
+        return $('.load-more-btn').html('N/A');
+      }
+    });
+  });
+</script>

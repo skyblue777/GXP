@@ -1,0 +1,9 @@
+<h1>Contests</h1>
+
+<div class="contests">
+  <ul>
+    <% @contests.each do |contest| %>
+      <li><%= link_to contest.name, contest_path(id: contest), class: 'contest-li' %></li>
+    <% end %>
+  </ul>
+</div>

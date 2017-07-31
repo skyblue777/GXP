@@ -1,0 +1,391 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8WP3o0hCauFoiI4SMgr1BevY2w8qp7Uc&libraries=places&callback=initAutocomplete" async defer></script>
+
+<script>
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('user_location')),
+        {types: ['geocode']});
+  }
+
+  $("#user_location").focus(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  });
+</script>
+
+<style type="text/css">
+  .mandetory{
+    color:red; font-size:30px; margin-left:-20px; margin-top:-20px;
+  }
+  #mob_mandetory{
+    font-size:30px; margin-left: -113px; color:red;
+  }
+
+  #email_error, #blank_email_error{
+    background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+  }
+
+  fieldset {
+    border: none;
+    position: relative;
+    font-family: arial, sans-serif;
+  }
+  input:focus {
+    outline: none;
+  }
+  input + label {
+    display: block;
+    cursor: text;
+    color: #777;
+    transition: .15s ease-out all;
+    position: absolute;
+    top: 0.79em;
+    left: 1em;
+  }
+  input:focus + label,
+  label.stay {
+    top: -0.3em;
+    left: 1em;
+    font-size: .7em;
+    transition: .15s ease-out all;
+  }
+
+</style>
+<% if flash[:alert] %>
+<%= flash[:alert]%>
+<%end%>
+<div class="contact-us">
+  <div class="container">
+    <h1><%= I18n.t('user.titles.sign_up') %></h1>
+  </div>
+</div>
+
+<div class="book-background">
+  <div class="container user-form">
+    <div class="row">
+      <div class="col-md-12">
+        <%if !flash[:error].nil?%>
+          <div style="text-align:center; color:red;"><%= flash[:error] %></div>
+        <%end%>
+      </div>
+      <div class="col-md-6 col-md-offset-3">
+        <%= simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f| %>
+              <span class="name_error" id="name_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Name field can't be blank</span>
+              <%= f.input :name, autofocus: true, label: false  %>
+              <span class="blank_email_error" id="blank_email_error" >Email field can't be blank</span>
+              <span class="email_error" id="email_error" >Invalid Email Id</span>
+              <%= f.input :email, label: false, input_html: { value: @email } %>
+              <span class="location_error" id="location_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Location field can't be blank</span>
+              <%= f.input :location, label: false %>
+          <div class="form-group password required order_otp">    
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="div_country" id="div_country" style="position:relative; left:14px">
+                    <p><%= country_select("reg_cnrty_code", "country", include_blank: false, class: "form-control") %></p>
+                  </div>                  
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                  <input type="text" name="reg_contr_code" id="reg_contr_code_id" class="reg_contr_code_id form-control" readonly="true" placeholder="+14">
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" id="mobile_no_otp" class="mobile_no_otp form-control" placeholder="Ex. 417543010" maxlength="20">
+                </div>
+              </div>
+          <a onclick="jsfunction1(event)" href="javascript:void(0);" id="send_link" class="send_link" style="color:red">Send</a>
+          <a onclick="jsfunction2(event)" href="javascript:void(0);" id="cancel_link" class="cancel_link" style="color:red">Cancel</a>
+            <span class="otp_send_error" id="otp_send_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >OTP field can't be blank</span>
+            <input id="order_otp" class="form-control order_otp required" aria-required="true" placeholder="*OTP" name="user[order_otp]" type="text" maxlength="4"> 
+          <a onclick="jsfunction(event)" href="javascript:void(0);" id="resend_link" class="resend_link" style="color:red">Resend OTP</a>
+          </div>    
+              <span class="password_error" id="password_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Password field can't be blank</span>
+              <%= f.input :password, autocomplete: 'off', label: false %>         
+              <span class="confirm_password_error" id="confirm_password_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" > Confirm Password field can't be blank</span>          
+              <%= f.input :password_confirmation, autocomplete: 'off', label: false %> 
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">TERMS OF USE AND CONDITIONS</button>
+              <!-- <div id="myModal" class="modal fade" role="dialog" style="text-align:justify;"> -->
+                <!-- <div class="modal-dialog"> -->
+
+                  <!-- Modal content-->
+                  <div class="modal-content modal fade" id="myModal" role="dialog" style="text-align:justify;" >
+                    <div class="modal-header">
+                    <div style="text-align:right; padding-right: 16px;"><button type="button" class="" data-dismiss="modal" style="position:fixed; color:red;"><b>X</b></button></div>
+                      <h4 class="modal-title" style="text-align:center;">TERMS OF USE AND CONDITIONS</h4>
+                    </div>
+                    <div style="margin-left:10px;margin-right:10px;" class="tncdescription">
+                      <p><b>NOTICE:</b> GREENXPRIZE.COM ("GREENXPRIZE") is a website owned and operated by Go Green Media Labs, LLC. The site markets and sells the book and program for <u><em>Go Green Get Rich</em></u>. See <u><a href="https://greenxprize.com" style="color:blue">https://greenxprize.com</a></u> for a full description of the book and program.  Users who purchase the book may also register for green project contests projects ("Projects") where winners are eligible for $10,000 cash awards and prizes that are financed by Go Green Media Labs, LLC and its members of its sponsors. Projects are chosen through a simple, secure and transparent vote and all Projects are eligible to enter.</p>
+                      <p>The site also hosts the Go Green Sponsorship program which markets green Projects to potential sponsors in order to acquire funding  Go to <u><a href="https://greenxprize.com/sponsors/new" style="color:blue">https://greenxprize.com/sponsors/new</a></u> if you are interested in becoming a sponsor ("Sponsor").</p>
+                      <p>Readers, Users, or Sponsors <u>are not required</u> to purchase the book or to sponsor a program to access or use the website or to submit or fund a Project.</p>
+                      <p><b>1. ACCEPTANCE OF TERMS OF USE AND SERVICES</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> Users of the GREENXPRIZE.COM ("User(s)") constitutes acceptance of these terms, conditions, clauses and provisions of this Terms of Use and Conditions Agreement ("Terms" or "this Agreement"). This Agreement incorporates by reference and be the final arbiter of any other terms and provisions applicable to the use of use of all GREENXPRIZE, including, but not limited to, our Privacy Policy found at <u><a href="https://greenxprize.com/privacy" style="color:blue">https://greenxprize.com/privacy</a></u>.  By using GREENXPRIZE.COM,  you the user ("User") agrees to comply with all of the terms and conditions set forth here for both content use of the site, use to purchase the book, use to submit Projects, and entry or registration for a sponsor-financed prize.  </p>
+                      <p style="padding-left:40px;"><b>B.</b> GREENXPRIZE Users are solely responsible for all access to, and use of, the site and for any User's Account provided by GREENXPRIZE. Users are solely responsible for ensuring that any use of User's Account complies fully with the provisions of the Terms. User will be responsible for protecting the confidentiality of User's password(s), if any. </p>
+                      <p style="padding-left:40px;"><b>C.</b> GREENXPRIZE will have the right at any time to change or discontinue any aspect or feature of GREENXPRIZE, including, but not limited to, content, book availability, site access, Projects, project platforms, and any sponsorship rules or restrictions.</p>
+                      <p><b>2. DESCRIPTION OF SERVICES</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE provides User with access to a variety of resources, including the <u><em>Go Green Get Rich book</em></u>, project platforms, and sponsorship platform and content access, book purchase, product information, project platforms, upload facility, and communication forums (collectively "Services"). The Services, including any updates, enhancements, and/or the addition of any new features or properties, are all subject to this Terms of Use.</p>
+                      <p><b>3. CHANGE OR MODIFICATION OF TERMS</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE will have the right at any time to change or discontinue any aspect or feature of GREENXPRIZE, including, but not limited to, content, book availability, site access, projects platforms, and any project or sponsorship rules GREENXPRIZE will have the right at any time to change or modify the terms and conditions applicable to User's use of GREENXPRIZE, or any part thereof, or to impose new conditions, including, but not limited to, adding fees and charges for use.</p>
+                      <p style="padding-left:40px;"><b>B.</b> Such changes, modifications, additions or deletions will be effective immediately upon notice thereof, which may be given by means including, but not limited to, posting on GREENXPRIZE.COM, or by electronic or conventional mail, or by any other means by which User obtains notice thereof. Any use of GREENXPRIZE by User after such notice will be deemed to constitute acceptance by User of such changes, modifications or additions.</p>
+                      <p><b>4. USER CONDUCT</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> Users herein agree to use GREENXPRIZE for lawful purposes only. A User must not post or transmit through GREENXPRIZE any material which violates any laws or infringes on the rights of others, including the rights of copyright or patent on any Project.</p>        
+                      <p style="padding-left:40px;"><b>B.</b> Any conduct by a User that unlawful, threatening, abusive, vulgar or obscene, or which defamatory, invasive of privacy or publicity rights, or any efforts to encourage such behavior will constitute unlawful use of the site and such conduct by User is expressly prohibited.</p>        
+                      <p style="padding-left:40px;"><b>C.</b> GREENXPRIZE may, in its sole and unilateral discretion , restrict, inhibit, or suspend any User who in the judgment of GREENXPRIZE is misusing the site.</p>
+                      <p style="padding-left:40px;"><b>D.</b> User will not use GREENXPRIZE to advertise or perform any commercial solicitation, including, but not limited to, the solicitation of users to become subscribers of other on-line information services competitive with GREENXPRIZE.</p>        
+                      <p style="padding-left:40px;"><b>E.</b> GREENXPRIZE may at any time, provide email services, bulletin board services, chat areas, news groups, forums, communities, personal web pages, calendars, photo albums, file cabinets or other message or social media facilities designed to enable Users to communicate with others. User agrees to use the websites communication services only to post, send and receive messages and material that are lawful and proper, and User will not under any circumstances, engage in the following behavior. USERS WILL NOT:</p>
+                      <p style="padding-left:80px;">i.  Use the site in connection with surveys, contests, pyramid schemes, chain letters, junk email, spamming or any duplicative or unsolicited messages (commercial or otherwise).</p>
+                      <p style="padding-left:80px;">ii. Publish, post, upload, distribute or disseminate any inappropriate, profane, defamatory, obscene, indecent or unlawful topic, name, material or information.</p>
+                      <p style="padding-left:80px;">iii. Upload files that contain viruses, Trojan horses, worms, time bombs, cancelbots, corrupted files, or any other similar software or programs that may damage the operation of another's computer or property of another.</p>
+                      <p style="padding-left:80px;">iv. Restrict or inhibit any other user from using and enjoying the Communication Services.</p>
+                      <p style="padding-left:80px;">v. Attempt to harvest or otherwise collect information about others, including email addresses.</p>
+                      <p style="padding-left:80px;">vi. Create a false identity for the purpose of misleading GREENXPRIZE or its Users.</p>          
+                      <p><b>5. MEMBER ACCOUNT, PASSWORD, AND SECURITY</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> If any feature of GREENXPRiZE requires User to open an account, User must complete the registration process by providing GREENXPRIZE with current, complete and accurate information as prompted by the applicable registration form. User also will choose a password and a user name.</p>
+                      <p style="padding-left:40px;"><b>B.</b> User is responsible for maintaining the confidentiality of User’s password and account. Furthermore, User is entirely responsible for any and all activities that occur under User’s account. User agrees to notify GREENXPRIZE immediately of any unauthorized use of User’s account or any other breach of security.</p>
+                      <p style="padding-left:40px;"><b>C.</b> GREENXPRIZE will not be liable for any loss that User may incur as a result of someone else using User’s password or account, either with or without User’s knowledge. However, User could be held liable for losses incurred by GREENXPRIZE or another party due to someone else using User’s account or password. User may not use anyone else's account at any time, without the permission of the account holder.</p>
+                      <p><b>6. MONITORING</b></p>        
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE will have the right, but not the obligation, to monitor the content of GREENXPRIZE, including chat rooms and forums, to determine compliance with this Agreement and any operating rules established by GREENXPRIZE and to satisfy any law, regulation or authorized government request.</p>
+                      <p style="padding-left:40px;"><b>B.</b> GREENXPRIZE will have the right in its sole discretion to edit, refuse to post or remove any material submitted to or posted on GREENXPRIZE. Without limiting the foregoing, GREENXPRIZE will have the right to remove any material that GREENXPRIZE, in its sole discretion, finds to be in violation of the provisions hereof or otherwise objectionable.</p>
+                      <p><b>7. INTELLECTUAL PROPERTY</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE contains,  and owns in its entirety, copyrighted, trademarked, and proprietary material and content that is fully protected under the laws of copyright, trademark, trade use, and patent law, including, but not limited to, content, text, graphics, website look and function, photos, video, graphics, and sound. The entire scope of GREENXPRIZE’s content is copyrighted under United States law and all international copyright laws.</p> 
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE contains,  and owns in its entirety, copyrighted, trademarked, and proprietary material and content that is fully protected under the laws of copyright, trademark, trade use, and patent law, including, but not limited to, content, text, graphics, website look and function, photos, video, graphics, and sound. The entire scope of GREENXPRIZE’s content is copyrighted under United States law and all international copyright laws.</p> 
+                      <p style="padding-left:40px;"><b>B.</b> GREENXPRIZE owns a copyright in the selection, coordination, arrangement and enhancement of all GREENXPRIZE content. User may not modify, publish, transmit, participate in the transfer or sale, create derivative works, or in any way exploit, any of the content, in whole or in part, by engaging in copying, re-distribution, retransmission, publication or commercial exploitation of GREENXPRIZE material.</p> 
+                      <p style="padding-left:40px;"><b>C.</b> User acknowledges that it does not acquire any ownership rights by downloading copyrighted material.</p> 
+                      <p style="padding-left:40px;"><b>D.</b> User will not upload, or otherwise make available, files that contain images, photographs, software or other material protected by intellectual property laws, including but not limited to, copyright or trademark laws, privacy rights.</p>       
+                      <p style="padding-left:40px;"><b>E.</b> User will not upload, post or otherwise make available to or on GREENXPRIZE any Intellectual Property which belongs to another and that protected by copyright, trademark or other proprietary right without the express permission of the owner of the copyright, trademark or other proprietary right and the burden of determining that any material is not protected by copyright rests with User.</p>
+                      <p style="padding-left:40px;"><b>F.</b> By using or posting content or a Project to the site, User warrants and represents in posting content or a Project:</p>
+                      <p style="padding-left:80px;">i. THAT, User is the sole legal owner of any Intellectual Property, or that the owner of such property has granted User permission to use such property or any content and/or images used by User;</p>
+                      <p style="padding-left:80px;">ii. THAT, User’s posted content is consistent with the manner, purpose, and intent to post only as permitted by these Terms of Use and Conditions;</p>
+                      <p style="padding-left:80px;">iii. THAT, User has all of the rights necessary to grant licenses and sublicenses described in these Terms of Use and Conditions;</p>
+                      <p style="padding-left:80px;">iv. THAT, each person depicted in videos, photos, or graphics  has provided consent to the use of the Images as set forth in these Terms of Use, including, by way of example, and not as a limitation, the distribution, public display and reproduction of such Images; and</p>
+                      <p style="padding-left:80px;">v. THAT, User will be solely liable for any damage resulting from any infringement of copyrights, patents, trademarks, or any other proprietary rights, or any other harm resulting from such a submission.</p>
+                      <p style="padding-left:40px;"><b>G.</b> By submitting material to any area, public or private, to GREENXPRIZE, User automatically grants, or warrants that the owner of such material has expressly granted GREENXPRIZE the royalty-free, non-exclusive right and license to use User content, in whole or in part. User also agrees to permit access to any other User to view content for  that User's personal use.</p>           
+                      <p><b>8. LIMITATIONS AND WARRANTIES AND REPRESENTATIONS BY GREENXPRIZE</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> GREENXPRIZE MAKES NO ACTUAL REPRESENTATIONS OR LEGAL GUARANTEE ABOUT THE ACCURACY OR SUITABILITY OF THE INFORMATION CONTAINED IN THE USER CONTENT OR PROJECTS. GREENXPRIZE AND ITS PARENT COMPANY, GO GREEN MEDIA, LLC, HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS CONTENT, INCLUDING ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY, WHETHER EXPRESS, IMPLIED OR STATUTORY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT WILL GREENXPRIZE OR ITS PARENT BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF INFORMATION AVAILABLE FROM THE SITE, ITS PRODUCTS, PROJECTS, OR SERVICE.</p> 
+                      <p style="padding-left:40px;"><b>B.</b> FORCE MAJEURE. GREENXPRIZE MAY NOTE BE HELD RESPONSIBLE FOR ANY FAILURE OR DELAY IN PERFORMANCE DUE TO CIRCUMSTANCES BEYOND ITS REASONABLE CONTROL (KNOWN AS “FORCE MAJEURE”), INCLUDING, WITHOUT LIMITATION, ACTS OF GOD, WAR, RIOT, EMBARGOES, ACTS OF CIVIL OR MILITARY AUTHORITIES, FIRE, FLOODS, ACCIDENTS, SERVICE OUTAGES RESULTING FROM EQUIPMENT AND/OR SOFTWARE FAILURE AND/OR TELECOMMUNICATIONS FAILURES, POWER FAILURES, NETWORK FAILURES, FAILURES OF THIRD PARTY SERVICE PROVIDERS, INCLUDING INTERNET PROVIDERS, HOSTING OR CLOUD SERVICES, AND TELECOMMUNICATIONS COMPANIES.. THE PARTY AFFECTED BY ANY SUCH EVENT WILL NOTIFY THE OTHER PARTY WITHIN A MAXIMUM OF FIFTEEN (15) DAYS FROM ITS OCCURENCE. THE PERFORMANCE OF THS AGREEMENT WILL THEN BE SUSPENDED FOR AS LONG AS ANY SUCH EVENT WILL PREVENT THE AFFECTED PARTY FROM PERFORMING ITS OBLIGATIONS UNDER THIS AGREEMENT.</p> 
+                      <p><b>9. TERMINATION OF USE AGREEMENT</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> Either GREENXPRIZE or User may terminate this Agreement at any time.</p> 
+                      <p style="padding-left:40px;"><b>B.</b> Without limiting the foregoing, GREENXPRIZE will have the right to immediately terminate any User's Account in the event of any conduct by User which GREENXPRIZE, in its sole discretion, considers to be unacceptable, or in the event of any breach by User of this Agreement.</p>
+                      <p><b>10. GOVERNING LAW</b></p>
+                      <p style="padding-left:40px;"><b>A.</b> Governing Law for any dispute arising from the Use of GREENXPRIZE.COM, for any matters related to any it’s products, projects, or sponsorships will be governed by the law of the State of Georgia, which the location of the website parent company, Go Green Media Labs, LLC.</p> 
+                      <p style="padding-left:40px;"><b>B.</b> User hereby agrees that any disputes that cannot be resolved directly between User and GREENXPRIZE.COM and Go Green Media Labs, LLC,  for any causes of action arising out of, or connected with this site, parent, or sponsor, will be resolved individually, without resort to any form of class action, exclusively before the court having relevant jurisdiction.</p>        
+                      <p style="padding-left:40px;"><b>C.</b> Further, in any such dispute, under no circumstances will Contestant be permitted to obtain awards for, and hereby waives all rights to, punitive, incidental, or consequential damages, and is limited to any actual and provable losses.  User waives all rights to have damages multiplied or increased.</p>                                         
+                      <p style="padding-left:40px;"><b>D.</b> Legal Notices: Legal notices should be sent to GREENXPRIZE.COM or to Go Green Media Labs, LLC, whose legal place of business is: 3399 Peachtree Road, Suite 400, Atlanta, GA, 30326.</p>
+                      <p style="padding-left:40px;"><b>E.</b> DMCA Disclaimers: Under the Digital Millennium Copyright Act (DMCA), GREENXPRIZE.COM, Go Green Media Labs, LLC, including founder, officers, e and  GREENXPRIZE will not be liable for any direct or contributory copyright infringement for any content or Project posted to GREENXPRIZE by a User so long as GREENXPRIZE follows the requirements of the DMCA to have a place where it may be notified in writing, by mail or email, of a claim of infringement and site follows the procedures for taking down potentially infringing content until the source and ownership can be determined.</p>        
+                      <p><b>11. MISCELLANEOUS</b></p>        
+                      <p style="padding-left:40px;"><b>A.</b> Entire Agreement. This Terms of Use Agreement and any operating rules for GREENXPRIZE.COM as established by Go Green Media Labs, LLC constitute the entire agreement  with respect to the Use of the website, its content, products, and projects. This Agreement will be construed in accordance with the laws of the State of Georgia, United States of America, without regard to any conflict of laws rules.  Any separate sponsorship or contest rules will be posted separately but will be incorporated by reference as enforceable in compliance with these Terms.</p>
+                      <p style="padding-left:40px;"><b>B.</b> Binding Agreement. This Agreement will constitute a legal and Agreement between GREENXPRIZE.COM, Go Green Media Labs, LLC and User of the website, book, or sponsorship program and will enforceable in accordance with these Terms, except as enforcement may be limited by law.</p>     
+                      <p>End of Terms and Conditions</p>   
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div> -->
+                  </div><br>
+
+                <!-- </div> -->
+              <!-- </div> -->
+            <span class="terms_error" id="terms_error" style="background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;" >Please select Terms of Service<br></span> 
+          <span style="font-size:30px; margin-left: 10px; color:white; position:relative; top:8px;">*</span>
+          <table>
+            <tr>
+              <td><%= f.check_box :terms_of_service, required: true %></td>
+              <td style="position:relative; top:3px; left:10px;"><%= f.label :terms_of_service %></td>
+            </tr>
+          </table>
+          <%= hidden_field_tag :invitation_code, @invitation.try(:code) %>
+          <div class="actions">
+            <center><%= f.submit 'Sign up', class: 'btn btn-warning', style: "width:200px", id: "btn_user_create" %></center>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  .otp_send_error, .name_error, .email_error, .blank_email_error, .location_error, .password_error, .confirm_password_error, .mobile_no_otp, .send_link, .cancel_link, .resend_otp_error, .div_country, .reg_contr_code_id, .mob_mandetory, .terms_error{ display: none; }
+  /*#reg_cnrty_code_country{
+    width:425px;
+  }*/
+</style>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $("input[type=text], input[type=tel], input[type=email], input[type=password]").each(function(e) {
+    $(this).wrap('<fieldset></fieldset>');
+    var tag = $(this).attr("placeholder");
+    //var tag= $(this).data("tag");
+    $(this).attr("placeholder", "");
+    $(this).after('<label for="name">' + tag + '</label>');
+  });
+
+  $("input[type=text], input[type=tel], input[type=email], input[type=password]").on('blur', function() {
+    if (!$(this).val() == "") {
+      $(this).next().addClass('stay');
+    } else {
+      $(this).next().removeClass('stay');
+    }
+  });
+
+
+
+  $("#mobile_no_otp").hide();
+  $("#reg_contr_code_id").hide();
+  $('#mobile_no_otp').keypress(function(event) {
+      var $this = $(this);
+      if ((event.which != 46 || $this.val().indexOf('.') != -1) &&
+         ((event.which < 48 || event.which > 57) &&
+         (event.which != 0 && event.which != 8))) {
+             event.preventDefault();
+      }
+      var text = $(this).val();
+      if ((event.which == 46) && (text.indexOf('.') == -1)) {
+          setTimeout(function() {
+              if ($this.val().substring($this.val().indexOf('.')).length > 0) {
+                  $this.val($this.val().substring(0, $this.val().indexOf('.') + 2));
+              }
+          }, 1);
+      }      
+  });
+});
+
+
+  function jsfunction(e){
+      $("#mobile_no_otp").removeClass("mobile_no_otp");
+      $("#mob_mandetory").removeClass("mob_mandetory");
+      $("#mobile_no_otp").show();
+      $("#reg_contr_code_id").show();      
+      $("#reg_contr_code_id").removeClass("reg_contr_code_id");
+      $("#div_country").removeClass("div_country");
+      $("#send_link").removeClass("send_link");
+      $("#cancel_link").removeClass("cancel_link");
+      $("#resend_link").hide();
+  }
+
+  function jsfunction2(e){
+    $("#mobile_no_otp").val("");
+    $("#mobile_no_otp").hide();
+    $("#reg_contr_code_id").hide();    
+    $("#div_country").addClass("div_country");
+    $("#reg_contr_code_id").addClass("reg_contr_code_id");
+    $("#resend_link").show();
+    $("#mobile_no_otp").addClass("mobile_no_otp");
+    $("#mob_mandetory").addClass("mob_mandetory")
+    $("#send_link").addClass("send_link");
+    $("#cancel_link").addClass("cancel_link");    
+  }
+
+  function jsfunction1(e){
+    var $phon_no = $("#reg_contr_code_id").val() + $("#mobile_no_otp").val();
+    var phoneReg =  /^\+(?:[0-9] ?){7,15}[0-9]$/;
+    if(!phoneReg.test($phon_no)){
+      if ($phon_no==""){
+        alert("Mobile Number can't be blank.");
+      }else{
+        alert("Invalid mobile Number.");
+      }
+    }else{
+      $.ajax({
+        type:"GET",
+        url:"/resend_otp",
+        dataType:"json",
+        data: {mobile_no: $phon_no},
+        success:function(result){
+          alert(result["messages"]);
+          $("#resend_link").show();
+          $("#div_country").addClass("div_country");
+          $("#reg_contr_code_id").addClass("reg_contr_code_id");
+          $("#mobile_no_otp").addClass("mobile_no_otp");
+          $("#mob_mandetory").addClass("mob_mandetory");
+          $("#send_link").addClass("send_link");
+          $("#cancel_link").addClass("cancel_link");            
+        }
+      });
+    }  
+  }  
+
+  $("#btn_user_create").click(function(e){
+
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+    if($("#user_terms_of_service").prop("checked") == false){
+      $("#terms_error").removeClass("terms_error");
+      e.preventDefault();
+    }else{
+      $("#terms_error").addClass("terms_error");
+    }
+
+    if ($("#order_otp").val() == ""){
+      $("#otp_send_error").removeClass("otp_send_error");
+      e.preventDefault();
+    }else{
+      $("#otp_send_error").addClass("otp_send_error");
+    }
+
+    if ($("#user_name").val() == ""){
+      $("#name_error").removeClass("name_error");
+      e.preventDefault();
+    }else{
+      $("#name_error").addClass("name_error");
+    }
+
+    if ($("#user_email").val() == ""){
+      $("#blank_email_error").removeClass("blank_email_error");
+      e.preventDefault();
+    }else{
+      $("#blank_email_error").addClass("blank_email_error");
+    }
+
+    if(!emailReg.test($("#user_email").val()) && $("#user_email").val() != ""){
+      $("#email_error").removeClass("email_error");
+      e.preventDefault();
+    }else{
+      $("#email_error").addClass("email_error");
+    }
+
+
+
+    if ($("#user_location").val() == ""){
+      $("#location_error").removeClass("location_error");
+      e.preventDefault();
+    }else{
+      $("#location_error").addClass("location_error");
+    }
+
+    if ($("#user_password").val() == ""){
+      $("#password_error").removeClass("password_error");
+      e.preventDefault();
+    }else{
+      $("#password_error").addClass("password_error");
+    }
+
+    if ($("#user_password_confirmation").val() == ""){
+      $("#confirm_password_error").removeClass("confirm_password_error");
+      e.preventDefault();
+    }else{
+      $("#confirm_password_error").addClass("confirm_password_error");
+    }                    
+  });
+</script>

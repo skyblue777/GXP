@@ -1,0 +1,55 @@
+<style type="text/css">
+  .email_error, .email_blank_error{
+    display: none;
+  }
+#email_error, #email_blank_error{
+  background-color: #d9534f; border-radius: 5px;color: #fff;padding: 5px;
+}
+
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_email_next").click(function(evt){
+      var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      $email = $("#email").val();
+      if($email == ""){
+        $("#email_blank_error").removeClass("email_blank_error");
+        $("#email_blank_error").text("Email field can't be blank.");
+        evt.preventDefault();
+      }else{
+        $("#email_blank_error").addClass("email_blank_error");
+      }
+
+      if(!emailReg.test($email) && $email != ""){
+        $("#email_error").removeClass("email_error");
+        $("#email_error").text("Please enter valid email address.");
+        evt.preventDefault();
+      }else{
+        $("#email_error").addClass("email_error");
+      }
+
+    });
+  });
+</script>
+<div class="project-details">
+  <div class="container">
+    <h1>Add Email</h1>
+  </div>
+</div>
+<div class="book-background">
+  <div class="container user-form">
+  <br>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= form_tag({controller: "emails", action: "create", method: "post"}, class: "simple_form new_email") do %>
+          <div class="form-group">
+          <span class="email_error" id="email_error"></span>
+          <span class="email_blank_error" id="email_blank_error"></span>
+            <%= email_field_tag :email, nil, placeholder: "*Email", class: "form-control" %>
+          </div>
+          <%= submit_tag "Next", class: "btn btn-default btn-danger btn-block btn-large", id: "btn_email_next" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="well">
+  <div class="row">
+    <div class="col-xs-6">
+      <h4><%= op.name %></h4>
+      <% @total_price = @total_price + op.price %>
+      <div class="product-thumb">
+        <%= attachment_image_tag  op_product(op.product_price_id), :image, :fill, 120, 120, fallback: 'silhouette-large.png', size: "200x100" %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="row">
+        <div class="col-xs-4">
+          <h5><%= I18n.t('order.quantity') %>: <%= op.quantity %></h5>
+        </div>
+        <div class="col-xs-8">
+        <h5 class="text-right"><%= I18n.t('cart.unit') %>: <span style="color: gray"><%= number_to_currency unit_price(op.product_price_id) %></span></h5>
+          <h6 class="text-right"><%= "Book Type" %>: <span style="color:green"><%= book_type(op.product_price_id) %></span></h6>        
+        <h4 class="text-right"><%= I18n.t('cart.total') %>: <span style="color: green"><%= number_to_currency op.price %></span></h4>
+        </div>
+      </div>
+      <% if op.order.complete && op_product(op.product_price_id).book_download.present? %>
+        <div class="row">
+          <div class="col-xs-12">
+            <h5 class="text-right">Download Link: 
+              <%= link_to op.product.book_download_filename, controller: :products, action: :download_url, id: op.product.id %>
+            </h5>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

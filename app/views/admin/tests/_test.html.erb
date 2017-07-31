@@ -1,0 +1,10 @@
+<tr>
+  <td><%= test.id %></td>
+  <td><%= test.title %></td>
+  <td><%= test.body %></td>
+  <td class="text-right">
+    <%= link_to 'Edit', edit_admin_test_path(test) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Delete', admin_test_path(test), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

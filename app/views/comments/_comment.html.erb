@@ -1,0 +1,52 @@
+<hr>
+<div id="comment-<%= comment.id %>" class="comment container" >
+  <div class="row comment-display">
+    <div class="col-sm-1 attachment-user-image">
+      <%= attachment_image_tag comment.user, :image, :fill, 40, 40, fallback: 'silhouette-small.png' %>
+    </div>
+    <div class="col-sm-11">
+      <p>
+        <strong><%= link_to comment.user.nil? ? "Guest" : comment.user.name, '#' %></strong>
+        <small class="created-at-text"><em><%= timeago_tag comment.created_at %></em></small>
+      </p>
+      <p class="comment-body-text">
+        <%= comment.body %>
+      </p>
+      <%if !@project.user.nil? && @project.user == current_user %>
+        <%= content_tag(:a, class: 'add-comment-btn') do %>
+          <span class='fa fa-sm fa-reply'></span>
+          <small>Reply</small>
+        <% end %>
+      <%end%>
+    </div>
+  </div>
+
+  <div class="row" style="margin-left:30px;">
+    <%= simple_form_for [@project, @comment], html: { class: 'hide' } do |f| %>
+      <div class="input-group">
+        <%= f.input :body, as: :text, :input_html => { 'rows' => 1}, label: false, placeholder: 'Write a reply...', class: 'form-control' %>
+        <%= f.hidden_field :commentable_id, value: comment.id %>
+        <%= f.hidden_field :commentable_type, value: 'Comment' %>
+        <span class="input-group-btn">
+          <%= f.submit 'Post Reply', disabled: current_user.nil?, class: 'btn btn-primary', id: "btn_post_reply" %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row" style="margin-left:30px;">
+    <%= render comment.comments %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_post_reply").click(function(evt){
+      if(!$("#comment_body").val().replace(/\s/g, '').length){
+        alert("Please enter Reply");
+        evt.preventDefault();        
+      }
+    });
+  });
+</script>

@@ -1,0 +1,12 @@
+<tr>
+  <td><%= link_to contest.slug, contest_path(contest) %></td>
+  <td><%= contest.name %></td>
+  <td><%= l contest.starts_at, format: :admin %></td>
+  <td><%= l contest.ends_at, format: :admin %></td>
+  <td><%= link_to 'View winners', admin_contest_winners_path(contest) %></td>
+  <td class="text-right">
+    <%= link_to 'Edit', edit_admin_contest_path(contest) %>
+    &nbsp; / &nbsp;
+    <%= link_to 'Delete', admin_contest_path(contest), method: :delete, data: { confirm: 'Are you sure you want to delete the contest "' + contest.name.to_s + '"?' } %>
+  </td>
+</tr>

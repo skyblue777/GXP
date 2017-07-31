@@ -1,0 +1,2 @@
+describe GroupInvitation do
+end

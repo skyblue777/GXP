@@ -1,0 +1,41 @@
+<%= simple_form_for [:admin, @project] do |f| %>
+  <div class="form-group">
+    <label><%= t 'simple_form.labels.project.video' %></label>
+    <div class="video-container">
+      <label class="choose-file" for="project_video">Choose a Video From Your Computer</label>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" style="width: 0%">
+        </div>
+      </div>
+      <small>Project Video</small>
+      <small>MOV, MPEG, AVI, MP4, 3GP, WMV, or FLV</small>
+      <small>5GB file limit</small>
+      <%= f.file_field :video,  direct: true, presigned: true %>
+      <!-- as: :attachment, -->
+    </div>
+  </div>
+  <small>Project Audio</small>
+  <small>MP3, MPEG</small>
+  <small>10MB</small>
+  <%= f.file_field :audio, direct: true, presigned: true, style: "color:white" %>
+
+  <%= f.input :name %>
+
+  <div id="add-image-container">
+    <% image_num = 0 %>
+    <%= f.simple_fields_for :images do |i| %>
+      <%= render 'image_fields', i: i, image_num: image_num %>
+      <% image_num += 1 %>
+    <% end %>
+  </div>
+
+  <%= f.input :tagline %>
+  <%#= f.association :contest %>
+  <%= f.select :contest_id, Contest.all.collect{|p| [p.name, p.id]} %>
+  <%#= select_tag 'contest', category_filter_options(@categories), id: 'category-filter', class: 'category-filter filter' %>
+  <%= f.association :categories, input_html: { multiple: true } %>
+  <%= f.input :body, input_html: { class: 'wysiwyg' } %>
+  <div class="text-center">
+    <%= f.submit 'Save', class: 'btn inverse-btn-inverted' %>
+  </div>
+<% end %>

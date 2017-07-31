@@ -1,0 +1,5 @@
+<h1 class="page-header">Subscription Plan: <%= @subscription_plan.name %></h1>
+<%= render 'admin/shared/attribute', name: 'Amount', value: (number_to_currency @subscription_plan.amount/100.to_f) %>
+<%= render 'admin/shared/attribute', name: 'Interval', value: @subscription_plan.interval %>
+<%= render 'admin/shared/attribute', name: 'Active Subscriptions', value: @subscriptions.map{|s|s.active?}.count %>
+<%= render 'admin/shared/attribute', name: 'Canceled Subscriptions', value: @subscriptions.map{|s|!s.active?}.count  %>

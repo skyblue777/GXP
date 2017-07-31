@@ -1,0 +1,36 @@
+//
+//= require_self
+//
+
+@import "font-awesome",
+        "application/base/variables",
+        "application/base/mixins",
+        "redactor",
+        "bootstrap.min",
+        "bootstrap-combined.min",
+        "bootstrap-theme.min",
+        "font-awesome",
+        "font-awesome.min",
+        "main",
+        "responsive",
+        "selectize";
+
+// folder structure definitions
+//
+//  base - where all base styles that are non specified go, no classes
+//    _globals - the meat of your base styles go here
+//    _variables - any non-color scss variables go here
+//    _colors - any color scss variables go here
+//    _forms - all form styles go here
+//    _mixins - all scss mixins go here
+//  layouts - global styles for header, container, and footer
+//    _header - layout header styles go here
+//    _footer - layout footer styles go here
+//    _container - global layout container styles go here
+//    specific page files should go in this section
+//  modules - all moduled blocks of pages go here (keep it DRY)
+@import "datatables";
+@import "froala_editor.min.css";
+@import "froala_style.min.css";
+@import "social-share-button";
+

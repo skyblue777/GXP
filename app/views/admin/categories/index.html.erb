@@ -1,0 +1,28 @@
+<style type="text/css">
+  table.dataTable thead .sorting_asc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_asc.png") no-repeat center right;
+  }
+  table.dataTable thead .sorting_desc {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_desc.png") no-repeat center right;
+  }
+  table.dataTable thead .sorting {
+    background: url("http://cdn.datatables.net/1.10.0/images/sort_both.png") no-repeat center right;
+  }
+</style>
+
+<h1 class="page-header">
+  Categories
+  <%= link_to 'New', new_admin_category_path, class: 'btn btn-primary' %>
+</h1>
+<table class="table table-striped table-categories" id="table-categories">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @categories %>
+  </tbody>
+</table>

@@ -1,0 +1,46 @@
+<div class="project-details">
+  <div class="container">
+    <h1><%= I18n.t('user.titles.manage_subscription') %></h1>
+  </div>
+</div>
+
+<div class="book-background">
+  <div class="container user-form">
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-6 col-md-offset-3">
+        <%# if current_user.redemption_code.present? %>
+          <h2 class="white text-center"><%#= I18n.t('user.messages.membership_created') %></h2>
+          <p class="text-center"><%#= link_to 'Back to Profile', user_path(current_user), class: 'btn btn-round-green' %></p>
+        <%# else %>
+        <%if !current_user.nil? %>
+          <% if current_user.subscriptions && current_user.subscriptions.any?{|s|s.active?} %>
+            <h2 class="white">Need to cancel?</h2>
+            <p class="white">You will lose the ability to vote on any contests or create a project.</p>
+            <p class="white">You can reactivate your membership at any time.</p>
+            <%= link_to "Cancel Subscription", cancel_subscriptions_path, class: 'btn btn-warning' %>
+          <% else %>
+              <label>Current Subscription Status: <%= current_user&.subscriptions&.first&.renewal_status? ? "<b style='color:green'>Active</b>".html_safe : "<b style='color:red'>Expired</b>".html_safe %>
+              <% if ( !current_user&.subscriptions&.first&.renewal_status? unless current_user&.subscriptions&.first&.blank? ) %>
+              <%= link_to "Renew Subsription", renew_subscriptions_path, method: :get, class: "btn btn-warning", data: {confirm: "Are you sure, you wan't to renew $2.99 Plan?"} %>
+              <%end%></label>   
+          <% end %>
+        <%else%>
+          <%= render "payment_form" %>
+        <%end%>
+
+          <!-- <h2 class="white">Lifetime Membership</h2>
+          <p class="white">Enter a redemption code from any book purchase to get a lifetime membership now.</p> -->
+
+          <%#= simple_form_for current_user, url: update_code_user_path(current_user) do |f| %>
+            <%#= f.input :redemption_code, required: true, label: false %>
+            <%#= f.submit 'Submit Code', class: 'btn btn-round-green' %>
+          <%# end %>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>

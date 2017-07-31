@@ -1,0 +1,101 @@
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<div class="join-section">
+  <div class="container">
+    <h1>Make Payment</h1>
+  </div>
+</div>
+<br>
+
+<div class="book-background-light">
+  <div class="container user-form">
+    <div class="row">
+      <div class="col-md-12">
+        <h2><%= I18n.t('order.your_order') %>:</h2>
+        <h4><%= I18n.t('order.order_items') %>:</h4>
+        <% @total_price = 0 %>
+        <% current_order.order_products.each do |order_product| %>
+          <%= render partial: 'order_products', locals: { op: order_product }%>
+        <% end %>
+        <div id="order-totals">
+          <%= link_to products_path, class: "btn btn-warning", id: "continue-shopping" do %>
+            <%= fa_icon 'shopping-cart', text: I18n.t('cart.shop')%>
+          <% end %>
+        </div>
+        <hr>
+      </div>
+      <div class="col-md-4">
+      <% if @shipping_count > 0 %>
+        <h4><%= I18n.t('order.address') %>:</h4>
+        <%= render partial: 'address', locals: { address: @order.shipping_address } %>
+        <%= link_to 'Edit Address', edit_address_path(@order.shipping_address), class: 'btn btn-warning' %>
+      <% end %>
+      </div>
+      <div class="col-md-4">
+        <h4><%= I18n.t('order.totals') %>:</h4>
+        <%= render partial: 'totals', locals: { order: @order } %>
+        <h4>Email:</h4>
+        <div class="list-group">
+          <div class="list-group-item">
+            <p class= "list-group-item-text"><%=!current_user.nil? ? current_user.email : @order.email %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h4><%= I18n.t('order.payment') %>:</h4>
+        <div class="well"> 
+          Pay Amount<br>
+
+          <%= form_tag({controller: "orders", action: "process_card", method: "post"}, class: "nifty_form", id: "nonce-form") do %>
+            <input type="hidden" name="email" id="card_email" class="form-control"  readonly="true" value="<%= !current_user.nil? ? current_user.email : @order.email %>" >
+            <input type="hidden" name="amount" class="form-control" value="<%= @total_price + Order::TAX_RATE + shipping_charges(@order.shipping_address.country, current_order.order_products) %>">
+            <input type="hidden" name="with_paypal" value=true>
+            <%= submit_tag "Make Payment", class: "btn btn-lg btn-block btn-info" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<style type="text/css">
+  #card_exp_date_id, #card_cvv_id, #card_no_id, #card_email {
+    width:320px; height:40px; font-size: 15px;
+  }
+  .expire_blank_error, .cvv_blank_error, .card_blank_error{
+    display: none;
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn_order_payment").click(function(evt){
+
+      if($("#visa_card").is(':checked') == false && $("#master_card").is(':checked') == false && $("#discover_card").is(':checked') == false && $("#amex_card").is(':checked') == false){
+        alert("Please select at least one card");
+        evt.preventDefault();
+      }
+
+      if ($("#card_no_id").val() == ""){
+        $("#card_blank_error").removeClass("card_blank_error");
+        $("#card_blank_error").text("Field can't be blank.");
+        evt.preventDefault();
+      }else{
+        $("#card_blank_error").addClass("card_blank_error");
+      }
+      if ($("#card_cvv_id").val() == ""){
+        $("#cvv_blank_error").removeClass("cvv_blank_error");
+        $("#cvv_blank_error").text("Field can't be blank.");
+        evt.preventDefault();
+      }else{
+        $("#cvv_blank_error").addClass("cvv_blank_error");
+      }
+      if ($("#card_exp_date_id").val() == ""){
+        $("#expire_blank_error").removeClass("expire_blank_error");
+        $("#expire_blank_error").text("Field can't be blank.");
+        evt.preventDefault();
+      }else{
+        $("#expire_blank_error").addClass("expire_blank_error");
+      }      
+
+    });
+  });
+</script>

@@ -1,0 +1,26 @@
+.shopping-cart {
+    h1 {
+        text-align: center;
+        color: $font-color-dark;
+    }
+    h2 {
+        text-align: center;
+    }
+    p {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+form.new_email {
+    padding-top: 150px;
+}
+
+.shopping-cart-full .fa-2x {
+    color: #006633;
+    font-size: 22px;
+}
+
+.shopping-cart-empty .fa-2x {
+    font-size: 22px;
+}

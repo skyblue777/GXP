@@ -1,0 +1,19 @@
+<h1 class="page-header">
+  Contests
+  <%= link_to 'New', new_admin_contest_path, class: 'btn btn-primary' %>
+</h1>
+<table class="table table-striped table-contests">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Name</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th>Winners</th>
+      <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @contests %>
+  </tbody>
+</table>

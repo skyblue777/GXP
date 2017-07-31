@@ -1,0 +1,26 @@
+<%= simple_form_for @adminpolicy, url: (@adminpolicy.persisted? ? admin_admins_policy_path(@adminpolicy) : admin_admin_admins_policy_path) do |f| %>
+  <%= f.input :admin_email %>
+  <div class="row">
+    <div class="col-md-2">
+      <b>Country</b>
+      <%= country_select("mobile_code", "country", include_blank: "Select a Country", style: "width:10px") %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input :code, readonly: true %>
+    </div>
+    <div class="col-md-8">
+    <%= f.input :admin_mobile_no %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+<style type="text/css">
+  #mobile_code_country{
+    margin-top: 5px;
+    width:150px; height: 35px;
+  }
+</style>

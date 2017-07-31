@@ -1,0 +1,3 @@
+describe GroupInvitationsController do
+
+end

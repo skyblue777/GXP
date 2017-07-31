@@ -1,0 +1,176 @@
+require 'square_connect'
+require 'securerandom'
+
+class Square
+
+  #ACCESS_TOKEN = 'sandbox-sq0atb-UkAI-wOEE084IqwG0G2W_w'
+  #BASE_URL = ENV["BASE_URL"]
+  LOCATION_ID = ENV["LOCATION_ID"]
+  #ENV["LOCATION_ID"]
+  ACCESS_TOKEN = ENV["ACCESS_TOKEN"]
+  #ENV["ACCESS_TOKEN"]
+  #LOCATION_ID = 'CBASEMpple_uhhLP4Efrt0zPbaggAQ'
+  #BASE_URL = "https://connect.squareup.com"
+
+  def initialize(params = {})
+    @nonce = params[:nonce]
+    @order = params[:order]
+    @user = params[:user]
+  end
+  
+  # https://docs.connect.squareup.com/api/connect/v2/#endpoint-charge
+  def charge
+    transaction_api = SquareConnect::TransactionApi.new()
+
+    request_body = {
+      card_nonce: @nonce,
+      amount_money: {
+        amount: @order.price.to_i * 100,
+        currency: 'USD'
+      },
+      idempotency_key: SecureRandom.uuid,
+      reference_id: @order.name
+    }
+
+    res = nil
+    begin
+      Rails.logger.info "#{ENV["LOCATION_ID"]} #{ENV["ACCESS_TOKEN"]}"
+      Rails.logger.info "#########################################"
+      Rails.logger.info "#{transaction_api.charge(ACCESS_TOKEN, LOCATION_ID, request_body)}"
+      res = transaction_api.charge(ACCESS_TOKEN, LOCATION_ID, request_body)
+      res.transaction.tenders.each do |tender|
+        Payment.create(
+          tender_id: tender.id,
+          transaction_id: tender.transaction_id,
+          location_id: tender.location_id,
+          amount: tender.amount_money.amount,
+          card_brand: tender.card_details.card.card_brand,
+          card_last_4: tender.card_details.card.last_4,
+          order: @order,
+          user: @user
+        )
+      end
+    rescue SquareConnect::ApiError => e
+      Rails.logger.debug e.message
+      res = e.message
+    end
+    res
+  end
+
+  def charge_recurring(customer_id, card_id, amount, subscription_id, user_id)
+    transaction_api = SquareConnect::TransactionApi.new
+    
+    request_body = {
+      customer_id: customer_id,
+      customer_card_id: card_id,
+      amount_money: {
+        amount: amount,
+        currency: 'USD'
+      },
+      idempotency_key: SecureRandom.uuid
+    }
+
+    res = nil
+    begin
+      res = transaction_api.charge(ACCESS_TOKEN, LOCATION_ID, request_body)
+      res.transaction.tenders.each do |tender|
+        Payment.create(
+          tender_id: tender.id,
+          transaction_id: tender.transaction_id,
+          location_id: tender.location_id,
+          amount: tender.amount_money.amount,
+          card_brand: tender.card_details.card.card_brand,
+          card_last_4: tender.card_details.card.last_4,
+          card_exp_month: tender.card_details.card.exp_month,
+          card_exp_year: tender.card_details.card.exp_year,
+          subscription_id: subscription_id,
+          user_id: user_id,
+        )
+      end
+    rescue SquareConnect::ApiError => e
+      Rails.logger.debug e.message
+      res = e.message
+    end
+    res
+  end
+
+  # https://docs.connect.squareup.com/api/connect/v2/#endpoint-retrievetransaction
+  def refund(transaction_id, tender_id, amount, payment_id, order_id, subscription_id)
+    refund_api = SquareConnect::RefundApi.new
+
+    request_body = {
+      tender_id: tender_id,
+      amount_money: {
+        amount: amount,
+        currency: 'USD'
+        },
+      idempotency_key: SecureRandom.uuid,
+    }
+    
+    res = nil
+    begin
+      res = refund_api.create_refund(ACCESS_TOKEN, LOCATION_ID, transaction_id, request_body)
+      refund = res.refund
+      Refund.create(
+        refund_id: refund.id,
+        transaction_id: refund.transaction_id,
+        location_id: refund.location_id,
+        tender_id: refund.tender_id,
+        amount: refund.amount_money.amount,
+        payment_id: payment_id,
+        order_id: order_id,
+        subscription_id: subscription_id,
+      )
+    rescue SquareConnect::ApiError => e
+      Rails.logger.debug e.message
+      res = e.message
+    end
+    res
+  end
+
+
+  # https://docs.connect.squareup.com/api/connect/v2/#endpoint-createcustomer
+  def create_customer
+    customer_api = SquareConnect::CustomerApi.new
+
+    customer_request = {
+      email_address: @user.email,
+      reference_id: @user.id.to_s
+    }
+
+    res = nil
+    begin
+      res = customer_api.create_customer(ACCESS_TOKEN, customer_request)
+    rescue SquareConnect::ApiError => e
+      Rails.logger.debug e.message
+      res = e.message
+    end
+    res
+  end
+  
+  # https://docs.connect.squareup.com/api/connect/v2/#endpoint-createcustomercard
+  def create_card(customer)
+    customer_card_api = SquareConnect::CustomerCardApi.new
+
+    customer_card_request = {
+      card_nonce: @nonce
+    }
+    
+    res = nil
+    begin
+      res = customer_card_api.create_customer_card(ACCESS_TOKEN, customer.id, customer_card_request)
+    rescue SquareConnect::ApiError => e
+      Rails.logger.debug e.message
+      res = e.message
+    end
+    res
+  end
+
+
+  # https://docs.connect.squareup.com/api/connect/v2/#navsection-location
+  def locations
+    locationApi = SquareConnect::LocationApi.new()
+    locations = locationApi.list_locations(ACCESS_TOKEN).locations
+  end
+
+end

@@ -1,0 +1,119 @@
+#main-nav {
+  background-color: #fff;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: $padding * 2;
+  z-index: 10000;
+  @include box-shadow(-3px 3px 6px rgba(0, 0, 0, .32));
+
+  .navbar-header img {
+    margin-top: floor($padding / 2);
+    margin-left: $padding;
+    height: $navbar-height - $padding;
+    width: auto;
+  }
+
+  .nav {
+    height: $header-height !important;
+
+    a {
+      text-transform: uppercase;
+    }
+
+    a.btn-inverted {
+      $sign-in-btn-height: 40px;
+      padding: 0 12px !important;
+      height: $sign-in-btn-height;
+      line-height: 34px;
+      margin-top: ($header-height - $sign-in-btn-height) / 2
+    }
+
+    .edit-profile a {
+      padding: 6px 0 0 $padding;
+
+      img {
+        @extend .img-circle;
+      }
+    }
+  }
+}
+
+// set the navbar background color
+.navbar-default {
+  background-color: #f5f5f5;
+}
+// set the link colors in navbar
+.navbar-default .navbar-nav > li > a {
+  color: #097841;
+  font-family: 'Open Sans', sans-serif;
+}
+// set border bottom for active links
+.navbar-default .navbar-nav > li > a.active {
+  color: #097841;
+  border-bottom: 2px solid #75be47;
+}
+// Get rid of navbar bottom margin
+.navbar {
+  margin-bottom: 0px;
+  border-bottom: none;
+  background-size: contain;
+  background: image-url('backgrounds/header-texture.jpg');
+  text-transform: uppercase;
+}
+.navbar-default .navbar-nav > li a.sign-in-button {
+  color: white;
+  line-height: 0.75;
+  border-radius: 40px;
+  background-color: #70b644;
+  text-transform: uppercase;
+  font-size: 30pt;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  max-width: 90px;
+}
+.nav.main-nav {
+  margin-left: 70px;
+  a {
+    border-right: 1px solid #bec5ba;
+    padding: 15px 30px;
+  }
+  .nav.main-nav  li:last-child a {
+    border-right: none;
+  }
+}
+
+.navbar-right {
+  .profile-link {
+    img {
+      max-width: 20px;
+    }
+  }
+}
+
+@media (max-width: $screen-md-max) {
+  nav {
+    font-size: 10px;
+  }
+  .nav.main-nav {
+    a {
+      padding: 14px 14px;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  nav {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  nav {
+    font-size: 18px;
+  }
+  .navbar-default .navbar-nav > li a.sign-in-button {
+    margin-left: 40%;
+  }
+}

@@ -1,0 +1,32 @@
+<div class="list-group">
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.name') %>:</h5>
+    <p class= "list-group-item-text"><%= address.name %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.street') %>:</h5>
+    <p class= "list-group-item-text"><%= address.street %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.city') %>:</h5>
+    <p class= "list-group-item-text"><%= address.city %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.state') %>:</h5>
+    <p class= "list-group-item-text"><%= address.state %></p>
+  </div>
+  <%if !address.mobile.blank?%>
+    <div class="list-group-item">
+      <h5 class="list-group-item-heading"><%= I18n.t('address.mobile') %>:</h5>
+      <p class= "list-group-item-text"><%= address.mobile %></p>
+    </div>
+  <%end%>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.zip') %>:</h5>
+    <p class= "list-group-item-text"><%= address.zip %></p>
+  </div>
+  <div class="list-group-item">
+    <h5 class="list-group-item-heading"><%= I18n.t('address.country') %>:</h5>
+    <p class= "list-group-item-text"><%= ISO3166::Country[address.country].name %></p>
+  </div>
+</div>

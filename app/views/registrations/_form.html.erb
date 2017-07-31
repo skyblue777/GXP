@@ -1,0 +1,158 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8WP3o0hCauFoiI4SMgr1BevY2w8qp7Uc&libraries=places&callback=initAutocomplete" async defer></script>
+
+<script>
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById("user_location")),
+        {types: ['geocode']});
+  }
+
+  $("#user_location").focus(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  });
+</script>
+
+<style type="text/css">
+  abbr, .name_error, .email_error, .location_error, .control-label{
+    display: none;
+  }
+  #name_error, #email_error, #location_error{
+    background-color: #d9534f;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;
+  }
+</style>
+<%= simple_form_for user, url: user_registration_path(local_assigns.slice(:redirect_path)) do |f| %>
+  <span class="name_error" id="name_error">Name can't be blank</span>
+  <%= f.input :name %>
+  <span class="email_error" id="email_error">Email can't be blank</span>
+  <%= f.input :email %>
+  <span class="location_error" id="location_error">Location can't be blank</span>
+  <%= f.input :location %>
+  <%= f.input :website %>
+  <%= f.input :bio, as: :text %>
+  <div class="form-group">
+    <label><%= t 'simple_form.labels.user.image' %>(JPG, JPEG, PNG - 5MB File Limit)</label>
+    <div class="image-container">
+      <div class="silhouette">
+        <%= attachment_image_tag user, :image, :fill, 120, 120, fallback: 'silhouette-large.png' %>
+      </div>
+      <div class="uploader">
+        <label class="choose-file" for="user_image">Choose an image from your computer</label>
+        <!-- <div class="progress">
+          <div class="progress-bar progress-bar-striped" style="width: 0%">
+          </div>
+        </div> -->
+        <%#= f.input :image, direct: true, presigned: true, input_html: { class: 'hidden' }, label_html: { class: 'hidden' } %>
+        <div id="image_error_div" style="color:red"></div>
+        <%= f.file_field :image,  direct: true, presigned: true, class: "hidden" %>
+        <!-- as: :attachment, -->
+        <br>
+        <div>Preview:<img id="profile_img" src="#" alt="your image", style="width:200px; height:100px;" /></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit (local_assigns.key?(:redirect_path) ? 'Next' : 'Update'), class: 'btn btn-warning', id: "btn_profile_update", style: "width:150px" %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#user_password, #user_password_confirmation, #user_current_password").keypress(function (evt) {
+      var keycode = evt.charCode || evt.keyCode;
+      if (keycode  == 32) { 
+        return false;
+      }
+    });
+
+    function readURL(input){
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#profile_img').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }      
+    }
+
+
+    var image_file = "";
+    $("#user_image").change(function(event){
+        var file = this.files[0];
+        image_file = this.files[0];
+        image_error(file, event, this);
+        readURL(this);
+    });          
+
+    $("#btn_profile_update").click(function(evt){      
+      if($("#user_name").val() == "" || !$("#user_name").val().replace(/\s/g, '').length){
+        $("#name_error").removeClass("name_error");
+        evt.preventDefault();
+      }else{
+        $("#name_error").addClass("name_error");
+      }
+      if($("#user_email").val() == "" || !$("#user_email").val().replace(/\s/g, '').length){
+        $("#email_error").removeClass("email_error");
+        evt.preventDefault();
+      }else{
+        $("#email_error").addClass("email_error");
+      }
+      if($("#user_location").val() == "" || !$("#user_location").val().replace(/\s/g, '').length){
+        $("#location_error").removeClass("location_error");
+        evt.preventDefault();
+      }else{
+        $("#location_error").addClass("location_error");
+      }            
+      image_error(image_file, evt);
+    });
+
+  function image_error(file,e){
+    var ext = file.name.split(".");
+    ext = ext[ext.length-1].toLowerCase();      
+    var arrayExtensions = ["jpg" , "jpeg", "png"];
+    $("#image_error_div").text("");
+    $("#image_error_div").fadeIn();
+    $("#image_error_div").removeClass("alert alert-danger");   
+
+    if (arrayExtensions.lastIndexOf(ext) == -1) {
+      $("#image_error_div").addClass("alert alert-danger");
+      $("#image_error_div").append("<p>Unsupported format.</p>");       
+      e.preventDefault();
+    }else if (file.size > 5000000) {
+      $("#image_error_div").addClass("alert alert-danger");
+      $("#image_error_div").append("<p>file size is too large.</p>");            
+      e.preventDefault();
+    }else{
+      $("#image_error_div").text("");
+    } 
+  }
+
+
+  });
+</script>

@@ -1,0 +1,88 @@
+<style type="text/css">
+  fieldset {
+    border: none;
+    position: relative;
+    font-family: arial, sans-serif;
+  }
+  input:focus {
+    outline: none;
+  }
+  input + label {
+    display: block;
+    cursor: text;
+    color: #777;
+    transition: .15s ease-out all;
+    position: absolute;
+    top: 0.79em;
+    left: 1em;
+  }
+  input:focus + label,
+  label.stay {
+    top: -0.3em;
+    left: 1em;
+    font-size: .7em;
+    transition: .15s ease-out all;
+  }
+</style>
+
+
+<style type="text/css">
+  .error-message{
+    display: none;
+  }
+</style>
+<div class="join-section">
+  <div class="container">
+    <h1>Forgot password?</h1>
+  </div>
+</div>
+<div class="book-background">
+  <div class="container user-form">
+    <div class="row">
+      <% flash[:alert] = resource.errors.full_messages.to_s.gsub('"','').gsub("[","").gsub("]","") unless resource.errors.full_messages.blank? %>
+      <div class="col-md-6 col-md-offset-3">
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= f.input :email, label: false, required: true %>
+          <div class="actions">
+            <center><%= f.submit 'Reset Password', class: 'btn btn-round-green btn-warning' %></center>
+          </div>
+        <% end %>
+        <div class="links">
+          <center><%= render "devise/shared/links" %></center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $("#btn_sign_in").click(function(){
+      $("#user_email").val("");
+      $("#user_password").val("");
+    // });
+  });
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $("input[type=text], input[type=tel], input[type=email], input[type=password]").each(function(e) {
+    $(this).wrap('<fieldset></fieldset>');
+    var tag = $(this).attr("placeholder");
+    //var tag= $(this).data("tag");
+    $(this).attr("placeholder", "");
+    $(this).after('<label for="name">' + tag + '</label>');
+  });
+
+  $("input[type=email], input[type=password]").on('blur', function() {
+    if (!$(this).val() == "") {
+      $(this).next().addClass('stay');
+    } else {
+      $(this).next().removeClass('stay');
+    }
+  });
+});
+
+</script>
+

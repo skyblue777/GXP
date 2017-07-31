@@ -1,0 +1,217 @@
+#project-hero {
+  height: 508px;
+  line-height: 508px;
+  margin-top: -($padding * 2);
+  margin-bottom: $padding * 2;
+  background: image-url('project-hero.jpg') no-repeat center center;
+  background-size: cover;
+  text-align: center;
+
+  strong, small {
+    display: block;
+    color: #fff;
+  }
+
+  strong {
+    font-size: 60px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+
+  small {
+    margin-bottom: $padding * 2;
+    font-size: 38px;
+  }
+}
+
+#project-filter {
+  margin-top: 20px;
+}
+
+#projects {
+  @include make-row();
+}
+
+.selectize-control.filter, #search-container {
+  min-width: 200px;
+  margin: 0 $padding;
+  display: inline-block;
+}
+
+#search-icon {
+  cursor: pointer;
+}
+
+#countdown {
+  margin-top: $padding / 2;
+  font-size: 18px;
+  text-align: center;
+}
+
+#project {
+  margin-top: 30px;
+  img {
+    max-width: 100%;
+  }
+  h2 {
+    font-size: 2em;
+    text-transform: uppercase;
+  }
+  h4.credit {
+    text-transform: uppercase;
+    color: $brand-success;
+  }
+  p#countdown {
+    float: left;
+    margin-left: 20px;
+    text-align: left;
+  }
+  p#votes {
+    float: left;
+    margin-top: 2px;
+    font-size: 1.5em;
+    color: #fff;
+  }
+  p.impact {
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: 700;
+    .title {
+      text-transform: uppercase;
+    }
+    .location {
+      color: $brand-success;
+    }
+  }
+}
+
+#project.finalized-false {
+  margin-top: $padding * 2;
+
+  .container {
+    padding-top: $padding;
+    background-color: #fff;
+  }
+}
+
+.load-more-btn {
+  width: 180px;
+  height: 60px;
+  line-height: 40px;
+  margin: auto;
+  display: block;
+}
+
+.img-preview {
+  padding: $padding;
+
+  #project-img-preview {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+.project-block {
+  .label {
+    .fa {
+      color: #fff;
+      margin-right: 5px;
+    }
+    margin-right: 10px;
+    font-size: 1em;
+  }
+  img {
+    border: 1px solid $font-color-dark;
+  }
+}
+
+.steps {
+  @include make-row();
+  margin-bottom: $padding * 2;
+
+  span {
+    margin-top: 5px;
+    font-size: 16px;
+    display: inline-block;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .bubble {
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    @extend .img-circle;
+    background-color: $brand-primary;
+    border: 2px solid $brand-primary;
+    background-color: #fff;
+  }
+
+  #step1, #step2, #step3 {
+    text-align: center;
+    position: relative;
+    @include cols(4, 4, 4, 4);
+  }
+
+  .connector {
+    background-color: $brand-primary;
+    height: 5px;
+    position: absolute;
+    top: 25%;
+
+    &.right {
+      right: 0;
+      left: 50%;
+    }
+
+    &.left {
+      right: 50%;
+      left: 0;
+    }
+  }
+
+  #step1 .connector {
+    right: 0;
+    left: 50%;
+  }
+}
+
+.filled {
+  background-color: $brand-primary !important;
+}
+
+.step1 {
+  .connector { @extend .hide; }
+}
+
+.step2 {
+  #step2 .bubble { @extend .filled; }
+  #step2 .connector.right { @extend .hide; color: red; }
+  #step3 .connector { @extend .hide; }
+}
+
+.step3 {
+  .bubble { @extend .filled; }
+}
+
+.chooser {
+  text-align: center;
+
+  h2 {
+    color: #fff;
+  }
+
+  a {
+    p {
+      margin-top: $padding;
+      font-size: 18px;
+      color: #fff;
+    }
+  }
+
+  img {
+    max-width: 100px;
+  }
+}

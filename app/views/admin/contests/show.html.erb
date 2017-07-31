@@ -1,0 +1,9 @@
+<h1><%= @contest.name %></h1>
+<h3><%= link_to 'Back to Contests', admin_contests_path %></h3>
+
+<div class="contest">
+  <p><%= @contest.location %></p>
+  <p><%= @contest.starts_at %></p>
+  <p><%= @contest.ends_at %></p>
+  <p><%= @contest.terms_of_service %></p>
+</div>

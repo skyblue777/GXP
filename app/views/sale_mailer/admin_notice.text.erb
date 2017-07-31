@@ -1,0 +1,20 @@
+A payment has been made.
+
+Here are the details:
+
+Square Transaction ID: <%= @payment.transaction_id %><%= "\n" %>
+Square Location ID: <%= @payment.location_id %><%= "\n" %>
+Charge Amount: <%= number_to_currency @payment.amount/100.to_f %><%= "\n" %>
+Card Brand : <%= @payment.card_brand %><%= "\n" %>
+Card Last 4 : <%= @payment.card_last_4 %><%= "\n" %>
+<% if @payment.card_exp_month %>
+Card Expiration : <%= "#{@payment.card_exp_month}/#{@payment.card_exp_year}" %><%= "\n" %>
+<% end %>
+
+<% if @payment.order %>
+You can view the order here: <%= admin_order_url(@payment.order) %>
+<% end %>
+
+<% if @payment.subscription %>
+You can view the subscription here: <%= admin_subscription_url(@payment.subscription) %>
+<% end %>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GreenXWeb Admin</title>
+  <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="admin">
+  <nav id="main-nav" class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to root_path do %>
+          <%= image_tag 'logo-top.png' %>
+        <% end %>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Main Site', root_path %></li>
+        <li><%= link_to 'Categories', admin_categories_path %>
+        <li><%= link_to 'Contests', admin_contests_path %>
+        <% if admin_signed_in? %>
+          <li><%= link_to "Logout, #{current_admin.name}!", destroy_admin_session_path, method: :delete %>
+        <% else %>
+          <li><%= link_to 'Login', new_admin_session_path unless params.current_page 'admin/sessions#new' %>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <%= render 'shared/flash' %>
+  <div class="container">
+    <%= yield %>
+  </div>
+
+
+
+</body>
+</html>
+

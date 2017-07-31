@@ -1,0 +1,36 @@
+<%= simple_form_for [:admin, @product] do |f| %>
+  <%#= f.error_notification %>
+    <%= f.input :name %>
+    <div><b>Book Types:</b></div><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span>Hard Cover Price</span> 
+    <input type="text" name="txt_col_book_hardcover" id="txt_col_book_hardcover" class="txt_col_book_hardcover form-control" value="<%= books_prices(1, @product) %>">
+     <br>  
+    &nbsp;&nbsp;&nbsp;&nbsp;<span>Paper Back Price</span>    <input type="text" name="txt_col_paperback" id="txt_col_paperback" class="txt_col_book_hardcover form-control" value="<%= books_prices(2, @product) %>"><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span>Audio Price</span><input type="text" name="txt_book_audio" id="txt_book_audio" class="txt_book_audio form-control" value="<%= books_prices(5, @product) %>"><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span>Ebook Price</span><input type="text" name="txt_book_ebook" id="txt_book_ebook" class="txt_book_ebook form-control" value="<%= books_prices(6, @product) %>">
+
+    <%= f.input :description %>   
+
+    <%= @product.book_download_filename if @product.book_download_filename.present? %>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" style="width: 0%">
+      </div>
+    </div>
+    <%= render 'image', f: f %>
+  <%= f.submit 'Save', class: 'btn btn-primary', id: "btn-submit-product" %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#btn-submit-product").click(function(evt){
+      hard_cover_val = $("#txt_col_book_hardcover").val();
+      paper_back_val = $("#txt_col_paperback").val();
+      audio_val = $("#txt_book_audio").val();
+      ebook_val = $("#txt_book_ebook").val();
+      if((hard_cover_val=="" || hard_cover_val == "0") && (paper_back_val=="" || paper_back_val == "0") && (audio_val == "" || audio_val == "0") && (ebook_val == "" || ebook_val == "0")){
+        alert("Please enter at least one Book type Price.");
+        evt.preventDefault();
+      }
+    });
+  });
+</script>

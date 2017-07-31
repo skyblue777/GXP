@@ -1,0 +1,8 @@
+<%= simple_form_for [:admin, @subscription_plan] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :amount, hint: 'In Cents. Ex: 100 = $1.00' %>
+  <%= f.input :interval %>
+  <div class="text-center">
+    <%= f.submit 'Save', class: 'btn inverse-btn-inverted' %>
+  </div>
+<% end %>

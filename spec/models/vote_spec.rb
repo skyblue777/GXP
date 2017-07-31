@@ -1,0 +1,2 @@
+describe Vote do
+end

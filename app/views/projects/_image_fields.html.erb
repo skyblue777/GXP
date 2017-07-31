@@ -1,0 +1,29 @@
+<div class="">
+      <small><%= t 'project.image.formats' %></small>
+      <small><%= t 'project.video.file_size', size: number_to_human_size(Image::MAX_IMAGE_SIZE) %></small><br>
+      <div id="image_error_div" style="color:red"></div>
+      <%= i.file_field :image,  direct: true, presigned: true, :multiple => true %>
+</div>
+<div class="image-container">
+  <div class="silhouette">
+    <%= attachment_image_tag i.object, :image, :fill, 120, 120, fallback: 'silhouette-large.png' %>
+  </div>
+  <div class="uploader">
+    <!-- <label class="choose-file" for="project_images_attributes_<%= image_num %>_image"><%#= t 'project.image.choose_file' %></label> 
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" style="width: 0%">
+      </div>
+    </div>-->
+    <% if @crop_coordinates %>
+      <%= hidden_field_tag :image_crop_x, @crop_coordinates.x %>
+      <%= hidden_field_tag :image_crop_y, @crop_coordinates.y %>
+      <%= hidden_field_tag :image_crop_w, @crop_coordinates.w %>
+      <%= hidden_field_tag :image_crop_h, @crop_coordinates.h %>
+    <% end %>
+    <%#= i.input :image, as: :attachment, direct: true, input_html: { class: 'hidden' }, label_html: { class: 'hidden' } %>
+  </div>
+  <div class="clearfix"></div>
+  <div class="img-preview hide">
+    <img id="project-img-preview" />
+  </div>
+</div>

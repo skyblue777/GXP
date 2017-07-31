@@ -1,0 +1,2 @@
+describe Payment do
+end

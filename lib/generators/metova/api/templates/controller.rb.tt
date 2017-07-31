@@ -1,0 +1,45 @@
+<% module_namespacing do -%>
+class <%= class_name.pluralize %>Controller < API::BaseController
+
+  def index
+    @<%= plural_table_name %> = <%= singular_name.classify %>.all
+    respond_with @<%= table_name %>
+  end
+
+  def show
+    @<%= singular_table_name %> = find_<%= singular_table_name %>
+  end
+
+  def create
+    @<%= singular_table_name %> = <%= singular_name.classify %>.create permitted_params
+    respond_with @<%= singular_table_name %>
+  end
+
+  def update
+    @<%= singular_table_name %> = find_<%= singular_table_name %>
+    @<%= singular_table_name %>.update permitted_params
+    respond_with @<%= singular_table_name %>
+  end
+
+  def destroy
+    @<%= singular_table_name %> = find_<%= singular_table_name %>
+    @<%= singular_table_name %>.destroy
+    respond_with @<%= singular_table_name %>
+  end
+
+  private
+
+    def permitted_params
+      <%- if attributes_names.empty? -%>
+      params[:<%= singular_table_name %>]
+      <%- else -%>
+      params.require(:<%= singular_table_name %>).permit <%= attributes_names.map { |name| ":#{name}" }.join(', ') %>
+      <%- end -%>
+    end
+
+    def find_<%= singular_table_name %>
+      <%= singular_name.classify %>.find params[:id]
+    end
+
+end
+<% end -%>

@@ -1,0 +1,16 @@
+<div class="contact-us">
+  <div class="container">
+    <h1>BUY THE BOOK</h1>
+  </div>
+</div>
+<div class="book-background-light">
+  <div class="container">
+    <% @products.order("id").each.each_slice(3) do |slice_of_four| %>
+    <div class="row">
+      <% slice_of_four.each do |product| %>
+        <%= render 'product', product: product %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,284 @@
+
+<%= simple_form_for @project do |f| %>
+<div class="title_error_div" id="title_error_div" ></div>
+  <%= f.input :name %>
+  <div class="form-group hidden">
+    <label><%= t 'simple_form.labels.project.video' %></label>
+    <div class="video-container uploader">
+      <label class="choose-file" for="project_video"><%= t 'project.video.choose_file' %></label>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" style="width: 0%">
+        </div>
+      </div>
+      <%#= f.input :video, as: :attachment, direct: true, presigned: true, input_html: { class: 'hidden' }, label_html: { class: 'hidden' } %>
+    </div>
+  </div>
+  <%= f.input :tagline %>
+  <%= f.association :contest, :collection => Contest.all.where("DATE(starts_at) < ? AND DATE(ends_at) > ?", Time.zone.now.to_date, Time.zone.now.to_date), :label_method => :name, :value_method => :id, selected: 1 %>
+  <div class="cat_error_div" id="cat_error_div" ></div>
+  <%= f.association :categories, input_html: { multiple: true } %>
+  <%#= select_tag :categories, options_for_select(Category.all.order(:id).pluck(:name, :id)), input_html: { multiple: true }, class: "form-control" %>
+  <div class="body_error_div" id="body_error_div" ></div>
+  <%= f.input :body, input_html: { class: 'wysiwyg' } %>
+  <small><%= t 'project.video.formats' %></small>
+  <small><%= t 'project.video.file_size', size: number_to_human_size(Project::MAX_VIDEO_SIZE) %></small><br>
+
+  <div>
+    <table>
+      <tr>
+        <td>
+          <div id="video_error_div" style="color:red"></div>
+          <%= f.file_field :video,  direct: true, presigned: true %>
+        </td>
+        <td>
+          <a href="javascript:void(0)" id="clear_video" style="color:orange">Clear</a>
+        </td>        
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div>
+    <%if !@project.id.blank? %>
+      <video id="video" controls="" style="width:50%"><source src="<%= @project.video_url %>" type="video/mp4" /> Your browser does not support the video tag.</video>
+    <%end%>
+  </div>    
+  <small>MP3 10 MB MB file limit</small><br>
+  <div>
+    <table>
+      <tr>
+        <td>
+        <div id="audio_error_div" style="color:red"></div>
+          <%= f.file_field :audio, direct: true, presigned: true %>
+        </td>
+        <td>
+          <a href="javascript:void(0)" id="clear_audio" style="color:orange">Clear</a>
+        </td>        
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div>
+    <%if !@project.id.blank? %>
+     <audio controls>
+      <source src="<%= @project.audio.url %>" type="audio/mp3">
+     </audio> 
+    <%end%>
+  </div>
+  <small>*JPG, PNG 5 MB file limit</small><br>
+  <div>
+    <table>
+      <tr>
+        <td>
+          <div id="image_error_div" style="color:red"></div>
+          <%= f.file_field :image,  direct: true, presigned: true, :multiple => true %>
+        </td>
+        <td>
+          <a href="javascript:void(0)" id="clear_image" style="color:orange">Clear</a>
+        </td>        
+      </tr>
+    </table>
+  </div>
+
+
+  <br><br>
+  <%if !@project.images.ids.blank? %>
+    <% @project.images.each do |img| %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= image_tag "#{img.image_url}", size:"300x300" %><br><br>
+        </div>
+        <div class="col-md-6">
+          <%= link_to delete_images_path(@project.id, img.id), data: {confirm: "Are you sure to delete selected image."} do %>
+            <%= image_tag "close.png", size: "30x30", style:"" %>
+          <%end%>      
+        </div>
+      </div>
+    <%end%>
+  <%end%>
+  <!-- <div>
+    <%# image_num = 0 %>
+    <%#= f.simple_fields_for :images do |i| %>
+      <%#= render 'image_fields', i: i, image_num: image_num %>
+      <%# image_num += 1 %>
+    <%# end %>
+  </div> -->
+  <div class="text-center">
+    <%= f.submit 'Next', class: 'btn btn-warning', id: "btn_project_next", style: "width:150px;" %>
+  </div>
+<% end %>
+
+  
+<script type="text/javascript">
+  $(document).ready(function(){
+    var video_file = "";
+    var audio_file = "";
+    var image_file = "";
+    $("#clear_audio").click(function(){
+      $("#project_audio").val("");
+    });
+
+    $("#clear_video").click(function(){
+      $("#project_video").val("");
+    });    
+
+    $("#clear_image").click(function(){
+      $("#project_image").val("");
+    });        
+
+
+    $("#project_video").change(function(event){
+        var file = this.files[0];
+        video_file = this.files[0];
+        video_error(file,event);
+    });  
+
+    $("#project_audio").change(function(event){
+        var file = this.files[0];
+        audio_file = this.files[0];
+        audio_error(file,event);
+    });  
+
+    $("#project_image").change(function(event){
+        var file = this.files;
+        image_file = this.files;
+        image_error(file,event);
+    });          
+
+    $("#btn_project_next").click(function(evt){
+
+      if($("#project_name").val() == "" || !$("#project_name").val().replace(/\s/g, '').length){
+        $("#title_error_div").text("");
+        $("#title_error_div").addClass("alert alert-danger");
+        $("#title_error_div").append("<p>Project Title field can't be blank.</p>"); 
+        evt.preventDefault();        
+      }else{
+        $("#title_error_div").removeClass("alert alert-danger");
+        $("#title_error_div").text("");
+      }
+
+      if($("#project_category_ids").val() == null){
+        $("#cat_error_div").text("");
+        $("#cat_error_div").addClass("alert alert-danger");
+        $("#cat_error_div").append("<p>Categories field can't be blank.</p>"); 
+        evt.preventDefault();        
+      }else{
+        $("#cat_error_div").removeClass("alert alert-danger");
+        $("#cat_error_div").text("");
+      }
+
+      if($("#project_body").val() == "" || !$("#project_body").val().replace(/\s/g, '').length){ 
+          $("#body_error_div").text("");
+          $("#body_error_div").addClass("alert alert-danger");
+          $("#body_error_div").append("<p>Description field can't be blank.</p>"); 
+          evt.preventDefault();
+      }else{
+        $("#body_error_div").removeClass("alert alert-danger");
+        $("#body_error_div").text("");
+      }
+
+      if($("#project_category_ids :selected").length > 3){
+        $("#cat_error_div").text("");
+        $("#cat_error_div").addClass("alert alert-danger");
+        $("#cat_error_div").append("<p>Please select less than 4 categories.</p>"); 
+        evt.preventDefault();  
+      }else{  }
+
+      video_error(video_file, evt);
+      image_error(image_file, evt);
+      audio_error(audio_file, evt);
+    });
+
+
+  function video_error(file,e){
+    if (file.length != 0){
+      var ext = file.name.split(".");
+      ext = ext[ext.length-1].toLowerCase();      
+      var arrayExtensions = ["mp4"];
+      $("#video_error_div").text("");
+      $("#video_error_div").fadeIn();
+      $("#video_error_div").removeClass("alert alert-danger");         
+      if (arrayExtensions.lastIndexOf(ext) == -1) {
+        $("#video_error_div").addClass("alert alert-danger");
+        $("#video_error_div").append("<p>Unsupported format for Video.</p>");              
+          e.preventDefault();
+      }else if (file.size > 20000000) {
+        $("#video_error_div").addClass("alert alert-danger");
+        $("#video_error_div").append("<p>file size is too large for Video.</p>");           
+          e.preventDefault();
+      }else{
+        $("#video_error_div").text("");
+      }    
+    }
+  }
+
+  function image_error(file,e){
+    var length;
+    if(file.length != 0){
+      if (<%= !@project.images.ids.blank? %> == true){
+       length = 4 - <%= @project.images.length %>
+      }else{
+        length = 4;
+      }
+      var txt_msg = length == 1 ? "file is" : "files are";
+      if(file.length > length){
+        $("#image_error_div").text("");
+        $("#image_error_div").addClass("alert alert-danger");
+        $("#image_error_div").append("<p>Only "+length+" image "+ txt_msg +" allow.</p>");
+        e.preventDefault();
+        return false;
+      }
+
+      $.each(file, function(ind, val){
+        var ext = val.name.split(".");
+        ext = ext[ext.length-1].toLowerCase();      
+        var arrayExtensions = ["jpg" , "jpeg", "png"];
+        $("#image_error_div").text("");
+        $("#image_error_div").fadeIn();
+        $("#image_error_div").removeClass("alert alert-danger");   
+        if (arrayExtensions.lastIndexOf(ext) == -1) {
+          $("#image_error_div").addClass("alert alert-danger");
+          $("#image_error_div").append("<p>Unsupported format for Image.</p>");       
+          e.preventDefault();
+        }else if (val.size > 5000000) {
+          $("#image_error_div").addClass("alert alert-danger");
+          $("#image_error_div").append("<p>file size is too large for Image.</p>");
+          e.preventDefault();
+        }else{
+          $("#image_error_div").text("");
+        }
+      });
+    }else{
+      <% if @project.id.blank? %>
+        $("#image_error_div").text("");
+        $("#image_error_div").addClass("alert alert-danger");
+        $("#image_error_div").append("<p>Please select atleast one Image.</p>");
+        e.preventDefault();
+      <%end%>
+    }
+  }
+
+  function audio_error(file,e){
+    if (file.length != 0){
+      var ext = file.name.split(".");
+      ext = ext[ext.length-1].toLowerCase();      
+      var arrayExtensions = ["mp3"];
+      $("#audio_error_div").text("");
+      $("#audio_error_div").fadeIn();
+      $("#audio_error_div").removeClass("alert alert-danger");   
+
+      if (arrayExtensions.lastIndexOf(ext) == -1) {
+        $("#audio_error_div").addClass("alert alert-danger");
+        $("#audio_error_div").append("<p>Unsupported format for Audio.</p>");    
+        e.preventDefault();
+      }else if (file.size > 10000000) {
+        $("#audio_error_div").addClass("alert alert-danger");
+        $("#audio_error_div").append("<p>file size is too large Audio.</p>");              
+        e.preventDefault();
+      }else{
+        $("#audio_error_div").text("");
+      } 
+    }
+  }  
+
+  });
+</script>

@@ -1,0 +1,23 @@
+<div class="project-details">
+  <div class="container">
+    <h1>EDIT PROFILE</h1>
+  </div>
+</div>
+<div class="book-background">
+  <div class="container user-form">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="generic-form has-image">
+          <h1>Update Password</h1>
+          <%= render 'password_form', resource: @user, button_text: 'Update' %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="generic-form has-image">
+          <h1><%= I18n.t('user.titles.update_profile') %></h1>
+          <%= render 'form', user: resource, button_text: 'Update' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
