@@ -23,13 +23,13 @@
 
 <div class="banner">
 	<div class="row">
-		<div class="col-sm-6 video">
+		<div class="col-xs-12 col-sm-6 video">
 			<video controls="" id="info_video" poster="what_is_greenxprize.jpg">
 				<source src="/GreenXprize_11May_FinalVideo.mp4" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
 		</div>
-		<div class="col-sm-6 content">
+		<div class="col-xs-12 col-sm-6 content">
 			<p> Green X Prize is a brand new global online community where socially conscious entrepreneurs can propose their communities and generate profits for public, private, and corporate investors. </p>
 			<a href="#" class="find-out-btn" >Find Out How</a> 
 		</div>
@@ -39,7 +39,7 @@
 <div class="team-section">
 	<div class="row">
 		<h2>$10,000 WINNERS</h2>
-		<div class="col-sm-3">
+		<div class="col-xs-12 col-sm-3 team">
 			<div class="team-member">
 				<div class="team-thumb">
 					<%= image_tag "girl.png", alt: "img", class: "img-responsive ps-rel" %>
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-xs-12 col-sm-3 team">
 			<div class="team-member">
 				<div class="team-thumb">
 					<%= image_tag "girl.png", alt: "img", class: "img-responsive ps-rel" %>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-xs-12 col-sm-3 team">
 			<div class="team-member">
 				<div class="team-thumb">
 					<%= image_tag "girl.png", alt: "img", class: "img-responsive ps-rel" %>
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-xs-12 col-sm-3 team">
 			<div class="team-member">
 				<div class="team-thumb">
 					<%= image_tag "girl.png", alt: "img", class: "img-responsive ps-rel" %>
@@ -100,7 +100,8 @@
 			</div>
 		</div>
 		<div class="col-sm-12">
-			<div class="identy relative">
+			<div class="identy">
+				<%= image_tag "how-works-banner.png", alt: "img" %>
 				<div class="content">
 					<h2>Identify Any Problem</h2>
 					<p>You know the world needs a sustainable overhaul.</p>
@@ -116,6 +117,7 @@
 			<span>You can design an idea, movement, or theory toward a more sustainable world.</span>
 		</div>
 		<div class="col-sm-4 baby-img">
+			<%= image_tag "img1.png", alt: "img" %>
 			<h2>You Know You Can Help</h2>
 		</div>
 		<div class="col-sm-4">
@@ -135,91 +137,85 @@
 			<div class="col-sm-4 text text-left">
 				<h3>Lifetime Membership</h3>
 				<span>Click here to buy the book and become a lifetime Green X Prize member.</span>
-				<%= link_to 'Get Your Lifetime Membership'.html_safe, products_path, class: "btn btn-warning membership" %>      
+				<%= link_to 'Get Your Lifetime Membership'.html_safe, products_path, class: "membership" %>      
 			</div>
 			<div class="col-sm-offset-4 col-sm-4 text text-right">
 				<h3>Monthly Membership</h3>
 				<span>Skip the book buy a monthly membership for just $2.99 per month.</span>
-				<%= link_to "Get Your Monthly Membership".html_safe, new_subscription_path, class: 'btn btn-warning membership' %>
+				<%= link_to "Get Your Monthly Membership".html_safe, new_subscription_path, class: 'membership' %>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="fun-sec-main">
-	<!-- <div class="fun-section container"> -->
+	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="section-title ps-rel">
-					<h2>how it works</h2>
-				</div>
+			<div class="col-sm -12 section-title">
+				<h2>how it works</h2>
 			</div>
-			<div class="col-sm-3 col-md-4 col-sm-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+			<div class="col-sm-3">
 				<div class="fun-member">
 					<%= link_to products_path do %>
 					<div class="fun-thumb">
-						<div class="ps-rel"> <%= image_tag 'home_icons/purchase.png' %> <%#= image_tag "icon1.png", alt: "img", class: "img-responsive ps-rel" %>            
-						</div>
+						<%= image_tag 'home_icons/purchase.png'%>
 					</div>
-					<!-- <h3>Pitch An Idea</h3> -->
-					<h3>Purchase <br>Go Green, Get Rich</h3>
-					<span style="text-align:left">Purchase your copy today! Join other like-minded global citizens in the creation
-					and implementation of innovative sustainability-centric ideas and endeavors.</span>
+					<h3>Purchase Go Green, Get Rich</h3>
+					<span>Purchase your copy today! Join other like-minded global citizens in the creation and implementation of innovative sustainability-centric ideas and endeavors.</span>
 					<%end%>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-4 col-sm-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+			<div class="col-sm-3">
 				<div class="fun-member">
 					<%= link_to new_user_registration_path do %>
 					<div class="fun-thumb">
-						<div class="ps-rel"> <%= image_tag 'home_icons/code.png' %> <%#= image_tag "icon2.png", alt: "img", class: "img-responsive ps-rel" %> 
+						<div>
+							<%= image_tag 'home_icons/code.png' %>
 						</div>
 					</div>
-					<h3>Sign Up Using <br>Your Unique Code</h3>
-					<span style="text-align:left">Already have an authentication code? Click here to enter your code
-					and gain immediate access to Green X Prize and all contests.</span>
+					<h3>Sign Up Using Your Unique Code</h3>
+					<span>Already have an authentication code? Click here to enter your code and gain immediate access to Green X Prize and all contests.</span>
 					<%end%>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-4 col-sm-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+			<div class="col-sm-3">
 				<div class="fun-member">
 					<%= link_to projects_path do %>
 					<div class="fun-thumb">
-						<div class="ps-rel"> <%= image_tag 'home_icons/share.png' %> <%#= image_tag "icon3.png", alt: "img", class: "img-responsive ps-rel" %>
+						<div>
+							<%= image_tag 'home_icons/share.png' %>
 						</div>
 					</div>
-					<h3>Share Your <br>Green Idea</h3>
-					<span style="text-align:left">Have a green idea on how to solve an existing problem using clean energy and
-					sustainable technology? Share it with the Green X Prize community!</span>
+					<h3>Share Your Green Idea</h3>
+					<span>Have a green idea on how to solve an existing problem using clean energy and sustainable technology? Share it with the Green X Prize community!</span>
 					<%end%>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-4 col-sm-offset-0 col-md-offset-0 col-sm-offset-2 col-sm-8">
+			<div class="col-sm-3">
 				<div class="fun-member">
 					<%= link_to projects_path do %>
 					<div class="fun-thumb">
-						<div class="ps-rel"> <%= image_tag 'home_icons/prize.png' %> <%#= image_tag "icon4.png", alt: "img", class: "img-responsive ps-rel" %>
+						<div>
+							<%= image_tag 'home_icons/prize.png' %>
 						</div>
 					</div>
-					<h3>Get the Votes, <br>Win the Prize!</h3>
-					<span style="text-align:left">Have you or someone you know submitted a green idea? Encourage
-					friends and family to vote for a chance to win the $10,000 cash prize!</span>
+					<h3>Get the Votes, Win the Prize!</h3>
+					<span>Have you or someone you know submitted a green idea? Encourage friends and family to vote for a chance to win the $10,000 cash prize!</span>
 					<%end%>
 				</div>
 			</div>
 		</div>
-		<!-- /.row --> 
-	<!-- </div> -->
+	</div>
 </div>
 <div class="wins-section">
 	<div class="container">
-		<h1>Each Month Someone Wins <span>$10,000</span></h1>
-		<p>Through a transparent, community voting process, a winner is chosen!</p>
+		<h1>Each Month Someone Wins $10,000</h1>
+		<p>through a transparent community voting</p>
 	</div>
 </div>
 <div class="sponcer">
 	<div class="container">
-		<h1>New ideas are fostered, sponsored <i><%= link_to '<u>Sponsor</u>'.html_safe, new_sponsor_path, style:"color:white;" %></i>, and funded every month</h1>
-		<center><%= link_to 'Apply To Be A Sponsor', new_sponsor_path, class: "sponcer-btn" %></center>
+		<h1>New Ideas are Inspired, Sponsored and Funded Every Month</h1>
+		<%= link_to 'Apply To Be A Sponsor', new_sponsor_path, class: "sponcer-btn" %>
 	</div>
 </div>
 <div class="join-today">
@@ -229,11 +225,5 @@
 			<%= link_to 'Lifetime Membership', products_path, class: "btn btn-warning life-membership" %>
 			<%= link_to "Monthly Membership", new_subscription_path, class: 'btn btn-warning month-membership' %>
 		</div>
-	</div>
-</div>
-<div class="sponcer">
-	<div class="container">
-		<h1>Create a cleaner, greener world</h1>
-		<h2 style="text-align:center; color:black;">Your role in this community creates a better world for everyone</h2>
 	</div>
 </div>
