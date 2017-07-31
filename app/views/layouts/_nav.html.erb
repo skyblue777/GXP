@@ -1,23 +1,21 @@
 
-  <div class="row navbar"> 
+  <div class="navbar"> 
     <%#= render 'shared/errors' %>
-    <div class="col-sm-2 logo"> 
+    <div class="col-xs-2 col-sm-2 logo"> 
       <%= link_to root_path, method: :get do %>
         <%= image_tag 'logo.png', alt: "image", class: "img-responsive logo-man" %>
       <%end%>        
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#matblog-navbar-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
     </div>
     <div class="col-sm-8 menu">
       <ul>
         <li><%= link_to 'ABOUT', about_path, method: :get, class: active_route(about_path) %></li>
         <li><%= link_to 'PROJECTS & WINNERS', projects_path, method: :get, class: active_route(projects_path) %></li>
-        <!-- <li><%#= link_to 'Buy the book', products_path, class: active_route(products_path) %></li> -->
         <li><%= link_to 'SPONSOR A PRIZE', advertising_path, class: active_route(advertising_path) %></li>          
         <li><%= link_to 'ADVERTISING', new_sponsor_path, method: :get, class: active_route(new_sponsor_path) %></li>
         <li><%= link_to 'JOIN', join_path, method: :get, class: active_route(join_path) %></li>
       </ul>
     </div>
-    <div class="col-sm-2 cart-sign">
+    <div class="col-xs-8 col-sm-2 cart-sign">
       <ul class="clearfix">
         <% order_items = current_order.order_products if !current_order.nil? %>
         <% if !order_items.nil? && order_items.count > 0  %>
@@ -44,8 +42,24 @@
         <% end %>
       </ul>          
     </div>
+    <div class="col-xs-8 title">
+      <h1>Green X Web</h1>
+    </div>
+    <div class="col-xs-2 mobile-nav">
+      <%= image_tag 'mobile-menu.svg', alt: "image", class: "mobile-menu" %>
+    </div>
     
     <%= render 'shared/flash' %>
+  </div>
+
+  <div class="mobile-navigation">
+    <ul>
+      <li><%= link_to 'ABOUT', about_path, method: :get, class: active_route(about_path) %></li>
+      <li><%= link_to 'PROJECTS & WINNERS', projects_path, method: :get, class: active_route(projects_path) %></li>
+      <li><%= link_to 'SPONSOR A PRIZE', advertising_path, class: active_route(advertising_path) %></li>          
+      <li><%= link_to 'ADVERTISING', new_sponsor_path, method: :get, class: active_route(new_sponsor_path) %></li>
+      <li><%= link_to 'JOIN', join_path, method: :get, class: active_route(join_path) %></li>
+    </ul>
   </div>
 
   <style type="text/css">
