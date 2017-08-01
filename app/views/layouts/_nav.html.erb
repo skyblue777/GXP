@@ -6,7 +6,7 @@
         <%= image_tag 'logo.png', alt: "image", class: "img-responsive logo-man" %>
       <%end%>        
     </div>
-    <div class="col-sm-8 menu">
+    <div class="col-xs-7 col-sm-7 menu">
       <ul>
         <li><%= link_to 'ABOUT', about_path, method: :get, class: active_route(about_path) %></li>
         <li><%= link_to 'PROJECTS & WINNERS', projects_path, method: :get, class: active_route(projects_path) %></li>
@@ -15,7 +15,7 @@
         <li><%= link_to 'JOIN', join_path, method: :get, class: active_route(join_path) %></li>
       </ul>
     </div>
-    <div class="col-xs-8 col-sm-2 cart-sign">
+    <div class="col-xs-8 col-sm-3 cart-sign">
       <ul class="clearfix">
         <% order_items = current_order.order_products if !current_order.nil? %>
         <% if !order_items.nil? && order_items.count > 0  %>
