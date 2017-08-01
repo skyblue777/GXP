@@ -137,8 +137,10 @@ a {
 		}
 		.menu {
 			text-align: center;
+			@media(max-width: 1156px) {
+				padding-top: 30px;
+			}
 			@media(max-width: 768px) {
-				width: 58.33333%;
 				padding-top: 15px;
 			}
 			@media(max-width: 414px) {
@@ -149,10 +151,10 @@ a {
 					display: inline-block;
 					padding: 0 13px;
 			    	line-height: 126px;
-			    	@media(max-width: 768px) {
+			    	@media(max-width: 1156px) {
 			    		line-height: 30px;
 			    	}
-					a {
+			    	a {
 						color: #000;
 						font-size: 20px;
 						&:hover {
@@ -170,9 +172,11 @@ a {
 			}
 		}
 		.cart-sign {
+			@media(max-width: 1156px) {
+				padding-top: 25px;
+			}
 			@media(max-width: 768px) {
 				width: 25%;
-				padding-top: 25px;
 			}
 			@media(max-width: 414px) {
 				display: none;
@@ -181,7 +185,7 @@ a {
 				li {
 					line-height: 8;
 					float: left;
-					@media (max-width: 768px) {
+					@media (max-width: 1156px) {
 						line-height: 30px;
 					}
 					&:first-child {
