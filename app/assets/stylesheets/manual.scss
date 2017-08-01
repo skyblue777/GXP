@@ -100,40 +100,6 @@ width:90px; height:40px; font-size: 15px;
 width:425px; height:40px; font-size: 15px;
 }
 
-@media (max-width: 979px) {
-	.navbar .container {
-		margin: 0 20px 0 33px;
-	}
-}
-
-@media (min-width: 1200px) {
-	.navwid.container {
-		width: 1840px;
-	}
-}
-
-@media (min-width: 768px) {
-	.navbar-collapse.collapse {
-		height: 100px !important;
-	}
-}
-
-@media (max-width: 767px) {
-	body {
-		padding-right: 0px;
-	}
-}
-
-@media (min-width: 967px) {
-	.col-lg-6 {
-		padding: 50px 10px 80px 30px;
-	}
-
-	.col-lg-6.right-banner {
-		padding: 114px 114px 114px 30px;
-	}
-}
-
 
 
 /*============  My Style  ==============*/
@@ -155,6 +121,7 @@ a {
 
 /*=====  Home Page Style  ===========*/
 
+
 /*==========  Header Style  ==========*/
 
 #header {
@@ -163,13 +130,17 @@ a {
 		margin-bottom: 0;
 		border: none;
 		@media(max-width: 768px) {
-			padding: 10px 0;
+		    padding: 15px 0 0 0;
 		}
 		.logo {
 
 		}
 		.menu {
 			text-align: center;
+			@media(max-width: 768px) {
+				width: 58.33333%;
+				padding-top: 15px;
+			}
 			@media(max-width: 414px) {
 				display: none;
 			}
@@ -178,6 +149,9 @@ a {
 					display: inline-block;
 					padding: 0 13px;
 			    	line-height: 126px;
+			    	@media(max-width: 768px) {
+			    		line-height: 30px;
+			    	}
 					a {
 						color: #000;
 						font-size: 20px;
@@ -196,6 +170,10 @@ a {
 			}
 		}
 		.cart-sign {
+			@media(max-width: 768px) {
+				width: 25%;
+				padding-top: 25px;
+			}
 			@media(max-width: 414px) {
 				display: none;
 			}
@@ -203,7 +181,9 @@ a {
 				li {
 					line-height: 8;
 					float: left;
-
+					@media (max-width: 768px) {
+						line-height: 30px;
+					}
 					&:first-child {
 						padding-top: 8px;
 					}
@@ -244,6 +224,7 @@ a {
 				display: block;
 				img {
 					width: 30px;
+					padding-top: 5px;
 				}
 			}
 		}
@@ -315,11 +296,18 @@ a {
 	    		padding: 25px;
 	    		text-align: center;
 	    	}
+	    	@media(max-width: 414px) {
+	    		padding: 10px;
+	    	}
 	    	p {
 	    		font-size: 30px;
 	    		color: white;
 	    		font-weight: bold;
 	    		line-height: 40px;
+	    		@media(max-width: 414px) {
+					font-size: 17px;
+					line-height: 25px;
+	    		}
 	    	}
 	    	a {
 	    		color: #fff;
@@ -331,6 +319,9 @@ a {
 			    font-weight: 500;
 		    	font-family: 'Roboto', sans-serif;
 		    	background-color: #549007;
+		    	@media(max-width: 414px) {
+	    		    margin-top: 20px;
+		    	}
 		    	&:hover {
 		    		webkit-transition: all 0.2s ease-in-out;
 				    -moz-transition: all 0.2s ease-in-out;
@@ -347,20 +338,27 @@ a {
     }
 	
 	.team-section {
-		padding: 80px 20px;
+		padding: 80px 0;
 		max-width: 1170px;
 		margin: 0 auto;
 		width: 100%;
+		@media(max-width: 768px) {
+			padding: 30px 0;
+		}
 		h2 {
 			font-weight: bold;
 			font-size: 50px;
 			text-align: center;
 			color: #000;
 			margin-bottom: 50px;
+			@media(max-width: 768px) {
+				font-size: 30px;
+				margin-bottom: 15px;
+			}
 		}
 
 		.team {
-			@media(min-width: 414px) and (max-width: 768px) {
+			@media (max-width: 768px) {
 				width: 50%;
 				margin-bottom: 20px;
 			}
@@ -420,11 +418,17 @@ a {
 
 	.how-works {
 		background-color: #00c4d6;
+		@media(max-width: 414px) {
+			padding: 20px 0;
+		}
 		.how-works-title {
 		    text-align: center;
 	        padding: 30px 0 30px 50px;
 	        @media(max-width: 768px) {
-	        	padding: 10px;
+	        	padding: 30px 0 20px 22px;
+	        }
+	        @media(max-width: 414px) {
+	        	padding: 20px 0;
 	        }
 			h1 {
 				margin: 0;
@@ -433,17 +437,29 @@ a {
 				font-weight: bold;
 				color: white;
 				display: inline-block;
-
+				@media(max-width: 768px) {
+					font-size: 30px;
+				}
 			}
 			img {
 				display: inline-block;
 				max-width: 200px;
 				width: 100%;
+				@media(max-width: 768px) {
+					max-width: 100px;
+				}
 			}
 		}
 		.identy {
+			margin: 0 -15px;
+			@media(max-width: 414px) {
+				margin: 0;
+			}
 			img {
 				width: 100%;
+				@media(max-width: 414px) {
+					display: none;
+				}
 			}
 			.content {
 				position: absolute;
@@ -460,7 +476,14 @@ a {
 			    -webkit-transform: translate(-50%, -50%); /* Safari */
 			    transform: translate(-50%, -50%);
 				background-color: rgba(255, 255, 255, 0.9);
-
+				@media(max-width: 768px) {
+					padding: 10px 0;
+					max-width: 400px;
+				}
+				@media(max-width: 414px) {
+					position: initial;
+					transform: initial;
+				}
 				h2 {
 					width: 100%;
 					margin: 0;
@@ -468,13 +491,19 @@ a {
 				    padding: 0;
 				    border-radius: 5px;
 				    font-size: 40px;
+				    @media(max-width: 768px) {
+				    	font-size: 22px;
+				    }
 				}
-
 				p {
 					font-size: 24px;
 					margin-top: 15px;
 					color: black;
 					font-family: 'Open Sans', sans-serif;
+					@media(max-width: 768px) {
+				    	font-size: 14px;
+				    	margin-top: 0;
+				    }
 				}
 			}
 		}
@@ -483,6 +512,9 @@ a {
 	.help-works {
 		padding: 22px 0; 
 		background-color: #323232;
+		@media(max-width: 768px) {
+			margin-top: -1px;
+		}
 		.container {
 			@media(max-width: 768px) {
 				width: 100%;
@@ -498,18 +530,28 @@ a {
 					padding: 0;
 					font-size: 26px;
 				}
+				@media(max-width: 414px) {
+				    font-size: 22px;
+				}
 			}
 			span {
 				color: white;
 				font-family: 'Open Sans', sans-serif;
 				font-size: 24px;
 			    line-height: 27px;
+			    @media(max-width: 414px) {
+			    	font-size: 15px;
+			    }
 			}
 			.baby-img {
 				text-align: center;
 				
 				img {
 					position: relative;
+					@media(max-width: 414px) {
+						max-width: 150px;
+						width: 100%;
+					}
 				}
 				h2 {
 					color: black;
@@ -526,8 +568,14 @@ a {
 				    padding-top: 83px;
 				    position: absolute;
 				    @media(max-width: 768px) {
-				    	margin-top: 45px;
-				    	padding: 0;
+						margin-top: 89px;
+						padding: 0;
+						font-size: 23px;
+						line-height: 23px;
+						max-width: 150px;
+				    }
+				    @media(max-width: 414px) {
+			    	    margin-top: 60px;
 				    }
 				}
 			}
@@ -537,8 +585,14 @@ a {
 
 	.movment {
 		position: relative;
+		@media(max-width: 414px) {
+			background-color: #62b164;
+		}
 		img {
 			width: 100%;
+			@media(max-width: 414px) {
+				display: none;
+			}
 		}
 		.container {
 			position: absolute;
@@ -547,6 +601,10 @@ a {
 		    left: 0;
 		    @media(max-width: 768px) {
 		    	top: 37px;
+	    	}
+	    	@media(max-width: 414px) {
+	    		position: initial;
+	    		padding: 15px
 	    	}
 			.title {
 				background-color: rgba(255, 255, 255, 0.8);
@@ -558,13 +616,18 @@ a {
 				width: 100%;
 				@media(max-width: 768px) {
 					padding: 10px 0;
+					margin-top: 20px;
+					max-width: 400px;
+				}
+				@media(max-width: 414px) {
+					margin-top: 0;
 				}
 				h2 {
 					color: black;
 					font-size: 40px;
 					@media(max-width: 768px) {
-						font-size: 28px;
-						margin-top: 0;
+						font-size: 22px;
+						margin: 0;
 					}
 				}
 				span {
@@ -572,7 +635,7 @@ a {
 					font-size: 24px;
 					font-family: 'Open Sans', sans-serif;
 					@media(max-width: 768px) {
-						font-size: 16px;
+						font-size: 14px;
 					}
 				}
 			}
@@ -588,16 +651,22 @@ a {
 						padding-right: 80px;
 						text-align: left;
 						@media(max-width: 768px) {
-							padding: 0;
+							padding: 0 5px;
 							text-align: center;
+						}
+						@media(max-width: 414px) {
+							padding-right: 5px;
 						}
 					}
 					&.text-right {
 						padding-left: 95px;
 						text-align: left;
 						@media(max-width: 768px) {
-							padding: 0;
+							padding: 0 5px;
 							text-align: center;
+						}
+						@media(max-width: 414px) {
+							padding-left: 5px;
 						}
 					}
 					h3 {
@@ -605,6 +674,9 @@ a {
 						color: white;
 						@media(max-width: 768px) {
 							font-size: 28px; 
+						}
+						@media(max-width: 414px) {
+							font-size:22px;
 						}
 					}
 					span {
@@ -615,6 +687,9 @@ a {
 						@media(max-width: 768px) {
 							font-size: 18px; 
 							line-height: 20px;
+						}
+						@media(max-width: 414px) {
+							font-size: 14px;
 						}
 					}
 					a {
@@ -630,6 +705,9 @@ a {
 					    font-weight: 600;
 					    border-bottom: solid 1px #dd6401;
 					    border-top: solid 1px #ffdc9b;
+					    @media(max-width: 414px) {
+				    	    padding: 5px 15px;
+					    }
 					    &:hover {
 					    	webkit-transition: all 0.2s ease-in-out;
 						    -moz-transition: all 0.2s ease-in-out;
@@ -651,31 +729,61 @@ a {
 	.fun-sec-main {
 		background: #f9f9f9;
 		padding: 27px 0 75px 0;
+		@media(max-width: 768px) {
+			padding: 25px 0;
+		}
+		@media(max-width: 414px) {
+			padding: 0;
+		}
 		.section-title {
 			margin-bottom: 45px;
+			@media(max-width: 768px) {
+				margin-bottom: 15px;
+			}
 			h2 {
 				font-size: 60px;
 				color: black;
 				text-transform: uppercase;
 				text-align: center;
 				line-height: 60px;
+				@media(max-width: 768px) {
+					font-size: 30px;
+				}
 			}
 		}
 		.fun-member {
 			text-align: center;
+			@media (max-width: 414px) {
+				margin-bottom: 22px;
+			}
 			.fun-thumb{
 				margin-bottom: 45px;
+				@media(max-width: 414px) {
+					margin-bottom: 10px;
+				}
 			}
 			h3 {
 				color: black;
 				font-size: 32px;
 				margin-bottom: 32px;
+				@media(max-width: 768px) {
+					font-size: 22px;
+					line-height: 22px;
+				}
+				@media(max-width: 414px) {
+					font-size: 18px;
+					margin-bottom: 10px;
+				}
 			}
 			span {
 				font-size: 16px;
 				font-family: 'Open Sans', sans-serif;
 				color: #9e9d9d;
 				line-height: 26px;
+				@media(max-width: 768px) {
+					font-size: 14px;
+					line-height: 14px;
+				}
 			}
 		}
 	}
@@ -686,12 +794,21 @@ a {
 	    background-repeat: no-repeat;
 	    background-size: cover;
 	    background-position: center;
+	    @media(max-width: 768px) {
+	    	height: 300px;
+	    }
 	    h1 {
 		    color: black;
 		    font-size: 50px;
 		    text-align: center;
 		    margin-top: 160px;
 		    margin-bottom: 36px;
+		    @media(max-width: 768px) {
+		    	margin-top: 100px;
+		    	font-size: 30px;
+		    	line-height: 30px;
+		    	margin-bottom: 10px;
+		    }
 	    }
 	    p {
 	    	font-size: 24px;
@@ -713,6 +830,9 @@ a {
 	    		color: white;
 	    		text-align: center;
 	    		line-height: 50px;
+	    		@media(max-width: 768px) {
+	    			font-size: 30px;
+	    		}
 	    	}
 	    	.sponcer-btn {
 	    		border: 1px solid #fff;
@@ -749,6 +869,9 @@ a {
 				color: black;
 				line-height: 50px;
 				text-align: center;
+				@media(max-width: 768px) {
+					font-size: 30px;
+				}
 			}
 			.membrshp-btn {
 				text-align: center;
