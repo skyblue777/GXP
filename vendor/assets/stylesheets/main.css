@@ -6,12 +6,7 @@ html a {
     -webkit-font-smoothing: antialiased !important;
 }
 
-body {
-    font-size: 15px;
-    line-height: 100%;
-    color: #909090;
-    background: #f7f7f7;
-}
+
 
 p {
     line-height: 24px;
@@ -1796,14 +1791,8 @@ input[type="password"] {
         text-shadow: 2px 2px #8a8a8a;
         font-size: 50px;
     }
-    .month-membership {
-        width: 50%;
-        float: left;
-    }
-    .life-membership {
-        width: 50%;
-        float: left;
-    }
+
+
     .join-today h1 {
         font-size: 40px;
     }
@@ -1923,14 +1912,7 @@ input[type="password"] {
 }
 
 @media only screen and (max-width: 949px) {
-    .month-membership {
-        width: 50%;
-        float: left;
-    }
-    .life-membership {
-        width: 50%;
-        float: left;
-    }
+
     .join-today h1 {
         font-size: 40px;
     }
@@ -2017,11 +1999,7 @@ input[type="password"] {
     .baby-img {
         width: 100%;
     }
-    .life-membership {
-        width: 100%;
-        margin-top: 0;
-        float: left;
-    }
+
     .global-section h2 {
         padding: 7px 0;
         letter-spacing: 0px;
@@ -2044,18 +2022,12 @@ input[type="password"] {
     .how-works h1 {
         font-size: 42px;
     }
-    .how-works img {
-        width: 18%;
-    }
+
     .section-title h2 {
         font-size: 36px;
         padding: 0;
     }
-    .month-membership {
-        width: 100%;
-        margin-top: 5px;
-        float: left;
-    }
+
     .join-today h1 {
         font-size: 22px;
     }
@@ -2077,11 +2049,6 @@ input[type="password"] {
         font-size: 13px;
     }
 
-    .life-membership {
-        width: 100%;
-        margin-top: 0;
-        float: left;
-    }
     .global-section h2 {
         padding: 7px 0;
         letter-spacing: 0px;
@@ -2104,18 +2071,12 @@ input[type="password"] {
     .how-works h1 {
         font-size: 42px;
     }
-    .how-works img {
-        width: 18%;
-    }
+
     .section-title h2 {
         font-size: 36px;
         padding: 0;
     }
-    .month-membership {
-        width: 100%;
-        margin-top: 5px;
-        float: left;
-    }
+
     .join-today h1 {
         font-size: 22px;
     }
@@ -2243,9 +2204,7 @@ input[type="password"] {
         text-transform: uppercase;
         font-weight: 700;
     }
-    .how-works img {
-        width: 30%;
-    }
+
     .identy h2 {
         line-height: normal;
         width: 100%;
@@ -2302,12 +2261,7 @@ input[type="password"] {
     .join-today h1 {
         font-size: 27px;
     }
-    .life-membership {
-        padding: 6px 21px;
-    }
-    .month-membership {
-        padding: 6px 21px;
-    }
+
     .navbar-default.navbar-fixed-top.fixed-menu {
         padding: 8px 0;
     }
