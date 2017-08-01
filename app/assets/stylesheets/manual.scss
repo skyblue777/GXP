@@ -1004,16 +1004,28 @@ a {
 
 	.green-insire {
 		padding: 47px 0;
-		h1 {
-		    text-transform: uppercase;
-		    color: #000;
-		    font-weight: 700;
-		    font-size: 30px;
-		}
-		p{
-			font-size: 16px;
-			font-family: 'Open Sans', sans-serif;
-			color: #000;
+		.text {
+			padding-left: 62px;
+			padding-top: 98px;
+			h1 {
+			    text-transform: uppercase;
+			    color: #000;
+			    font-weight: 700;
+			    font-size: 30px;
+			}
+			p{
+				font-size: 16px;
+				font-family: 'Open Sans', sans-serif;
+				color: #000;
+				line-height: 19px;
+			}
+			.become {
+				background: #ef731f;
+				border: none;
+				padding: 8px 25px;
+				font-size: 17px;
+				margin-top: 17px;
+			}
 		}
 	}
 
