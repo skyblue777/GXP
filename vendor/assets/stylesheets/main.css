@@ -6,8 +6,6 @@ html a {
     -webkit-font-smoothing: antialiased !important;
 }
 
-
-
 p {
     line-height: 24px;
     margin-bottom: 0;
@@ -603,26 +601,6 @@ input[type="password"] {
     line-height: normal;
 }
 
-.advertisment-application {
-    width: 100%;
-    background: #323232;
-}
-
-.advertisment-application1 {
-    width: 100%;
-    background: #3dc4d9;
-    color: white;
-    text-align: center;
-}
-
-.advertisment-application h1 {
-    color: #fff;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-}
-
 .adver-form p {
     padding: 30px 0;
 }
@@ -1114,28 +1092,6 @@ input[type="password"] {
     background-position: center;
 }
 
-.green-insire {
-    background: url(about-banner-2.png);
-    position: relative;
-    height: 500px;
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-.green-insire h1 {
-    font-family: 'Roboto Condensed', sans-serif;
-    text-transform: uppercase;
-    color: #544e55;
-    margin-top: 17%;
-    font-weight: 700;
-    width: 100%;
-    font-size: 32px;
-    line-height: 47px;
-    text-align: left;
-}
-
 .green-insire span {
     color: #544e55;
     margin-top: 0%;
@@ -1155,60 +1111,6 @@ input[type="password"] {
     background-size: cover;
     background-position: center;
 }
-
-.about-clallenge {
-    width: 100%;
-    background: #3dc4d9;
-}
-
-.about-clallenge h1 {
-    color: #fff;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.about-sec-main {
-    width: 100%;
-    background: #323232;
-}
-
-.about-sec-main h1 {
-    width: 100%;
-    color: #fff;
-    text-align: center;
-    font-size: 22px;
-}
-
-.about-rework {
-    background: url(banner-abo.png);
-    position: relative;
-    height: 500px;
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-.about-rework h1 {
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #544e55;
-    width: 100%;
-    font-size: 52px;
-    text-align: center;
-    margin-top: 19%;
-}
-
-.about-rework p {
-    font-family: 'Roboto Condensed', sans-serif;
-    line-height: 37px;
-    color: #544e55;
-    width: 100%;
-    font-size: 22px;
-    text-align: center;
-}
-
 
 /* carousel */
 

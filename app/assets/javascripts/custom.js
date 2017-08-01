@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	if ($(window).width > 768) {
 		$(window).on('scroll', function() {
@@ -11,6 +12,7 @@ $(document).ready(function() {
 		
 	}
 	
+
 
 	$('.mobile-nav').on('click', function() {
 		if ($('.mobile-navigation').hasClass('add-mobile-menu')) {
