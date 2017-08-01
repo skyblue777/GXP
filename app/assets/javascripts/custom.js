@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	
 	$(window).on('scroll', function() {
@@ -11,7 +10,6 @@ $(document).ready(function() {
 		} else {
 			$('#header').removeClass('add-sticky');
 		}
-		
 	});	
 	
 	
