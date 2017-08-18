@@ -1,28 +1,3 @@
-test: &default
-
-  # Credentials for REST APIs
-  client_id: ATmMjFU8HRP9gPTY99R39aEivbGOeHp6Grol0DfXiNHqKYL3Zt4vDfxWe8bnO325oxzZxoo80fMs7-qM
-  client_secret: EK9S3XA9rDpW6hlUx1U0QLUgXPIx6Cog8cIJBvAd9R_KN12-uIO4mXqcZr-dU6MoaHqH0C4vVeTStgvg
-
-  # Mode can be 'live' or 'sandbox'
-  mode: sandbox
-
-  # Credentials for Classic APIs
-  #app_id: APP-80W284485P519543T
-  #username: tosky999_api1.yahoo.com
-  #password: MTXPJSXP9Z4ET6J2
-  #signature: AFcWxV21C7fd0v3bYYYRCpSSRl31Ar110u5T2YkFS3AyXKTBHCK3DlhH
-  # # With Certificate
-  # cert_path: "config/cert_key.pem"
-  #sandbox_email_address: tosky999@yahoo.com
-
-  # # IP Address
-  # ip_address: 127.0.0.1
-  # # HTTP Proxy
-  # http_proxy: http://proxy-ipaddress:3129/
-
-  verbose_logging: true
-
 development:
   <<: *default
   
